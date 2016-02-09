@@ -1,38 +1,35 @@
 package com.example.deean.medix;
 
-import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-public class Prijava extends AppCompatActivity implements View.OnClickListener {
-    Button bOdjava;
-    EditText etEmail, etOIB, etTelefon, etAdresa;
+public class Register extends AppCompatActivity implements View.OnClickListener {
+    Button bRegistracija;
+    EditText etEmail, etLozinka, etOIB, etTelefon, etAdresa;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_prijava);
-
+        setContentView(R.layout.activity_register);
         etEmail = (EditText) findViewById(R.id.etEmail);
+        etLozinka = (EditText) findViewById(R.id.etLozinka);
         etOIB = (EditText) findViewById(R.id.etOIB);
         etTelefon = (EditText) findViewById(R.id.etTelefon);
         etAdresa = (EditText) findViewById(R.id.etAdresa);
-        bOdjava = (Button) findViewById(R.id.bOdjava);
+        bRegistracija = (Button) findViewById(R.id.bRegistracija);
 
-        bOdjava.setOnClickListener(this);
+        bRegistracija.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
-        switch(v.getId()){
-            case R.id.bOdjava:
-                startActivity(new Intent(this,Login.class));
+        switch (v.getId()) {
+            case R.id.bRegistracija:
 
                 break;
-
         }
     }
 }
