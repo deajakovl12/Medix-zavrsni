@@ -8,7 +8,7 @@ import android.widget.EditText;
 
 public class Register extends AppCompatActivity implements View.OnClickListener {
     Button bRegistracija;
-    EditText etEmail, etLozinka, etOIB, etTelefon, etAdresa;
+    EditText etEmail, etLozinka, etOIB, etTelefon, etAdresa, etIme, etPrezime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,6 +19,8 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
         etOIB = (EditText) findViewById(R.id.etOIB);
         etTelefon = (EditText) findViewById(R.id.etTelefon);
         etAdresa = (EditText) findViewById(R.id.etAdresa);
+        etIme = (EditText) findViewById(R.id.etIme);
+        etPrezime = (EditText) findViewById(R.id.etPrezime);
         bRegistracija = (Button) findViewById(R.id.bRegistracija);
 
         bRegistracija.setOnClickListener(this);
@@ -28,7 +30,15 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.bRegistracija:
+                String ime = etIme.getText().toString();
+                String prezime = etPrezime.getText().toString();
+                String email = etEmail.getText().toString();
+                String telefon = etTelefon.getText().toString();
+                String adresa = etAdresa.getText().toString();
+                String oib = etOIB.getText().toString();
+                String lozinka = etLozinka.getText().toString();
 
+                Doktor registriraniPodaci = new Doktor(ime,prezime,email,telefon,adresa,oib,lozinka);
                 break;
         }
     }

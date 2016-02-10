@@ -13,6 +13,8 @@ public class Login extends AppCompatActivity  implements View.OnClickListener{
     EditText etEmail, etLozinka;
     TextView tvRegistracijaLink;
 
+    DoktorLokalno DoktorLokalno;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,13 +28,21 @@ public class Login extends AppCompatActivity  implements View.OnClickListener{
 
         bPrijava.setOnClickListener(this);
         tvRegistracijaLink.setOnClickListener(this);
-        tvRegistracijaLink.setOnClickListener(this);
+
+
+        DoktorLokalno = new DoktorLokalno(this);
+
+
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.bPrijava:
+                Doktor doktor = new Doktor(null,null,null,null,null,null,null);
+                DoktorLokalno.spremiDoktorPodatke(doktor);
+                DoktorLokalno.postaviPrijavljenogDoktora(true);
+
 
                 break;
             case R.id.tvRegistracijaLink:
