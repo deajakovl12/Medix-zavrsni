@@ -35,7 +35,9 @@ public class Prijava extends AppCompatActivity implements View.OnClickListener {
         super.onStart();
         if(provjera()==true){
             prikaziDoktorovePodatke();
-
+        }
+        else{
+            startActivity(new Intent(Prijava.this,Login.class));
         }
     }
 

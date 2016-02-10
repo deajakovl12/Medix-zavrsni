@@ -6,7 +6,7 @@ package com.example.deean.medix;
 public class Doktor {
     String ime, prezime, adresa, lozinka, telefon, oib,email;
 
-    public Doktor(String ime, String prezime, String adresa, String lozinka, String telefon, String oib, String email){
+    public Doktor(String ime, String prezime, String adresa,String oib, String lozinka, String telefon,  String email){
 
         this.ime=ime;
         this.prezime=prezime;

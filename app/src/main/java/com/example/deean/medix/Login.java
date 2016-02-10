@@ -44,6 +44,7 @@ public class Login extends AppCompatActivity  implements View.OnClickListener{
                 DoktorLokalno.postaviPrijavljenogDoktora(true);
 
 
+
                 break;
             case R.id.tvRegistracijaLink:
                 startActivity(new Intent(this,Register.class));

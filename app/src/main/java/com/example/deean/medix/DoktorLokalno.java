@@ -19,23 +19,23 @@ public class DoktorLokalno {
         SharedPreferences.Editor spEditor = doktorLokalnaBaza.edit();
         spEditor.putString("ime",doktor.ime);
         spEditor.putString("prezime",doktor.prezime);
+        spEditor.putString("adresa",doktor.adresa);
         spEditor.putString("OIB",doktor.oib);
-        spEditor.putString("adresa ordinacije",doktor.adresa);
-        spEditor.putString("telefon",doktor.telefon);
         spEditor.putString("lozinka",doktor.lozinka);
+        spEditor.putString("telefon",doktor.telefon);
         spEditor.putString("email",doktor.email);
         spEditor.commit();
     }
     public Doktor getPrijavljenogDoktora(){
         String ime = doktorLokalnaBaza.getString("ime", "");
         String prezime = doktorLokalnaBaza.getString("prezime","");
-        String oib = doktorLokalnaBaza.getString("OIB","");
         String adresa = doktorLokalnaBaza.getString("adresa","");
-        String telefon = doktorLokalnaBaza.getString("telefon","");
+        String oib = doktorLokalnaBaza.getString("OIB","");
         String lozinka = doktorLokalnaBaza.getString("lozinka","");
+        String telefon = doktorLokalnaBaza.getString("telefon","");
         String email = doktorLokalnaBaza.getString("email","");
 
-        Doktor spremljeniDoktor = new Doktor(ime,prezime,adresa,lozinka,telefon,oib,email);
+        Doktor spremljeniDoktor = new Doktor(ime,prezime,adresa,oib,lozinka,telefon,email);
         return spremljeniDoktor;
     }
     public void postaviPrijavljenogDoktora(boolean prijavljen){

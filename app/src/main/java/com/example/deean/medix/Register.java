@@ -1,5 +1,6 @@
 package com.example.deean.medix;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -38,7 +39,8 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
                 String oib = etOIB.getText().toString();
                 String lozinka = etLozinka.getText().toString();
 
-                Doktor registriraniPodaci = new Doktor(ime,prezime,email,telefon,adresa,oib,lozinka);
+                Doktor registriraniPodaci = new Doktor(ime,prezime,adresa,oib,lozinka,telefon,email);
+
                 break;
         }
     }
