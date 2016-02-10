@@ -1,5 +1,6 @@
 package com.example.deean.medix;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -39,7 +40,15 @@ public class Login extends AppCompatActivity  implements View.OnClickListener{
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.bPrijava:
-                Doktor doktor = new Doktor(null,null,null,null,null,null,null);
+                String email = etEmail.getText().toString();
+                String lozinka = etLozinka.getText().toString();
+
+
+
+                Doktor doktor = new Doktor(email,lozinka);
+
+                autentifikacija(doktor);
+
                 DoktorLokalno.spremiDoktorPodatke(doktor);
                 DoktorLokalno.postaviPrijavljenogDoktora(true);
 
@@ -51,6 +60,35 @@ public class Login extends AppCompatActivity  implements View.OnClickListener{
                 break;
 
         }
+
+    }
+
+    private void autentifikacija(Doktor doktor){
+        ServerRequest serverRequest = new ServerRequest(this);
+        serverRequest.dohvatiPodatkeUPozadini(doktor, new GetUserCallback() {
+            @Override
+            public void done(Doktor returnedDoktor) {
+                if(returnedDoktor == null){
+                    showErrorMessage();
+                }else{
+                    logDoktorIn(returnedDoktor);
+                }
+            }
+        });
+
+    }
+    private void showErrorMessage(){
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(Login.this);
+        dialogBuilder.setMessage("Krivo uneseni podaci!");
+        dialogBuilder.setPositiveButton("Ok",null);
+        dialogBuilder.show();
+    }
+
+    private void logDoktorIn(Doktor returnedDoktor){
+        DoktorLokalno.spremiDoktorPodatke(returnedDoktor);
+        DoktorLokalno.postaviPrijavljenogDoktora(true);
+
+        startActivity(new Intent(this,Prijava.class));
 
     }
 }

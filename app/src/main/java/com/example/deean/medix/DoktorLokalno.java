@@ -20,7 +20,7 @@ public class DoktorLokalno {
         spEditor.putString("ime",doktor.ime);
         spEditor.putString("prezime",doktor.prezime);
         spEditor.putString("adresa",doktor.adresa);
-        spEditor.putString("OIB",doktor.oib);
+        spEditor.putString("oib",doktor.oib);
         spEditor.putString("lozinka",doktor.lozinka);
         spEditor.putString("telefon",doktor.telefon);
         spEditor.putString("email",doktor.email);
@@ -30,7 +30,7 @@ public class DoktorLokalno {
         String ime = doktorLokalnaBaza.getString("ime", "");
         String prezime = doktorLokalnaBaza.getString("prezime","");
         String adresa = doktorLokalnaBaza.getString("adresa","");
-        String oib = doktorLokalnaBaza.getString("OIB","");
+        String oib = doktorLokalnaBaza.getString("oib","");
         String lozinka = doktorLokalnaBaza.getString("lozinka","");
         String telefon = doktorLokalnaBaza.getString("telefon","");
         String email = doktorLokalnaBaza.getString("email","");

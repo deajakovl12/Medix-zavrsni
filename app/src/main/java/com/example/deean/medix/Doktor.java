@@ -17,5 +17,15 @@ public class Doktor {
         this.email=email;
     }
 
+    public Doktor(String email, String lozinka){
+        this.email=email;
+        this.lozinka=lozinka;
+        this.ime="";
+        this.prezime="";
+        this.adresa="";
+        this.telefon="";
+        this.oib="";
+    }
+
 }
 
