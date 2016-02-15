@@ -10,12 +10,7 @@
 
 
 
-    <TextView
-        android:textColor="#A22022"
-        android:id="@+id/etIme"
-        android:layout_width="175dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="170dp"/>
+
 
     <ImageView
         android:layout_width="100dp"
@@ -23,8 +18,15 @@
         android:id="@+id/ivDoktor"
         android:src="@drawable/doctor_red"
         android:layout_gravity="left"
-        android:layout_alignTop="@+id/etIme"
-        android:layout_toEndOf="@+id/tvTelefon" />
+        android:layout_marginBottom="20dp"
+         />
+    <TextView
+        android:textColor="#A22022"
+        android:id="@+id/etIme"
+        android:layout_width="175dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="130dp"
+        />
 
     <TextView
         android:textColor="#A22022"
@@ -53,6 +55,8 @@
         android:textColor="#A22022"
         android:layout_width="wrap_content"
         android:text="Radno Vrijeme"
+        android:textSize="18dp"
+        android:textStyle="bold"
         android:layout_height="wrap_content"
         android:layout_below="@id/ivDoktor"
         android:layout_toEndOf="@+id/ivRadno_vrijeme"
@@ -78,6 +82,8 @@
         android:textColor="#A22022"
         android:layout_width="wrap_content"
         android:text="Rad Savjetovališta"
+        android:textSize="18dp"
+        android:textStyle="bold"
         android:layout_toEndOf="@+id/ivRad_Savjetovalista"
         android:layout_height="wrap_content"
         android:layout_below="@id/etRadnoVrijeme"/>
@@ -103,6 +109,8 @@
         android:textColor="#A22022"
         android:layout_width="wrap_content"
         android:text="Adresa ordinacije"
+        android:textSize="18dp"
+        android:textStyle="bold"
         android:layout_height="wrap_content"
         android:layout_below="@id/etSavjet"
         android:layout_toEndOf="@+id/ivAdresa"
@@ -129,6 +137,8 @@
         android:textColor="#A22022"
         android:layout_width="wrap_content"
         android:text="Telefon"
+        android:textSize="18dp"
+        android:textStyle="bold"
         android:layout_height="wrap_content"
         android:layout_below="@id/etAdresa"
         android:layout_toEndOf="@+id/ivTelefon"/>
@@ -154,6 +164,8 @@
         android:textColor="#A22022"
         android:layout_width="wrap_content"
         android:text="Mobitel"
+        android:textSize="18dp"
+        android:textStyle="bold"
         android:layout_height="wrap_content"
         android:layout_below="@id/etTelefon"
         android:layout_toEndOf="@+id/ivMobitel"/>
