@@ -24,6 +24,10 @@ public class DoktorLokalno {
         spEditor.putString("lozinka",doktor.lozinka);
         spEditor.putString("telefon",doktor.telefon);
         spEditor.putString("email",doktor.email);
+        spEditor.putString("radno_vrijeme",doktor.radno_vrijeme);
+        spEditor.putString("rad_savjetovalista",doktor.rad_savjetovalista);
+        spEditor.putString("mobitel",doktor.mobitel);
+        spEditor.putString("titula",doktor.titula);
         spEditor.commit();
     }
     public Doktor getPrijavljenogDoktora(){
@@ -34,8 +38,12 @@ public class DoktorLokalno {
         String lozinka = doktorLokalnaBaza.getString("lozinka","");
         String telefon = doktorLokalnaBaza.getString("telefon","");
         String email = doktorLokalnaBaza.getString("email","");
+        String radno_vrijeme = doktorLokalnaBaza.getString("radno_vrijeme","");
+        String rad_savjetovalista = doktorLokalnaBaza.getString("rad_savjetovalista","");
+        String mobitel = doktorLokalnaBaza.getString("mobitel","");
+        String titula = doktorLokalnaBaza.getString("titula","");
 
-        Doktor spremljeniDoktor = new Doktor(ime,prezime,adresa,oib,lozinka,telefon,email);
+        Doktor spremljeniDoktor = new Doktor(ime,prezime,adresa,oib,lozinka,telefon,email,radno_vrijeme,rad_savjetovalista,mobitel,titula);
         return spremljeniDoktor;
     }
     public void postaviPrijavljenogDoktora(boolean prijavljen){

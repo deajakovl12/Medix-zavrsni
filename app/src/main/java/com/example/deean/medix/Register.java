@@ -39,7 +39,7 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
                 String oib = etOIB.getText().toString();
                 String lozinka = etLozinka.getText().toString();
 
-                Doktor doktor = new Doktor(ime,prezime,adresa,oib,lozinka,telefon,email);
+                Doktor doktor = new Doktor(ime,prezime,adresa,oib,lozinka,telefon,email,null,null,null,null);
 
                 registrirajDoktor(doktor);
                 break;

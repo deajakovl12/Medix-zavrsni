@@ -1,71 +1,179 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:padding="10dp"
     android:layout_height="match_parent"
     android:layout_width="match_parent"
+    android:background="#efefef"
     >
+
+
+
     <TextView
-        android:layout_width="wrap_content"
-        android:text="Ime"
-        android:layout_height="wrap_content" />
-    <EditText
+        android:textColor="#A22022"
         android:id="@+id/etIme"
-        android:layout_width="match_parent"
-        android:layout_marginBottom="10dp"
-        android:layout_height="wrap_content" />
+        android:layout_width="175dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="170dp"/>
+
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:id="@+id/ivDoktor"
+        android:src="@drawable/doctor_red"
+        android:layout_gravity="left"
+        android:layout_alignTop="@+id/etIme"
+        android:layout_toEndOf="@+id/tvTelefon" />
+
     <TextView
-        android:layout_width="wrap_content"
-        android:text="Prezime"
-        android:layout_height="wrap_content" />
-    <EditText
+        android:textColor="#A22022"
         android:id="@+id/etPrezime"
-        android:layout_width="match_parent"
-        android:layout_marginBottom="10dp"
-        android:layout_height="wrap_content" />
+        android:layout_width="175dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/etIme"
+        android:layout_alignStart="@+id/etIme" />
     <TextView
+        android:textColor="#434343"
+        android:id="@+id/etTitula"
+        android:layout_width="175dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/etPrezime"
+        android:layout_alignStart="@+id/etPrezime" />
+
+    <ImageView
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:id="@+id/ivRadno_vrijeme"
+        android:src="@drawable/radno_vrijeme"
+        android:layout_gravity="left"
+        android:layout_below="@id/ivDoktor"
+        />
+    <TextView
+        android:textColor="#A22022"
         android:layout_width="wrap_content"
-        android:text="Email"
-        android:layout_height="wrap_content" />
-    <EditText
-        android:id="@+id/etEmail"
+        android:text="Radno Vrijeme"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/ivDoktor"
+        android:layout_toEndOf="@+id/ivRadno_vrijeme"
+        android:id="@+id/tvRadnoVrijeme"/>
+    <TextView
+        android:textColor="#434343"
+        android:id="@+id/etRadnoVrijeme"
         android:layout_width="match_parent"
         android:layout_marginBottom="10dp"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@+id/ivRadno_vrijeme"
+        android:layout_below="@id/tvRadnoVrijeme"/>
+    <ImageView
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:id="@+id/ivRad_Savjetovalista"
+        android:src="@drawable/savjet"
+        android:layout_gravity="left"
+        android:layout_below="@id/etRadnoVrijeme"
+        />
     <TextView
+        android:id="@+id/tvOIB"
+        android:textColor="#A22022"
         android:layout_width="wrap_content"
-        android:text="OIB"
-        android:layout_height="wrap_content" />
-    <EditText
-        android:id="@+id/etOIB"
+        android:text="Rad Savjetovališta"
+        android:layout_toEndOf="@+id/ivRad_Savjetovalista"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/etRadnoVrijeme"/>
+    <TextView
+        android:textColor="#434343"
+        android:id="@+id/etSavjet"
         android:layout_width="match_parent"
         android:layout_marginBottom="10dp"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvOIB"
+        android:layout_toEndOf="@+id/ivRad_Savjetovalista"
+        />
+    <ImageView
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:id="@+id/ivAdresa"
+        android:src="@drawable/location"
+        android:layout_gravity="left"
+        android:layout_below="@id/etSavjet"
+        />
     <TextView
-        android:layout_width="wrap_content"
-        android:text="Telefon"
-        android:layout_height="wrap_content" />
-    <EditText
-        android:id="@+id/etTelefon"
-        android:layout_marginBottom="10dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-    <TextView
+        android:id="@+id/tvAdresa"
+        android:textColor="#A22022"
         android:layout_width="wrap_content"
         android:text="Adresa ordinacije"
-        android:layout_height="wrap_content" />
-    <EditText
+        android:layout_height="wrap_content"
+        android:layout_below="@id/etSavjet"
+        android:layout_toEndOf="@+id/ivAdresa"
+        />
+    <TextView
+        android:textColor="#434343"
         android:id="@+id/etAdresa"
         android:layout_marginBottom="10dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvAdresa"
+        android:layout_toEndOf="@+id/ivAdresa"
+        />
+    <ImageView
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:id="@+id/ivTelefon"
+        android:src="@drawable/phone"
+        android:layout_gravity="left"
+        android:layout_below="@id/etAdresa"
+        />
+    <TextView
+        android:id="@+id/tvTelefon"
+        android:textColor="#A22022"
+        android:layout_width="wrap_content"
+        android:text="Telefon"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/etAdresa"
+        android:layout_toEndOf="@+id/ivTelefon"/>
+    <TextView
+        android:textColor="#434343"
+        android:id="@+id/etTelefon"
+        android:layout_marginBottom="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvTelefon"
+        android:layout_toEndOf="@+id/ivTelefon"/>
+        />
+    <ImageView
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:id="@+id/ivMobitel"
+        android:src="@drawable/mobile"
+        android:layout_gravity="left"
+        android:layout_below="@id/etTelefon"
+        />
+    <TextView
+        android:id="@+id/tvMobitel"
+        android:textColor="#A22022"
+        android:layout_width="wrap_content"
+        android:text="Mobitel"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/etTelefon"
+        android:layout_toEndOf="@+id/ivMobitel"/>
+    <TextView
+        android:textColor="#434343"
+        android:id="@+id/etMobitel"
+        android:layout_marginBottom="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvMobitel"
+        android:layout_toEndOf="@+id/ivMobitel"/>
+    />
     <Button
+        android:background="#A22022"
+        android:textColor="@android:color/background_light"
         android:id="@+id/bOdjava"
         android:text="Odjavi se"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_below="@id/etMobitel" />
 
 
-</LinearLayout>
+</RelativeLayout>

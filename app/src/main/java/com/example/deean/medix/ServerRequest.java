@@ -131,8 +131,12 @@ public class ServerRequest {
                     String adresa = jObject.getString("adresa");
                     String oib = jObject.getString("oib");
                     String telefon = jObject.getString("telefon");
+                    String radno_vrijeme = jObject.getString("radno_vrijeme");
+                    String rad_savjetovalista = jObject.getString("rad_savjetovalista");
+                    String mobitel = jObject.getString("mobitel");
+                    String titula = jObject.getString("titula");
 
-                    returnedDoktor = new Doktor(ime,prezime,adresa,oib,doktor.lozinka,telefon,doktor.email);
+                    returnedDoktor = new Doktor(ime,prezime,adresa,oib,doktor.lozinka,telefon,doktor.email,radno_vrijeme,rad_savjetovalista,mobitel,titula);
 
 
                 }

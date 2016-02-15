@@ -6,10 +6,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 public class Prijava extends AppCompatActivity implements View.OnClickListener {
     Button bOdjava;
-    EditText etEmail, etOIB, etTelefon, etAdresa,etIme,etPrezime;
+    TextView etRadnoVrijeme, etSavjet, etTelefon, etAdresa,etPrezime,etIme,etMobitel,etTitula;
     DoktorLokalno DoktorLokalno;
 
     @Override
@@ -17,12 +18,14 @@ public class Prijava extends AppCompatActivity implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_prijava);
 
-        etEmail = (EditText) findViewById(R.id.etEmail);
-        etOIB = (EditText) findViewById(R.id.etOIB);
-        etTelefon = (EditText) findViewById(R.id.etTelefon);
-        etAdresa = (EditText) findViewById(R.id.etAdresa);
-        etIme = (EditText) findViewById(R.id.etIme);
-        etPrezime = (EditText) findViewById(R.id.etPrezime);
+        etRadnoVrijeme = (TextView) findViewById(R.id.etRadnoVrijeme);
+        etSavjet = (TextView) findViewById(R.id.etSavjet);
+        etTelefon = (TextView) findViewById(R.id.etTelefon);
+        etAdresa = (TextView) findViewById(R.id.etAdresa);
+        etIme = (TextView) findViewById(R.id.etIme);
+        etPrezime = (TextView) findViewById(R.id.etPrezime);
+        etMobitel = (TextView) findViewById(R.id.etMobitel);
+        etTitula = (TextView) findViewById(R.id.etTitula);
         bOdjava = (Button) findViewById(R.id.bOdjava);
 
         bOdjava.setOnClickListener(this);
@@ -46,12 +49,14 @@ public class Prijava extends AppCompatActivity implements View.OnClickListener {
     }
     private void prikaziDoktorovePodatke(){
         Doktor doktor = DoktorLokalno.getPrijavljenogDoktora();
-        etEmail.setText(doktor.email);
-        etIme.setText(doktor.ime);
-        etPrezime.setText(doktor.prezime);
-        etOIB.setText(doktor.oib);
+        etRadnoVrijeme.setText(doktor.radno_vrijeme);
+        etIme.setText(doktor.ime.toUpperCase());
+        etPrezime.setText(doktor.prezime.toUpperCase());
+        etSavjet.setText(doktor.rad_savjetovalista);
         etAdresa.setText(doktor.adresa);
         etTelefon.setText(doktor.telefon);
+        etMobitel.setText(doktor.mobitel);
+        etTitula.setText(doktor.titula);
 
     }
     @Override
