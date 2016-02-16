@@ -34,6 +34,19 @@ public class Doktor {
         this.mobitel="";
         this.titula="";
     }
+    public Doktor(String email){
+        this.email=email;
+        this.lozinka="";
+        this.ime="";
+        this.prezime="";
+        this.adresa="";
+        this.telefon="";
+        this.oib="";
+        this.radno_vrijeme="";
+        this.rad_savjetovalista="";
+        this.mobitel="";
+        this.titula="";
+    }
 
 }
 

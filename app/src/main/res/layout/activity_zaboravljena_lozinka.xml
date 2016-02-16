@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:padding="10dp"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:background="#efefef"
+    >
+    <TextView
+        android:layout_marginTop="75dp"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/tvPoruka"
+        android:textColor="#434343"
+        android:layout_width="wrap_content"
+        android:text="Unesite e-mail kako bi vam na njega mogli poslati upute kako dobiti novu lozinku"
+        android:textAlignment="center"
+        android:layout_marginBottom="5dp"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:layout_below="@+id/tvPoruka"
+        android:layout_marginTop="50dp"
+        android:id="@+id/tvEmail"
+        android:textColor="#434343"
+        android:layout_width="wrap_content"
+        android:text="Unesite E-mail"
+        android:layout_marginBottom="5dp"
+        android:layout_height="wrap_content" />
+    <EditText
+        android:layout_below="@+id/tvEmail"
+        android:theme="@style/Boja_EditText"
+        android:textColor="#434343"
+        android:id="@+id/lozEmail"
+        android:layout_width="match_parent"
+        android:layout_marginBottom="50dp"
+        android:layout_height="wrap_content" />
+    <Button
+        android:background="#A22022"
+        android:textColor="@android:color/background_light"
+        android:id="@+id/bPosalji"
+        android:text="Pošalji"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/lozEmail" />
+
+
+
+
+
+</RelativeLayout>

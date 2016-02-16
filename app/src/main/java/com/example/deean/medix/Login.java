@@ -12,7 +12,7 @@ import android.widget.TextView;
 public class Login extends AppCompatActivity  implements View.OnClickListener{
     Button bPrijava;
     EditText etEmail, etLozinka;
-    TextView tvRegistracijaLink;
+    TextView tvRegistracijaLink, tvLozinkaLink;
 
     DoktorLokalno DoktorLokalno;
 
@@ -25,10 +25,12 @@ public class Login extends AppCompatActivity  implements View.OnClickListener{
         etLozinka = (EditText)findViewById(R.id.etLozinka);
         bPrijava = (Button) findViewById(R.id.bPrijava);
         tvRegistracijaLink = (TextView) findViewById(R.id.tvRegistracijaLink);
+        tvLozinkaLink = (TextView) findViewById(R.id.tvLozinkaLink);
 
 
         bPrijava.setOnClickListener(this);
         tvRegistracijaLink.setOnClickListener(this);
+        tvLozinkaLink.setOnClickListener(this);
 
 
         DoktorLokalno = new DoktorLokalno(this);
@@ -58,7 +60,13 @@ public class Login extends AppCompatActivity  implements View.OnClickListener{
                 startActivity(new Intent(this,Register.class));
                 break;
 
+            case R.id.tvLozinkaLink:
+                startActivity(new Intent(this,ZaboravljenaLozinka.class));
+                break;
+
         }
+
+
 
     }
 

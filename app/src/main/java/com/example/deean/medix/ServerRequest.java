@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
+import android.view.View;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -20,6 +21,9 @@ import org.apache.http.util.EntityUtils;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+
+import javax.mail.AuthenticationFailedException;
+import javax.mail.MessagingException;
 
 /**
  * Created by Deean on 10.2.2016..
@@ -44,6 +48,10 @@ public class ServerRequest {
     public void dohvatiPodatkeUPozadini(Doktor doktor, GetUserCallback callback){
         progressDialog.show();
         new DohvatiPodatkeAsyncTask(doktor,callback).execute();
+    }
+    public void dohvatiEmailUpozadini(Doktor doktor, GetUserCallback emailcallback){
+        progressDialog.show();
+        new DohvatiEmailAsyncTask(doktor,emailcallback).execute();
     }
 
     public class SpremiPodatkeAsyncTask extends AsyncTask<Void, Void, Void>{//1.void-nista ne saljemo tasku dok se pokrece 2.void-kako zelimo primati progress 3.void-sto zelimo da async task vrati
@@ -71,7 +79,7 @@ public class ServerRequest {
             HttpConnectionParams.setSoTimeout(httpRequestParams, CONNECTION_TIMEOUT);//vrijeme koliko zelimo cekat da dohvatimo podatke od servera
 
             HttpClient client = new DefaultHttpClient(httpRequestParams);
-            HttpPost post = new HttpPost(SERVER_ADDRESS + "/spremi.php");
+            HttpPost post = new HttpPost(SERVER_ADDRESS + "/spremi_doktora.php");
             try {
                 post.setEntity(new UrlEncodedFormEntity(dataToSend));//enkodiramo (dataToSend) i dajemo u post(da zna adresu)
                 client.execute(post);
@@ -111,7 +119,7 @@ public class ServerRequest {
 
 
             HttpClient client = new DefaultHttpClient(httpRequestParams);
-            HttpPost post = new HttpPost(SERVER_ADDRESS + "/dohvati.php");
+            HttpPost post = new HttpPost(SERVER_ADDRESS + "/dohvati_doktora.php");
 
 
             Doktor returnedDoktor = null;
@@ -153,5 +161,71 @@ public class ServerRequest {
             super.onPostExecute(returnedDoktor);
         }
     }
+    public class DohvatiEmailAsyncTask extends AsyncTask<Void, Void, Doktor> {//1.void-nista ne saljemo tasku dok se pokrece 2.void-kako zelimo primati progress 3.void-sto zelimo da async task vrati
+        Doktor doktor;
+        GetUserCallback emailCallback;
+
+        public DohvatiEmailAsyncTask(Doktor doktor, GetUserCallback emailCallback) {
+            this.doktor = doktor;
+            this.emailCallback = emailCallback;
+        }
+
+        @Override
+        protected Doktor doInBackground(Void... params) {
+            ArrayList<NameValuePair> dataToSend = new ArrayList<>();
+            dataToSend.add(new BasicNameValuePair("email", doktor.email));
+            HttpParams httpRequestParams = new BasicHttpParams();
+            HttpConnectionParams.setConnectionTimeout(httpRequestParams, CONNECTION_TIMEOUT);//koliko cmo cekat dok se POST izvrsava
+            HttpConnectionParams.setSoTimeout(httpRequestParams, CONNECTION_TIMEOUT);
+
+
+            HttpClient client = new DefaultHttpClient(httpRequestParams);
+            HttpPost post = new HttpPost(SERVER_ADDRESS + "/dohvati_email.php");
+
+
+            Doktor returnedDoktor = null;
+            try {
+                post.setEntity(new UrlEncodedFormEntity(dataToSend));//enkodiramo (dataToSend) i dajemo u post(da zna adresu)
+                HttpResponse httpOdgovor = client.execute(post);
+
+                HttpEntity entity = httpOdgovor.getEntity();
+                String result = EntityUtils.toString(entity);
+                JSONObject jObject = new JSONObject(result);
+                // Log.i("Ispis:",result);
+                if(jObject.length() == 0){
+                    returnedDoktor = null;
+                }else{
+                    String ime = jObject.getString("ime");
+                    String prezime = jObject.getString("prezime");
+                    String adresa = jObject.getString("adresa");
+                    String oib = jObject.getString("oib");
+                    String lozinka = jObject.getString("lozinka");
+                    String telefon = jObject.getString("telefon");
+                    String radno_vrijeme = jObject.getString("radno_vrijeme");
+                    String rad_savjetovalista = jObject.getString("rad_savjetovalista");
+                    String mobitel = jObject.getString("mobitel");
+                    String titula = jObject.getString("titula");
+
+                    returnedDoktor = new Doktor(ime,prezime,adresa,oib,lozinka,telefon,doktor.email,radno_vrijeme,rad_savjetovalista,mobitel,titula);
+
+
+                }
+
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+            return returnedDoktor;
+        }
+        @Override
+        protected void onPostExecute(Doktor returnedDoktor) {
+            progressDialog.dismiss();
+            emailCallback.done(returnedDoktor);
+            super.onPostExecute(returnedDoktor);
+        }
+    }
+
+
 
 }
+
+
