@@ -180,7 +180,7 @@ public class ServerRequest {
 
 
             HttpClient client = new DefaultHttpClient(httpRequestParams);
-            HttpPost post = new HttpPost(SERVER_ADDRESS + "/dohvati_email.php");
+            HttpPost post = new HttpPost(SERVER_ADDRESS + "/dohvati_email_doktora.php");
 
 
             Doktor returnedDoktor = null;
@@ -249,7 +249,7 @@ public class ServerRequest {
             HttpConnectionParams.setSoTimeout(httpRequestParams, CONNECTION_TIMEOUT);//vrijeme koliko zelimo cekat da dohvatimo podatke od servera
 
             HttpClient client = new DefaultHttpClient(httpRequestParams);
-            HttpPost post = new HttpPost(SERVER_ADDRESS + "/promjeni_lozinku.php");
+            HttpPost post = new HttpPost(SERVER_ADDRESS + "/promjeni_lozinku_doktor.php");
             try {
                 post.setEntity(new UrlEncodedFormEntity(dataToSend));//enkodiramo (dataToSend) i dajemo u post(da zna adresu)
                 client.execute(post);
@@ -380,6 +380,114 @@ public class ServerRequest {
             progressDialog.dismiss();
             pacijentCallback.done(returnedPacijent);
             super.onPostExecute(returnedPacijent);
+        }
+    }
+    public void dohvatiEmailUpozadiniPacijent(Pacijent pacijent, GetUserCallbackPacijent emailcallback){
+        progressDialog.show();
+        new DohvatiEmailPacijentAsyncTask(pacijent,emailcallback).execute();
+    }
+    public class DohvatiEmailPacijentAsyncTask extends AsyncTask<Void, Void, Pacijent> {//1.void-nista ne saljemo tasku dok se pokrece 2.void-kako zelimo primati progress 3.void-sto zelimo da async task vrati
+        Pacijent pacijent;
+        GetUserCallbackPacijent emailCallback;
+
+        public DohvatiEmailPacijentAsyncTask(Pacijent pacijent, GetUserCallbackPacijent emailCallback) {
+            this.pacijent = pacijent;
+            this.emailCallback = emailCallback;
+        }
+
+        @Override
+        protected Pacijent doInBackground(Void... params) {
+            ArrayList<NameValuePair> dataToSend = new ArrayList<>();
+            dataToSend.add(new BasicNameValuePair("email", pacijent.email));
+            HttpParams httpRequestParams = new BasicHttpParams();
+            HttpConnectionParams.setConnectionTimeout(httpRequestParams, CONNECTION_TIMEOUT);//koliko cmo cekat dok se POST izvrsava
+            HttpConnectionParams.setSoTimeout(httpRequestParams, CONNECTION_TIMEOUT);
+
+
+            HttpClient client = new DefaultHttpClient(httpRequestParams);
+            HttpPost post = new HttpPost(SERVER_ADDRESS + "/dohvati_email_pacijenta.php");
+
+
+            Pacijent returnedPacijent = null;
+            try {
+                post.setEntity(new UrlEncodedFormEntity(dataToSend));//enkodiramo (dataToSend) i dajemo u post(da zna adresu)
+                HttpResponse httpOdgovor = client.execute(post);
+
+                HttpEntity entity = httpOdgovor.getEntity();
+                String result = EntityUtils.toString(entity);
+                JSONObject jObject = new JSONObject(result);
+                // Log.i("Ispis:",result);
+                if(jObject.length() == 0){
+                    returnedPacijent = null;
+                }else{
+                    String ime = jObject.getString("ime");
+                    String prezime = jObject.getString("prezime");
+                    String adresa = jObject.getString("adresa");
+                    String oib = jObject.getString("oib");
+                    String lozinka = jObject.getString("lozinka");
+                    String telefon = jObject.getString("telefon");
+                    String mobitel = jObject.getString("mobitel");
+                    String spol = jObject.getString("spol");
+
+                    returnedPacijent = new Pacijent(ime,prezime,adresa,oib,lozinka,telefon,pacijent.email,spol,mobitel);
+
+
+                }
+
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+            return returnedPacijent;
+        }
+        @Override
+        protected void onPostExecute(Pacijent returnedPacijent) {
+            progressDialog.dismiss();
+            emailCallback.done(returnedPacijent);
+            super.onPostExecute(returnedPacijent);
+        }
+    }
+    public void spremiLozinkuUPozadiniPacijent(Pacijent pacijent, GetUserCallbackPacijent lozinkaCallback){
+        new SpremiLozinkuPacijentAsyncTask(pacijent,lozinkaCallback).execute();
+
+    }
+
+    public class SpremiLozinkuPacijentAsyncTask extends AsyncTask<Void, Void, Void>{//1.void-nista ne saljemo tasku dok se pokrece 2.void-kako zelimo primati progress 3.void-sto zelimo da async task vrati
+        Pacijent pacijent;
+        GetUserCallbackPacijent lozinkaCallback;
+
+        public SpremiLozinkuPacijentAsyncTask(Pacijent pacijent, GetUserCallbackPacijent lozinkaCallback){
+            this.pacijent = pacijent;
+            this.lozinkaCallback = lozinkaCallback;
+        }
+
+        @Override
+        protected Void doInBackground(Void... params) {
+            ArrayList<NameValuePair> dataToSend = new ArrayList<>();
+            dataToSend.add(new BasicNameValuePair("email",pacijent.email));
+            dataToSend.add(new BasicNameValuePair("lozinka",pacijent.lozinka));
+
+
+            HttpParams httpRequestParams = new BasicHttpParams();
+            HttpConnectionParams.setConnectionTimeout(httpRequestParams, CONNECTION_TIMEOUT);//koliko cmo cekat dok se POST izvrsava
+            HttpConnectionParams.setSoTimeout(httpRequestParams, CONNECTION_TIMEOUT);//vrijeme koliko zelimo cekat da dohvatimo podatke od servera
+
+            HttpClient client = new DefaultHttpClient(httpRequestParams);
+            HttpPost post = new HttpPost(SERVER_ADDRESS + "/promjeni_lozinku_pacijent.php");
+            try {
+                post.setEntity(new UrlEncodedFormEntity(dataToSend));//enkodiramo (dataToSend) i dajemo u post(da zna adresu)
+                client.execute(post);
+
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            lozinkaCallback.done(null);
+            super.onPostExecute(aVoid);
         }
     }
 

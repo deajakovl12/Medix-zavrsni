@@ -22,8 +22,6 @@ import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
-import java.security.SecureRandom;
-import java.math.BigInteger;
 import java.util.Random;
 
 
@@ -34,6 +32,7 @@ public class ZaboravljenaLozinka extends AppCompatActivity implements View.OnCli
     private static final String password = "docse1viv1";
 
     DoktorLokalno DoktorLokalno;
+    PacijentLokalno PacijentLokalno;
 
     @Override
     protected void onCreate(Bundle icicle) {
@@ -43,6 +42,7 @@ public class ZaboravljenaLozinka extends AppCompatActivity implements View.OnCli
         bPosalji = (Button) findViewById(R.id.bPosalji);
         bPosalji.setOnClickListener(this);
         DoktorLokalno = new DoktorLokalno(this);
+        PacijentLokalno = new PacijentLokalno(this);
 
     }
 
@@ -53,9 +53,13 @@ public class ZaboravljenaLozinka extends AppCompatActivity implements View.OnCli
                 String email = lozEmail.getText().toString();
 
                 Doktor doktor = new Doktor(email);
+                Pacijent pacijent = new Pacijent(email);
 
-                autentifikacija(doktor);
+                autentifikacija_doktora(doktor, pacijent);
+
+
                 DoktorLokalno.spremiDoktorPodatke(doktor);
+                PacijentLokalno.spremiPacijentPodatke(pacijent);
 
                 break;
         }
@@ -125,36 +129,48 @@ public class ZaboravljenaLozinka extends AppCompatActivity implements View.OnCli
     }
 
 
-    private void autentifikacija(Doktor doktor){
+    private void autentifikacija_doktora(Doktor doktor, final Pacijent pacijent){
         ServerRequest serverRequest = new ServerRequest(this);
         serverRequest.dohvatiEmailUpozadini(doktor, new GetUserCallback() {
             @Override
             public void done(Doktor returnedDoktor) {
                 if(returnedDoktor == null){
-                    showErrorMessage();
+                    autentifikacija_pacijenta(pacijent);
                 }else{
-                    prikaziPoruku();
+                    prikaziPoruku_doktor();
                 }
             }
         });
 
     }
+    private void autentifikacija_pacijenta(Pacijent pacijent){
+        ServerRequest serverRequest = new ServerRequest(this);
+        serverRequest.dohvatiEmailUpozadiniPacijent(pacijent, new GetUserCallbackPacijent() {
+            @Override
+            public void done(Pacijent returnedPacijent) {
+                if (returnedPacijent == null) {
+                    showErrorMessage();
+                } else {
+                    prikaziPoruku_Pacijent();
+                }
+            }
+        });
 
+    }
     private void showErrorMessage(){
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(ZaboravljenaLozinka.this);
         dialogBuilder.setMessage("Račun s takvim E-mailom ne postoji!");
-        dialogBuilder.setPositiveButton("Ok",null);
+        dialogBuilder.setPositiveButton("Ok", null);
         dialogBuilder.show();
 
     }
 
-    private void prikaziPoruku(){
+    private void prikaziPoruku_doktor(){
         String email = lozEmail.getText().toString();
         String subject = "Zahtjev za promjenom lozinke";
         String message = "Nova lozinka glasi: ";
         AlertDialog.Builder dialogBuilder1 = new AlertDialog.Builder(ZaboravljenaLozinka.this);
         dialogBuilder1.setMessage("E-mail s upustvima je poslan!");
-        dialogBuilder1.setPositiveButton("Ok", null);
         dialogBuilder1.show();
         String AB = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
         Random rnd = new Random();
@@ -164,9 +180,9 @@ public class ZaboravljenaLozinka extends AppCompatActivity implements View.OnCli
         message = message + lozinka.toString();
         Doktor doktor  = new Doktor(email, lozinka.toString());
         sendMail(email, subject, message);
-        promjeniLozinku(doktor);
+        promjeniLozinku_doktor(doktor);
     }
-    private void promjeniLozinku(Doktor doktor){
+    private void promjeniLozinku_doktor(Doktor doktor){
         ServerRequest serverRequest = new ServerRequest(this);
         serverRequest.spremiLozinkuUPozadini(doktor, new GetUserCallback() {
             @Override
@@ -175,4 +191,30 @@ public class ZaboravljenaLozinka extends AppCompatActivity implements View.OnCli
             }
         });
     }
+    private void prikaziPoruku_Pacijent(){
+        String email = lozEmail.getText().toString();
+        String subject = "Zahtjev za promjenom lozinke";
+        String message = "Nova lozinka glasi: ";
+        AlertDialog.Builder dialogBuilder1 = new AlertDialog.Builder(ZaboravljenaLozinka.this);
+        dialogBuilder1.setMessage("E-mail s upustvima je poslan!");
+        dialogBuilder1.show();
+        String AB = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+        Random rnd = new Random();
+        StringBuilder lozinka = new StringBuilder(6);
+        for( int i = 0; i < 6; i++ )
+            lozinka.append(AB.charAt(rnd.nextInt(AB.length())));
+        message = message + lozinka.toString();
+        Pacijent pacijent  = new Pacijent(email, lozinka.toString());
+        sendMail(email, subject, message);
+        promjeniLozinku_pacijent(pacijent);
+    }
+    private void promjeniLozinku_pacijent(Pacijent pacijent){
+        ServerRequest serverRequest = new ServerRequest(this);
+        serverRequest.spremiLozinkuUPozadiniPacijent(pacijent, new GetUserCallbackPacijent() {
+            @Override
+            public void done(Pacijent returnedPacijent) {
+                startActivity(new Intent(ZaboravljenaLozinka.this,Login.class));
+            }
+        });
+        }
 }
