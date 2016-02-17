@@ -223,6 +223,50 @@ public class ServerRequest {
             super.onPostExecute(returnedDoktor);
         }
     }
+    public void spremiLozinkuUPozadini(Doktor doktor, GetUserCallback lozinkaCallback){
+        new SpremiLozinkuAsyncTask(doktor,lozinkaCallback).execute();
+
+    }
+
+    public class SpremiLozinkuAsyncTask extends AsyncTask<Void, Void, Void>{//1.void-nista ne saljemo tasku dok se pokrece 2.void-kako zelimo primati progress 3.void-sto zelimo da async task vrati
+        Doktor doktor;
+        GetUserCallback lozinkaCallback;
+
+        public SpremiLozinkuAsyncTask(Doktor doktor, GetUserCallback lozinkaCallback){
+            this.doktor = doktor;
+            this.lozinkaCallback = lozinkaCallback;
+        }
+
+        @Override
+        protected Void doInBackground(Void... params) {
+            ArrayList<NameValuePair> dataToSend = new ArrayList<>();
+            dataToSend.add(new BasicNameValuePair("email",doktor.email));
+            dataToSend.add(new BasicNameValuePair("lozinka",doktor.lozinka));
+
+
+            HttpParams httpRequestParams = new BasicHttpParams();
+            HttpConnectionParams.setConnectionTimeout(httpRequestParams, CONNECTION_TIMEOUT);//koliko cmo cekat dok se POST izvrsava
+            HttpConnectionParams.setSoTimeout(httpRequestParams, CONNECTION_TIMEOUT);//vrijeme koliko zelimo cekat da dohvatimo podatke od servera
+
+            HttpClient client = new DefaultHttpClient(httpRequestParams);
+            HttpPost post = new HttpPost(SERVER_ADDRESS + "/promjeni_lozinku.php");
+            try {
+                post.setEntity(new UrlEncodedFormEntity(dataToSend));//enkodiramo (dataToSend) i dajemo u post(da zna adresu)
+                client.execute(post);
+
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            lozinkaCallback.done(null);
+            super.onPostExecute(aVoid);
+        }
+    }
 
 
 

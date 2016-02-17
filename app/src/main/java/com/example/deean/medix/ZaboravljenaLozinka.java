@@ -2,6 +2,7 @@ package com.example.deean.medix;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -21,12 +22,16 @@ import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
+import java.security.SecureRandom;
+import java.math.BigInteger;
+import java.util.Random;
+
 
 public class ZaboravljenaLozinka extends AppCompatActivity implements View.OnClickListener {
     Button bPosalji;
     EditText lozEmail;
-    private static final String username = "brutallion1@gmail.com";
-    private static final String password = "docse1viv";
+    private static final String username = "medix.supp@gmail.com";
+    private static final String password = "docse1viv1";
 
     DoktorLokalno DoktorLokalno;
 
@@ -72,7 +77,7 @@ public class ZaboravljenaLozinka extends AppCompatActivity implements View.OnCli
     }
     private Message createMessage(String email, String subject, String messageBody, Session session) throws MessagingException, UnsupportedEncodingException {
         Message message = new MimeMessage(session);
-        message.setFrom(new InternetAddress("brutallion1@gmail.com", "Dean Jakovljevic"));
+        message.setFrom(new InternetAddress("medix.supp@gmail.com", "Medix Support"));
         message.addRecipient(Message.RecipientType.TO, new InternetAddress(email, email));
         message.setSubject(subject);
         message.setText(messageBody);
@@ -146,11 +151,28 @@ public class ZaboravljenaLozinka extends AppCompatActivity implements View.OnCli
     private void prikaziPoruku(){
         String email = lozEmail.getText().toString();
         String subject = "Zahtjev za promjenom lozinke";
-        String message = "U poruci vam je dostupna nova lozinka";
+        String message = "Nova lozinka glasi: ";
         AlertDialog.Builder dialogBuilder1 = new AlertDialog.Builder(ZaboravljenaLozinka.this);
         dialogBuilder1.setMessage("E-mail s upustvima je poslan!");
         dialogBuilder1.setPositiveButton("Ok", null);
         dialogBuilder1.show();
+        String AB = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+        Random rnd = new Random();
+        StringBuilder lozinka = new StringBuilder(6);
+        for( int i = 0; i < 6; i++ )
+                lozinka.append(AB.charAt(rnd.nextInt(AB.length())));
+        message = message + lozinka.toString();
+        Doktor doktor  = new Doktor(email, lozinka.toString());
         sendMail(email, subject, message);
+        promjeniLozinku(doktor);
+    }
+    private void promjeniLozinku(Doktor doktor){
+        ServerRequest serverRequest = new ServerRequest(this);
+        serverRequest.spremiLozinkuUPozadini(doktor, new GetUserCallback() {
+            @Override
+            public void done(Doktor returnedDoktor) {
+                startActivity(new Intent(ZaboravljenaLozinka.this,Login.class));
+            }
+        });
     }
 }
