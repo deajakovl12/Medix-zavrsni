@@ -8,7 +8,7 @@
     android:background="#efefef"
     >
     <Button
-        android:background="#A22022"
+        android:background="#434343"
         android:textColor="@android:color/background_light"
         android:id="@+id/bdoktor"
         android:text="Doktor"
@@ -20,7 +20,7 @@
         />
     <Button
         android:layout_marginTop="10dp"
-        android:background="#434343"
+        android:background="#A22022"
         android:textColor="@android:color/background_light"
         android:id="@+id/bpacijent"
         android:text="Pacijent"
@@ -86,15 +86,13 @@
         android:layout_marginBottom="10dp"/>
     <EditText
         android:theme="@style/Boja_EditText"
-        android:layout_below="@id/etTelefon"
-        android:hint="Adresa ordinacije"
+        android:layout_below="@+id/etTelefon"
+        android:hint="Prebivalište"
         android:textColor="#434343"
         android:id="@+id/etAdresa"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        />
-
+        android:layout_marginBottom="10dp"/>
     <Button
         android:layout_below="@id/etAdresa"
         android:background="#A22022"
@@ -103,7 +101,6 @@
         android:text="Registriraj se"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-
         />
 
 

@@ -22,14 +22,22 @@
             android:label="Doktor" />
         <activity
             android:name=".Register"
-            android:label="Registracija"></activity>
-        <activity android:name=".ZaboravljenaLozinka"
-            android:label="Zaboravili ste lozinku?"></activity>
-        <!-- ATTENTION: This was auto-generated to add Google Play services to your project for
-             App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information. -->
+            android:label="Registracija doktora" />
+        <activity
+            android:name=".ZaboravljenaLozinka"
+            android:label="Zaboravili ste lozinku?" />
+        <!--
+             ATTENTION: This was auto-generated to add Google Play services to your project for
+             App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information.
+        -->
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
+
+        <activity
+            android:name=".Register_Pacijent"
+            android:label="Registracija pacijenta" />
+        <activity android:name=".Prijava_Pacijent"></activity>
     </application>
 
 </manifest>

@@ -7,14 +7,14 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-public class Register extends AppCompatActivity implements View.OnClickListener {
-    Button bRegistracija,bpacijent;
+public class Register_Pacijent extends AppCompatActivity implements View.OnClickListener {
+    Button bRegistracija, bdoktor;
     EditText etEmail, etLozinka, etOIB, etTelefon, etAdresa, etIme, etPrezime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register);
+        setContentView(R.layout.activity_register_pacijent);
         etEmail = (EditText) findViewById(R.id.etEmail);
         etLozinka = (EditText) findViewById(R.id.etLozinka);
         etOIB = (EditText) findViewById(R.id.etOIB);
@@ -23,10 +23,10 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
         etIme = (EditText) findViewById(R.id.etIme);
         etPrezime = (EditText) findViewById(R.id.etPrezime);
         bRegistracija = (Button) findViewById(R.id.bRegistracija);
-        bpacijent = (Button) findViewById(R.id.bpacijent);
+        bdoktor = (Button) findViewById(R.id.bdoktor);
 
         bRegistracija.setOnClickListener(this);
-        bpacijent.setOnClickListener(this);
+        bdoktor.setOnClickListener(this);
     }
 
     @Override
@@ -41,21 +41,22 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
                 String oib = etOIB.getText().toString();
                 String lozinka = etLozinka.getText().toString();
 
-                Doktor doktor = new Doktor(ime,prezime,adresa,oib,lozinka,telefon,email,null,null,null,null);
+                Pacijent pacijent = new Pacijent(ime, prezime, adresa, oib, lozinka, telefon, email, null, null);
 
-                registrirajDoktor(doktor);
+                registrirajPacijent(pacijent);
                 break;
-            case R.id.bpacijent:
-                startActivity(new Intent(Register.this,Register_Pacijent.class));
+            case R.id.bdoktor:
+                startActivity(new Intent(Register_Pacijent.this, Register.class));
 
         }
     }
-    private void registrirajDoktor(Doktor doktor){
+
+    private void registrirajPacijent(Pacijent pacijent) {
         ServerRequest serverRequest = new ServerRequest(this);
-        serverRequest.spremiPodatkeUPozadini(doktor, new GetUserCallback() {
+        serverRequest.spremiPodatkePacijentUPozadini(pacijent, new GetUserCallbackPacijent() {
             @Override
-            public void done(Doktor returnedDoktor) {
-                startActivity(new Intent(Register.this,Login.class));
+            public void done(Pacijent returnedPacijent) {
+                startActivity(new Intent(Register_Pacijent.this, Login.class));
             }
         });
     }

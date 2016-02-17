@@ -15,6 +15,7 @@ public class Login extends AppCompatActivity  implements View.OnClickListener{
     TextView tvRegistracijaLink, tvLozinkaLink;
 
     DoktorLokalno DoktorLokalno;
+    PacijentLokalno PacijentLokalno;
 
 
     @Override
@@ -34,6 +35,7 @@ public class Login extends AppCompatActivity  implements View.OnClickListener{
 
 
         DoktorLokalno = new DoktorLokalno(this);
+        PacijentLokalno = new PacijentLokalno(this);
 
     }
 
@@ -44,16 +46,14 @@ public class Login extends AppCompatActivity  implements View.OnClickListener{
                 String email = etEmail.getText().toString();
                 String lozinka = etLozinka.getText().toString();
 
-
-
+                Pacijent pacijent = new Pacijent(email,lozinka);
                 Doktor doktor = new Doktor(email,lozinka);
 
-                autentifikacija(doktor);
+                autentifikacija_doktora(doktor);
+                autentifikacija_pacijenta(pacijent);
 
-                DoktorLokalno.spremiDoktorPodatke(doktor);
-                DoktorLokalno.postaviPrijavljenogDoktora(true);
-
-
+                //DoktorLokalno.spremiDoktorPodatke(doktor);
+                //DoktorLokalno.postaviPrijavljenogDoktora(true);
 
                 break;
             case R.id.tvRegistracijaLink:
@@ -70,19 +70,31 @@ public class Login extends AppCompatActivity  implements View.OnClickListener{
 
     }
 
-    private void autentifikacija(Doktor doktor){
+    private void autentifikacija_doktora(Doktor doktor){
         ServerRequest serverRequest = new ServerRequest(this);
         serverRequest.dohvatiPodatkeUPozadini(doktor, new GetUserCallback() {
             @Override
             public void done(Doktor returnedDoktor) {
                 if(returnedDoktor == null){
-                    showErrorMessage();
                 }else{
                     logDoktorIn(returnedDoktor);
                 }
             }
         });
 
+    }
+    private void autentifikacija_pacijenta(Pacijent pacijent) {
+        ServerRequest serverRequest = new ServerRequest(this);
+        serverRequest.dohvatiPodatkePacijentUPozadini(pacijent, new GetUserCallbackPacijent() {
+            @Override
+            public void done(Pacijent returnedPacijent) {
+                if (returnedPacijent == null) {
+                    showErrorMessage();
+                } else {
+                    logPacijentIn(returnedPacijent);
+                }
+            }
+        });
     }
     private void showErrorMessage(){
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(Login.this);
@@ -96,6 +108,11 @@ public class Login extends AppCompatActivity  implements View.OnClickListener{
         DoktorLokalno.postaviPrijavljenogDoktora(true);
 
         startActivity(new Intent(this,Prijava.class));
+    }
+    private void logPacijentIn(Pacijent returnedPacijent){
+        PacijentLokalno.spremiPacijentPodatke(returnedPacijent);
+        PacijentLokalno.postaviPrijavljenogPacijenta(true);
 
+        startActivity(new Intent(this,Prijava_Pacijent.class));
     }
 }

@@ -267,6 +267,121 @@ public class ServerRequest {
             super.onPostExecute(aVoid);
         }
     }
+    public void spremiPodatkePacijentUPozadini(Pacijent pacijent, GetUserCallbackPacijent pacijentCallback){
+        progressDialog.show();
+        new SpremiPodatkePacijentAsyncTask(pacijent,pacijentCallback).execute();
+
+    }
+    public class SpremiPodatkePacijentAsyncTask extends AsyncTask<Void, Void, Void>{//1.void-nista ne saljemo tasku dok se pokrece 2.void-kako zelimo primati progress 3.void-sto zelimo da async task vrati
+        Pacijent pacijent;
+        GetUserCallbackPacijent pacijentCallback;
+
+        public SpremiPodatkePacijentAsyncTask(Pacijent pacijent, GetUserCallbackPacijent pacijentCallback){
+            this.pacijent = pacijent;
+            this.pacijentCallback = pacijentCallback;
+        }
+
+        @Override
+        protected Void doInBackground(Void... params) {
+            ArrayList<NameValuePair> dataToSend = new ArrayList<>();
+            dataToSend.add(new BasicNameValuePair("ime",pacijent.ime));
+            dataToSend.add(new BasicNameValuePair("prezime",pacijent.prezime));
+            dataToSend.add(new BasicNameValuePair("adresa",pacijent.adresa));
+            dataToSend.add(new BasicNameValuePair("lozinka",pacijent.lozinka));
+            dataToSend.add(new BasicNameValuePair("telefon",pacijent.telefon));
+            dataToSend.add(new BasicNameValuePair("oib",pacijent.oib));
+            dataToSend.add(new BasicNameValuePair("email", pacijent.email));
+
+            HttpParams httpRequestParams = new BasicHttpParams();
+            HttpConnectionParams.setConnectionTimeout(httpRequestParams, CONNECTION_TIMEOUT);//koliko cmo cekat dok se POST izvrsava
+            HttpConnectionParams.setSoTimeout(httpRequestParams, CONNECTION_TIMEOUT);//vrijeme koliko zelimo cekat da dohvatimo podatke od servera
+
+            HttpClient client = new DefaultHttpClient(httpRequestParams);
+            HttpPost post = new HttpPost(SERVER_ADDRESS + "/spremi_pacijenta.php");
+            try {
+                post.setEntity(new UrlEncodedFormEntity(dataToSend));//enkodiramo (dataToSend) i dajemo u post(da zna adresu)
+                client.execute(post);
+
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            progressDialog.dismiss();
+            pacijentCallback.done(null);
+            super.onPostExecute(aVoid);
+        }
+    }
+
+    public void dohvatiPodatkePacijentUPozadini(Pacijent pacijent, GetUserCallbackPacijent callback){
+        progressDialog.show();
+        new DohvatiPodatkePacijentAsyncTask(pacijent,callback).execute();
+    }
+    public class DohvatiPodatkePacijentAsyncTask extends AsyncTask<Void, Void, Pacijent> {//1.void-nista ne saljemo tasku dok se pokrece 2.void-kako zelimo primati progress 3.void-sto zelimo da async task vrati
+        Pacijent pacijent;
+        GetUserCallbackPacijent pacijentCallback;
+
+        public DohvatiPodatkePacijentAsyncTask(Pacijent pacijent, GetUserCallbackPacijent pacijentCallback) {
+            this.pacijent = pacijent;
+            this.pacijentCallback = pacijentCallback;
+        }
+
+        @Override
+        protected Pacijent doInBackground(Void... params) {
+            ArrayList<NameValuePair> dataToSend = new ArrayList<>();
+            dataToSend.add(new BasicNameValuePair("email", pacijent.email));
+            dataToSend.add(new BasicNameValuePair("lozinka",pacijent.lozinka));
+
+            HttpParams httpRequestParams = new BasicHttpParams();
+            HttpConnectionParams.setConnectionTimeout(httpRequestParams, CONNECTION_TIMEOUT);//koliko cmo cekat dok se POST izvrsava
+            HttpConnectionParams.setSoTimeout(httpRequestParams, CONNECTION_TIMEOUT);
+
+
+            HttpClient client = new DefaultHttpClient(httpRequestParams);
+            HttpPost post = new HttpPost(SERVER_ADDRESS + "/dohvati_pacijenta.php");
+
+
+            Pacijent returnedPacijent = null;
+            try {
+                post.setEntity(new UrlEncodedFormEntity(dataToSend));//enkodiramo (dataToSend) i dajemo u post(da zna adresu)
+                HttpResponse httpOdgovor = client.execute(post);
+
+                HttpEntity entity = httpOdgovor.getEntity();
+                String result = EntityUtils.toString(entity);
+                JSONObject jObject = new JSONObject(result);
+                // Log.i("Ispis:",result);
+                if(jObject.length() == 0){
+                    returnedPacijent = null;
+                }else{
+                    String ime = jObject.getString("ime");
+                    String prezime = jObject.getString("prezime");
+                    String adresa = jObject.getString("adresa");
+                    String oib = jObject.getString("oib");
+                    String telefon = jObject.getString("telefon");
+                    String mobitel = jObject.getString("mobitel");
+                    String spol = jObject.getString("spol");
+
+                    returnedPacijent = new Pacijent(ime,prezime,adresa,oib,pacijent.lozinka,telefon,pacijent.email,spol,mobitel);
+
+
+                }
+
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+            return returnedPacijent;
+        }
+        @Override
+        protected void onPostExecute(Pacijent returnedPacijent) {
+            progressDialog.dismiss();
+            pacijentCallback.done(returnedPacijent);
+            super.onPostExecute(returnedPacijent);
+        }
+    }
 
 
 
