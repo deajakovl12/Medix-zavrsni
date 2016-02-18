@@ -42,20 +42,21 @@ public class Register_Pacijent extends AppCompatActivity implements View.OnClick
                 String oib = etOIB.getText().toString();
                 String lozinka = etLozinka.getText().toString();
                 if(email.contains("@")) {
-                    final Pacijent pacijent = new Pacijent(ime, prezime, adresa, oib, lozinka, telefon, email, null, null);
-                    final Doktor doktor1 = new Doktor (email);
-                    Pacijent pacijent1 = new Pacijent(email);
+
+                    final Pacijent pacijent3 = new Pacijent(ime, prezime, adresa, oib, lozinka, telefon, email, null, null);
+                    final Doktor doktor2 = new Doktor (email);
+                    Pacijent pacijent2 = new Pacijent(email);
 
                     final ServerRequest serverRequest = new ServerRequest(this);
-                    serverRequest.dohvatiEmailUpozadiniPacijent(pacijent1, new GetUserCallbackPacijent() {
+                    serverRequest.dohvatiEmailUpozadiniPacijent(pacijent2, new GetUserCallbackPacijent() {
                         @Override
                         public void done(Pacijent returnedPacijent) {
                             if (returnedPacijent == null) {
-                                serverRequest.dohvatiEmailUpozadini(doktor1, new GetUserCallback() {
+                                serverRequest.dohvatiEmailUpozadini(doktor2, new GetUserCallback() {
                                     @Override
                                     public void done(Doktor returnedDoktor) {
                                         if (returnedDoktor == null) {
-                                            registrirajPacijent(pacijent);
+                                            registrirajPacijent(pacijent3);
                                         } else {
                                             showErrorMessage();}
                                     }});
@@ -64,8 +65,6 @@ public class Register_Pacijent extends AppCompatActivity implements View.OnClick
                             }
                         }
                     });
-
-                    registrirajPacijent(pacijent);
                 }
                 else{
                 AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(Register_Pacijent.this);
@@ -84,6 +83,7 @@ public class Register_Pacijent extends AppCompatActivity implements View.OnClick
         serverRequest.spremiPodatkePacijentUPozadini(pacijent, new GetUserCallbackPacijent() {
             @Override
             public void done(Pacijent returnedPacijent) {
+                potvrdnaPoruka();
                 startActivity(new Intent(Register_Pacijent.this, Login.class));
             }
         });
@@ -94,5 +94,10 @@ public class Register_Pacijent extends AppCompatActivity implements View.OnClick
         dialogBuilder.setPositiveButton("Ok", null);
         dialogBuilder.show();
 
+    }
+    private void potvrdnaPoruka(){
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(Register_Pacijent.this);
+        dialogBuilder.setMessage("Račun kreiran!");
+        dialogBuilder.show();
     }
 }

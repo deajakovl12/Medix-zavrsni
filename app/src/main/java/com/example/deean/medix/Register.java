@@ -66,12 +66,6 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
                             }
                         }
                     });
-
-                    //autentifikacija_doktora(doktor1, pacijent1);
-
-
-
-
                 } else{
                     AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(Register.this);
                     dialogBuilder.setMessage("Nije ispravan E-Mail!!");
@@ -88,6 +82,7 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
         serverRequest.spremiPodatkeUPozadini(doktor, new GetUserCallback() {
             @Override
             public void done(Doktor returnedDoktor) {
+                potvrdnaPoruka();
                 startActivity(new Intent(Register.this,Login.class));
             }
         });
@@ -98,6 +93,11 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
         dialogBuilder.setPositiveButton("Ok", null);
         dialogBuilder.show();
 
+    }
+    private void potvrdnaPoruka(){
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(Register.this);
+        dialogBuilder.setMessage("Račun kreiran!");
+        dialogBuilder.show();
     }
 
 }
