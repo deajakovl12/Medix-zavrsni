@@ -170,7 +170,7 @@ public class ZaboravljenaLozinka extends AppCompatActivity implements View.OnCli
         String subject = "Zahtjev za promjenom lozinke";
         String message = "Nova lozinka glasi: ";
         AlertDialog.Builder dialogBuilder1 = new AlertDialog.Builder(ZaboravljenaLozinka.this);
-        dialogBuilder1.setMessage("E-mail s upustvima je poslan!");
+        dialogBuilder1.setMessage("E-mail s novom lozinkom vam je poslan!");
         dialogBuilder1.show();
         String AB = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
         Random rnd = new Random();
@@ -196,7 +196,7 @@ public class ZaboravljenaLozinka extends AppCompatActivity implements View.OnCli
         String subject = "Zahtjev za promjenom lozinke";
         String message = "Nova lozinka glasi: ";
         AlertDialog.Builder dialogBuilder1 = new AlertDialog.Builder(ZaboravljenaLozinka.this);
-        dialogBuilder1.setMessage("E-mail s upustvima je poslan!");
+        dialogBuilder1.setMessage("E-mail s novom lozinkom vam je poslan!");
         dialogBuilder1.show();
         String AB = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
         Random rnd = new Random();

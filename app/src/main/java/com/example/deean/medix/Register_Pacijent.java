@@ -1,5 +1,6 @@
 package com.example.deean.medix;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -40,10 +41,37 @@ public class Register_Pacijent extends AppCompatActivity implements View.OnClick
                 String adresa = etAdresa.getText().toString();
                 String oib = etOIB.getText().toString();
                 String lozinka = etLozinka.getText().toString();
+                if(email.contains("@")) {
+                    final Pacijent pacijent = new Pacijent(ime, prezime, adresa, oib, lozinka, telefon, email, null, null);
+                    final Doktor doktor1 = new Doktor (email);
+                    Pacijent pacijent1 = new Pacijent(email);
 
-                Pacijent pacijent = new Pacijent(ime, prezime, adresa, oib, lozinka, telefon, email, null, null);
+                    final ServerRequest serverRequest = new ServerRequest(this);
+                    serverRequest.dohvatiEmailUpozadiniPacijent(pacijent1, new GetUserCallbackPacijent() {
+                        @Override
+                        public void done(Pacijent returnedPacijent) {
+                            if (returnedPacijent == null) {
+                                serverRequest.dohvatiEmailUpozadini(doktor1, new GetUserCallback() {
+                                    @Override
+                                    public void done(Doktor returnedDoktor) {
+                                        if (returnedDoktor == null) {
+                                            registrirajPacijent(pacijent);
+                                        } else {
+                                            showErrorMessage();}
+                                    }});
+                            } else {
+                                showErrorMessage();
+                            }
+                        }
+                    });
 
-                registrirajPacijent(pacijent);
+                    registrirajPacijent(pacijent);
+                }
+                else{
+                AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(Register_Pacijent.this);
+                dialogBuilder.setMessage("Nije ispravan E-Mail!!");
+                dialogBuilder.show();
+            }
                 break;
             case R.id.bdoktor:
                 startActivity(new Intent(Register_Pacijent.this, Register.class));
@@ -59,5 +87,12 @@ public class Register_Pacijent extends AppCompatActivity implements View.OnClick
                 startActivity(new Intent(Register_Pacijent.this, Login.class));
             }
         });
+    }
+    private void showErrorMessage(){
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(Register_Pacijent.this);
+        dialogBuilder.setMessage("Račun s takvim E-mailom je već kreiran!!");
+        dialogBuilder.setPositiveButton("Ok", null);
+        dialogBuilder.show();
+
     }
 }
