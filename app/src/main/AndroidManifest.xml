@@ -37,7 +37,14 @@
         <activity
             android:name=".Register_Pacijent"
             android:label="Registracija pacijenta" />
-        <activity android:name=".Prijava_Pacijent"></activity>
+        <activity
+            android:name=".Prijava_Pacijent"
+            android:label="Pacijent" />
+        <activity android:name=".CardViewLijek" />
+        <activity
+            android:name=".RecycleView"
+            android:label="Lijekovi" />
+        <activity android:name=".LijekProba"></activity>
     </application>
 
 </manifest>

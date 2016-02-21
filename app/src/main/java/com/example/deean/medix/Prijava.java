@@ -10,7 +10,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 public class Prijava extends AppCompatActivity implements View.OnClickListener {
-    Button bOdjava;
+    Button bOdjava,bLijek;
     TextView etRadnoVrijeme, etSavjet, etTelefon, etAdresa,etPrezime,etIme,etMobitel,etTitula;
     DoktorLokalno DoktorLokalno;
 
@@ -28,8 +28,10 @@ public class Prijava extends AppCompatActivity implements View.OnClickListener {
         etMobitel = (TextView) findViewById(R.id.etMobitel);
         etTitula = (TextView) findViewById(R.id.etTitula);
         bOdjava = (Button) findViewById(R.id.bOdjava);
+        bLijek = (Button) findViewById(R.id.bLijek);
 
         bOdjava.setOnClickListener(this);
+        bLijek.setOnClickListener(this);
 
         DoktorLokalno = new DoktorLokalno(this);
     }
@@ -69,6 +71,9 @@ public class Prijava extends AppCompatActivity implements View.OnClickListener {
 
                 startActivity(new Intent(this, Login.class));
 
+                break;
+            case R.id.bLijek:
+                startActivity(new Intent(this,RecycleView.class));
                 break;
 
         }

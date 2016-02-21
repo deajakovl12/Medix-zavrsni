@@ -8,10 +8,6 @@
     android:background="#efefef"
     >
 
-
-
-
-
     <ImageView
         android:layout_width="100dp"
         android:layout_height="100dp"
@@ -186,6 +182,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/etMobitel" />
+    <Button
+        android:background="#A22022"
+        android:textColor="@android:color/background_light"
+        android:id="@+id/bLijek"
+        android:text="Lijekovi"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/bOdjava" />
 
 
 </RelativeLayout>

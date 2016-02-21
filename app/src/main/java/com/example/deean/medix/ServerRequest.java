@@ -31,7 +31,7 @@ import javax.mail.MessagingException;
 public class ServerRequest {
     ProgressDialog progressDialog;
     public static final int CONNECTION_TIMEOUT = 1000*15;
-    public static final String SERVER_ADDRESS = "http://deajakovl.heliohost.org";
+    public static final String SERVER_ADDRESS = "http://jaka12.heliohost.org";
 
     public ServerRequest(Context context){
         progressDialog = new ProgressDialog(context);

@@ -73,7 +73,10 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
                 }
                 break;
             case R.id.bpacijent:
-                startActivity(new Intent(Register.this,Register_Pacijent.class));
+                Intent to_pacijent = new Intent(Register.this,Register_Pacijent.class);
+                to_pacijent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(to_pacijent);
+
 
         }
     }
@@ -83,7 +86,7 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
             @Override
             public void done(Doktor returnedDoktor) {
                 potvrdnaPoruka();
-                startActivity(new Intent(Register.this,Login.class));
+                startActivity(new Intent(Register.this, Login.class));
             }
         });
     }

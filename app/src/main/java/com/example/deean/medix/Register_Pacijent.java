@@ -73,7 +73,10 @@ public class Register_Pacijent extends AppCompatActivity implements View.OnClick
             }
                 break;
             case R.id.bdoktor:
-                startActivity(new Intent(Register_Pacijent.this, Register.class));
+                Intent to_doktor = new Intent(Register_Pacijent.this,Register.class);
+                to_doktor.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(to_doktor);
+
 
         }
     }
