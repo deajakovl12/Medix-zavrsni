@@ -20,8 +20,6 @@ public class Lijek {
         this.kada_ne_smije_primjeniti=kada_ne_smije_primjeniti;
         this.doziranje=doziranje;
         this.nuspojave=nuspojave;
-
-
     }
 
     public String getNaziv() {

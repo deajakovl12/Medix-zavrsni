@@ -44,7 +44,7 @@
         <activity
             android:name=".RecycleView"
             android:label="Lijekovi" />
-        <activity android:name=".LijekProba"></activity>
+        <activity android:name=".LijekDetalji"></activity>
     </application>
 
 </manifest>

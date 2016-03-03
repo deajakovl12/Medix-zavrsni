@@ -44,11 +44,11 @@ public class Register_Pacijent extends AppCompatActivity implements View.OnClick
                 if(email.contains("@")) {
 
                     final Pacijent pacijent3 = new Pacijent(ime, prezime, adresa, oib, lozinka, telefon, email, null, null);
-                    final Doktor doktor2 = new Doktor (email);
-                    Pacijent pacijent2 = new Pacijent(email);
+                    Doktor doktor2 = new Doktor (email);
+                    final Pacijent pacijent2 = new Pacijent(email);
 
                     final ServerRequest serverRequest = new ServerRequest(this);
-                    serverRequest.dohvatiEmailUpozadiniPacijent(pacijent2, new GetUserCallbackPacijent() {
+                    /*serverRequest.dohvatiEmailUpozadiniPacijent(pacijent2, new GetUserCallbackPacijent() {
                         @Override
                         public void done(Pacijent returnedPacijent) {
                             if (returnedPacijent == null) {
@@ -60,6 +60,25 @@ public class Register_Pacijent extends AppCompatActivity implements View.OnClick
                                         } else {
                                             showErrorMessage();}
                                     }});
+                            } else {
+                                showErrorMessage();
+                            }
+                        }
+                    });*/
+                    serverRequest.dohvatiEmailUpozadini(doktor2, new GetUserCallback() {
+                        @Override
+                        public void done(Doktor returnedDoktor) {
+                            if (returnedDoktor == null) {
+                                serverRequest.dohvatiEmailUpozadiniPacijent(pacijent2, new GetUserCallbackPacijent() {
+                                    @Override
+                                    public void done(Pacijent returnedPacijent) {
+                                        if (returnedPacijent == null) {
+                                            registrirajPacijent(pacijent3);
+                                        } else {
+                                            showErrorMessage();
+                                        }
+                                    }
+                                });
                             } else {
                                 showErrorMessage();
                             }

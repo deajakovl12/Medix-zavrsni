@@ -26,6 +26,8 @@ public class RecycleView extends AppCompatActivity implements View.OnClickListen
     private ArrayList<String> spremi;
     private List<Lijek> lijeks;
     private RecyclerView rv;
+    int [] poljeSlika = {R.drawable.lupocet_100,R.drawable.neofen_100,R.drawable.naklofen_100};
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,27 +65,21 @@ public class RecycleView extends AppCompatActivity implements View.OnClickListen
         LijekAPI.Factory.getIstance().response().enqueue(new Callback<ArrayList<Lijek>>() {
             @Override
             public void onResponse(Call<ArrayList<Lijek>> call, Response<ArrayList<Lijek>> response) {
+                initializeAdapter();
                 for (int i = 0; i < response.body().size(); i++) {
-                        spremi.add(response.body().get(i).getNaziv());
-
+                    //lijeks.add(new Lijek(response.body().get(i).getNaziv(),poljeSlika[i]));
+                    spremi.add(response.body().get(i).getNaziv());
                 }
-                //Log.i("TAG", response.body().get(0).getNaziv());
+                //Log.i("TAG", responbodyse.body().get(0).getNaziv());
                 //Log.i("TAG2", spremi.get(0));
                 //Log.i("VELICINA PRVO", String.valueOf(spremi.size()));
-                // tu stavit provjeri da li se taj lijek treba ispisat il ne
-                    if(spremi.get(0).toLowerCase().contains(tekst.toLowerCase())) {
-                        lijeks.add(new Lijek(spremi.get(0), R.drawable.lupocet_100));
+                // napravit polje u kojem su slike i onda citat od tamo i tu upisivat
+                for (int i = 0; i < spremi.size(); i++) {
+                    if (spremi.get(i).toLowerCase().contains(tekst.toLowerCase())) {
+                        lijeks.add(new Lijek(spremi.get(i), poljeSlika[i]));
                     }
-                    if(spremi.get(1).toLowerCase().contains(tekst.toLowerCase())) {
-                        lijeks.add(new Lijek(spremi.get(1), R.drawable.neofen_100));
-                    }
-                    if(spremi.get(2).toLowerCase().contains(tekst.toLowerCase())) {
-                        lijeks.add(new Lijek(spremi.get(2), R.drawable.naklofen_100));
-                    }
-
-
+                }
                 //Log.i("LIJEKS", String.valueOf(lijeks));
-                initializeAdapter();
             }
 
             @Override
@@ -94,7 +90,7 @@ public class RecycleView extends AppCompatActivity implements View.OnClickListen
         });
     }
     private void initializeAdapter(){
-        RVAdapter adapter = new RVAdapter(lijeks);
+        RVAdapter adapter = new RVAdapter(RecycleView.this,lijeks);
         rv.setAdapter(adapter);
     }
 

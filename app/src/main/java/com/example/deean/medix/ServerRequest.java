@@ -318,7 +318,7 @@ public class ServerRequest {
     }
 
     public void dohvatiPodatkePacijentUPozadini(Pacijent pacijent, GetUserCallbackPacijent callback){
-        progressDialog.show();
+        //progressDialog.show();
         new DohvatiPodatkePacijentAsyncTask(pacijent,callback).execute();
     }
     public class DohvatiPodatkePacijentAsyncTask extends AsyncTask<Void, Void, Pacijent> {//1.void-nista ne saljemo tasku dok se pokrece 2.void-kako zelimo primati progress 3.void-sto zelimo da async task vrati
@@ -377,13 +377,13 @@ public class ServerRequest {
         }
         @Override
         protected void onPostExecute(Pacijent returnedPacijent) {
-            progressDialog.dismiss();
+            //progressDialog.dismiss();
             pacijentCallback.done(returnedPacijent);
             super.onPostExecute(returnedPacijent);
         }
     }
     public void dohvatiEmailUpozadiniPacijent(Pacijent pacijent, GetUserCallbackPacijent emailcallback){
-        progressDialog.show();
+       // progressDialog.show();
         new DohvatiEmailPacijentAsyncTask(pacijent,emailcallback).execute();
     }
     public class DohvatiEmailPacijentAsyncTask extends AsyncTask<Void, Void, Pacijent> {//1.void-nista ne saljemo tasku dok se pokrece 2.void-kako zelimo primati progress 3.void-sto zelimo da async task vrati
@@ -441,7 +441,7 @@ public class ServerRequest {
         }
         @Override
         protected void onPostExecute(Pacijent returnedPacijent) {
-            progressDialog.dismiss();
+            //progressDialog.dismiss();
             emailCallback.done(returnedPacijent);
             super.onPostExecute(returnedPacijent);
         }
