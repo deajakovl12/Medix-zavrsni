@@ -39,13 +39,17 @@ public class MjereOprezaFragment extends android.support.v4.app.Fragment{
         super.onCreate(savedInstanceState);
         example_data = getArguments().getString(ARG_EXAMPLE);
         Log.i("Fragment created with", example_data);
-        proba = (TextView) proba.findViewById(R.id.textView);
-        proba.setText("LALALALA");
+        //proba = (TextView) proba.findViewById(R.id.textView);
+        //proba.setText("LALALALA");
     }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_mjere_opreza,container,false);
+        LayoutInflater lf = getActivity().getLayoutInflater();
+        View view = lf.inflate(R.layout.fragment_mjere_opreza, container, false);
+        TextView text = (TextView) view.findViewById(R.id.textView);
+        text.setText("test");
+        return view;
     }
 }

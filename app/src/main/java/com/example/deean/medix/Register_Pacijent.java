@@ -113,7 +113,6 @@ public class Register_Pacijent extends AppCompatActivity implements View.OnClick
     private void showErrorMessage(){
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(Register_Pacijent.this);
         dialogBuilder.setMessage("Račun s takvim E-mailom je već kreiran!!");
-        dialogBuilder.setPositiveButton("Ok", null);
         dialogBuilder.show();
 
     }

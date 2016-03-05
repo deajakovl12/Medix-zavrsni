@@ -50,7 +50,6 @@ public class RVAdapter  extends RecyclerView.Adapter<RVAdapter.LijekViewHolder> 
                     Pozovi_detalje(ime);
                     break;
             }
-
         }
         public void Pozovi_detalje(String ime){
             Intent intent1 = new Intent(context, FragmentLijekDetalji.class);

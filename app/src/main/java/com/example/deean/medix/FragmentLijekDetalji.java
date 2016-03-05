@@ -14,6 +14,7 @@ public class FragmentLijekDetalji extends AppCompatActivity {
 
     private ViewPager viewPager;
     private TabLayout tabLayout;
+    private String ime;
     private int[] tabIcons = {R.drawable.caution_white,R.drawable.information_white};
 
     @Override
@@ -29,19 +30,13 @@ public class FragmentLijekDetalji extends AppCompatActivity {
 
         tabLayout.getTabAt(0).setIcon(tabIcons[1]);
         tabLayout.getTabAt(1).setIcon(tabIcons[0]);
-
-
-        Intent intent = getIntent();
-        String ime = intent.getStringExtra("ime1");
-        Log.e("TAG", ime);
-
-
     }
-
     private void setupViewPager(ViewPager viewPager) {
-        //todo adapter za ovo
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(OsnovneInformacijeFragment.newIstance("this data is for fragment 1"),"Osnovne informacije");
+        Intent intent = getIntent();
+        ime = intent.getStringExtra("ime1");
+        Log.e("TAG", ime);
+        adapter.addFragment(OsnovneInformacijeFragment.newIstance(ime),"Osnovne informacije");
         adapter.addFragment(MjereOprezaFragment.newIstance("this data is for fragment 2"),"Mjere opreza");
         viewPager.setAdapter(adapter);
     }

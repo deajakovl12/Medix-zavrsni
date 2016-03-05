@@ -3,6 +3,9 @@ package com.example.deean.medix;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.widget.TextView;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
@@ -37,4 +40,6 @@ public class ViewPagerAdapter extends FragmentPagerAdapter{
     public CharSequence getPageTitle(int position) {
         return mFragmentListTitles.get(position);
     }
+
+
 }

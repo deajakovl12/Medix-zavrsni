@@ -44,7 +44,6 @@
         <activity
             android:name=".RecycleView"
             android:label="Lijekovi" />
-        <activity android:name=".LijekDetalji" />
         <activity android:name=".FragmentLijekDetalji"
                   android:label="Lijek detalji"
             >
