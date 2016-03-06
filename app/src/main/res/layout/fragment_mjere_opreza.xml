@@ -1,14 +1,84 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent">
 
+    android:orientation="vertical"
+    android:padding="10dp"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:background="#efefef">
+
+    <ImageView
+        android:layout_marginTop="20dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:id="@+id/ivLijek"
+        android:layout_gravity="left"
+        android:layout_marginBottom="20dp"
+        />
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello from fragment #2"
+        android:layout_marginLeft="10dp"
+        android:textSize="18dp"
         android:textColor="#A22022"
-        android:textSize="30dp"
-        android:id="@+id/textView"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
+        android:id="@+id/tvImeLijeka"
+        android:layout_width="match_parent"
+        android:layout_marginBottom="10dp"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@+id/ivLijek"
+        android:layout_marginTop="40dp"
+        />
+    <TextView
+        android:textColor="#A22022"
+        android:layout_width="wrap_content"
+        android:text="Kada ne smijete primjeniti tablete"
+        android:textSize="18dp"
+        android:textStyle="bold"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/ivLijek"
+        android:id="@+id/tvKadNe"
+        />
+    <TextView
+        android:maxLines="20"
+        android:textColor="#434343"
+        android:id="@+id/etkadNe"
+        android:layout_width="match_parent"
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvKadNe"/>
+    <TextView
+        android:textColor="#A22022"
+        android:layout_width="wrap_content"
+        android:text="Doziranje i način primjene"
+        android:textSize="18dp"
+        android:textStyle="bold"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/etkadNe"
+        android:id="@+id/tvDoziranje"
+        />
+    <TextView
+        android:textColor="#434343"
+        android:id="@+id/etDoziranje"
+        android:layout_width="match_parent"
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvDoziranje"/>
+    <TextView
+        android:textColor="#A22022"
+        android:layout_width="wrap_content"
+        android:text="Nuspojave"
+        android:textSize="18dp"
+        android:textStyle="bold"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/etDoziranje"
+        android:id="@+id/tvNuspojave"
+        />
+    <TextView
+        android:textColor="#434343"
+        android:id="@+id/etNuspojave"
+        android:layout_width="match_parent"
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvNuspojave"/>
 </RelativeLayout>

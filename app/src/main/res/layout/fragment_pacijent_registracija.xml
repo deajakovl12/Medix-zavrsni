@@ -1,35 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+
     android:orientation="vertical"
     android:padding="5dp"
     android:layout_height="match_parent"
     android:layout_width="match_parent"
-    android:background="#efefef"
-    >
-    <Button
-        android:background="#434343"
-        android:textColor="@android:color/background_light"
-        android:id="@+id/bdoktor"
-        android:text="Doktor"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:layout_marginBottom="10dp"
-        android:layout_marginTop="10dp"
-        />
-    <Button
-        android:layout_marginTop="10dp"
-        android:background="#A22022"
-        android:textColor="@android:color/background_light"
-        android:id="@+id/bpacijent"
-        android:text="Pacijent"
-        android:layout_toEndOf="@id/bdoktor"
-        android:layout_marginLeft="10dp"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        />
+    android:background="#efefef">
+
     <EditText
+        android:layout_marginTop="20dp"
         android:theme="@style/Boja_EditText"
         android:hint="Ime"
         android:layout_below="@+id/bdoktor"
@@ -102,6 +81,5 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         />
-
 
 </RelativeLayout>

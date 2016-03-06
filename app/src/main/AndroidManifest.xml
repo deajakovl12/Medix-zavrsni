@@ -21,9 +21,6 @@
             android:name=".Prijava"
             android:label="Doktor" />
         <activity
-            android:name=".Register"
-            android:label="Registracija doktora" />
-        <activity
             android:name=".ZaboravljenaLozinka"
             android:label="Zaboravili ste lozinku?" />
         <!--
@@ -35,19 +32,18 @@
             android:value="@integer/google_play_services_version" />
 
         <activity
-            android:name=".Register_Pacijent"
-            android:label="Registracija pacijenta" />
-        <activity
             android:name=".Prijava_Pacijent"
             android:label="Pacijent" />
         <activity android:name=".CardViewLijek" />
         <activity
             android:name=".RecycleView"
             android:label="Lijekovi" />
-        <activity android:name=".FragmentLijekDetalji"
-                  android:label="Lijek detalji"
-            >
-        </activity>
+        <activity
+            android:name=".FragmentLijekDetalji"
+            android:label="Lijek detalji"></activity>
+        <activity android:name=".FragmentRegistracija"
+            android:label="Registracija"
+            ></activity>
     </application>
 
 </manifest>

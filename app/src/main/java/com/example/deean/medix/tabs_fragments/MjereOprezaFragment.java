@@ -7,9 +7,19 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.deean.medix.Lijek;
+import com.example.deean.medix.LijekDetaljiAPI;
 import com.example.deean.medix.R;
+import com.example.deean.medix.RecycleView;
+
+import java.util.ArrayList;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * Created by Deean on 4.3.2016..
@@ -17,15 +27,11 @@ import com.example.deean.medix.R;
 public class MjereOprezaFragment extends android.support.v4.app.Fragment{
 
     private static  final String ARG_EXAMPLE = "this_is_a_constant";
-    private String example_data;
-    TextView proba;
-
-
+    private String ime;
+    TextView imeLijeka,kadne,doziranje,nuspojave;
+    ImageView ivLijek;
     public MjereOprezaFragment(){
-
-
     }
-
     public static MjereOprezaFragment newIstance (String example_argument){
         MjereOprezaFragment osnovneInformacijeFragment = new MjereOprezaFragment();
         Bundle args = new Bundle();
@@ -37,10 +43,9 @@ public class MjereOprezaFragment extends android.support.v4.app.Fragment{
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        example_data = getArguments().getString(ARG_EXAMPLE);
-        Log.i("Fragment created with", example_data);
-        //proba = (TextView) proba.findViewById(R.id.textView);
-        //proba.setText("LALALALA");
+        ime = getArguments().getString(ARG_EXAMPLE);
+        Log.i("Fragment created with", ime);
+
     }
 
     @Nullable
@@ -48,8 +53,37 @@ public class MjereOprezaFragment extends android.support.v4.app.Fragment{
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         LayoutInflater lf = getActivity().getLayoutInflater();
         View view = lf.inflate(R.layout.fragment_mjere_opreza, container, false);
-        TextView text = (TextView) view.findViewById(R.id.textView);
-        text.setText("test");
+
+        imeLijeka = (TextView) view.findViewById(R.id.tvImeLijeka);
+        imeLijeka.setText(ime);
+        kadne = (TextView) view.findViewById(R.id.etkadNe);
+        doziranje = (TextView) view.findViewById(R.id.etDoziranje);
+        nuspojave = (TextView) view.findViewById(R.id.etNuspojave);
+        ivLijek = (ImageView) view.findViewById(R.id.ivLijek);
+
+
+        if(ime.equals("Lupocet 500mg tablete")){
+            ivLijek.setImageResource(RecycleView.poljeSlika[0]);
+        }
+        else if(ime.equals("Naklofen")){
+            ivLijek.setImageResource(RecycleView.poljeSlika[2]);
+        }
+        else if(ime.equals("Neofen")){
+            ivLijek.setImageResource(RecycleView.poljeSlika[1]);
+        }
+        LijekDetaljiAPI.Factory.getIstance().response(ime).enqueue(new Callback<ArrayList<Lijek>>() { //u response ime
+            @Override
+            public void onResponse(Call<ArrayList<Lijek>> call, Response<ArrayList<Lijek>> response) {
+                kadne.setText(response.body().get(0).getKada_ne_smije_primjeniti());
+                doziranje.setText(response.body().get(0).getDoziranje());
+                nuspojave.setText(response.body().get(0).getNuspojave());
+            }
+            @Override
+            public void onFailure(Call<ArrayList<Lijek>> call, Throwable t) {
+                Log.e("FAIL", "Nije dohvatilo");
+                Log.e("TAG", t.getMessage());
+            }
+        });
         return view;
     }
 }

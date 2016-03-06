@@ -57,7 +57,7 @@ public class Login extends AppCompatActivity  implements View.OnClickListener{
 
                 break;
             case R.id.tvRegistracijaLink:
-                startActivity(new Intent(this,Register.class));
+                startActivity(new Intent(this,FragmentRegistracija.class));
                 break;
 
             case R.id.tvLozinkaLink:

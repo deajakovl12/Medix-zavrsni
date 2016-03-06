@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.example.deean.medix.Lijek;
 import com.example.deean.medix.LijekDetaljiAPI;
 import com.example.deean.medix.R;
+import com.example.deean.medix.RecycleView;
 
 import java.util.ArrayList;
 
@@ -29,7 +30,7 @@ public class OsnovneInformacijeFragment extends android.support.v4.app.Fragment{
     private String ime;
     TextView imeLijeka,sastav,namjena,pakovanje,imeIAdresa;
     ImageView ivLijek;
-    int [] poljeSlika = {R.drawable.lupocet_100,R.drawable.neofen_100,R.drawable.naklofen_100};
+    //int [] poljeSlika = {R.drawable.lupocet_100,R.drawable.neofen_100,R.drawable.naklofen_100};
 
 
     public OsnovneInformacijeFragment(){
@@ -65,13 +66,13 @@ public class OsnovneInformacijeFragment extends android.support.v4.app.Fragment{
 
 
         if(ime.equals("Lupocet 500mg tablete")){
-            ivLijek.setImageResource(poljeSlika[0]);
+            ivLijek.setImageResource(RecycleView.poljeSlika[0]);
         }
         else if(ime.equals("Naklofen")){
-            ivLijek.setImageResource(poljeSlika[2]);
+            ivLijek.setImageResource(RecycleView.poljeSlika[2]);
         }
         else if(ime.equals("Neofen")){
-            ivLijek.setImageResource(poljeSlika[1]);
+            ivLijek.setImageResource(RecycleView.poljeSlika[1]);
         }
 
 

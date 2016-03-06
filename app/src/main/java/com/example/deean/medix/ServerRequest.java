@@ -6,6 +6,8 @@ import android.os.AsyncTask;
 import android.util.Log;
 import android.view.View;
 
+import com.example.deean.medix.tabs_fragments.DoktorRegistracijaFragment;
+
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -39,8 +41,13 @@ public class ServerRequest {
         progressDialog.setTitle("Obrađujem");
         progressDialog.setMessage("Molim sačekajte...");
     }
+
+    public ServerRequest() {
+
+    }
+
     public void spremiPodatkeUPozadini(Doktor doktor, GetUserCallback doktorCallback){
-        progressDialog.show();
+//        progressDialog.show();
         new SpremiPodatkeAsyncTask(doktor,doktorCallback).execute();
 
     }
@@ -50,7 +57,7 @@ public class ServerRequest {
         new DohvatiPodatkeAsyncTask(doktor,callback).execute();
     }
     public void dohvatiEmailUpozadini(Doktor doktor, GetUserCallback emailcallback){
-        progressDialog.show();
+        //progressDialog.show();
         new DohvatiEmailAsyncTask(doktor,emailcallback).execute();
     }
 
@@ -93,7 +100,7 @@ public class ServerRequest {
 
         @Override
         protected void onPostExecute(Void aVoid) {
-            progressDialog.dismiss();
+            //progressDialog.dismiss();
             doktorCallback.done(null);
             super.onPostExecute(aVoid);
         }
@@ -218,7 +225,7 @@ public class ServerRequest {
         }
         @Override
         protected void onPostExecute(Doktor returnedDoktor) {
-            progressDialog.dismiss();
+//            progressDialog.dismiss();
             emailCallback.done(returnedDoktor);
             super.onPostExecute(returnedDoktor);
         }
@@ -268,7 +275,7 @@ public class ServerRequest {
         }
     }
     public void spremiPodatkePacijentUPozadini(Pacijent pacijent, GetUserCallbackPacijent pacijentCallback){
-        progressDialog.show();
+//        progressDialog.show();
         new SpremiPodatkePacijentAsyncTask(pacijent,pacijentCallback).execute();
 
     }
@@ -311,7 +318,7 @@ public class ServerRequest {
 
         @Override
         protected void onPostExecute(Void aVoid) {
-            progressDialog.dismiss();
+//            progressDialog.dismiss();
             pacijentCallback.done(null);
             super.onPostExecute(aVoid);
         }

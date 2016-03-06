@@ -7,20 +7,22 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 
+import com.example.deean.medix.tabs_fragments.DoktorRegistracijaFragment;
 import com.example.deean.medix.tabs_fragments.MjereOprezaFragment;
 import com.example.deean.medix.tabs_fragments.OsnovneInformacijeFragment;
+import com.example.deean.medix.tabs_fragments.PacijentRegistracijaFragment;
 
-public class FragmentLijekDetalji extends AppCompatActivity {
+public class FragmentRegistracija extends AppCompatActivity {
 
     private ViewPager viewPager;
     private TabLayout tabLayout;
-    private String ime;
-    private int[] tabIcons = {R.drawable.caution_white,R.drawable.information_white};
+
+    private int[] tabIcons = {R.drawable.patient_white_small,R.drawable.doctor_white_small};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_fragment_lijek_detalji);
+        setContentView(R.layout.activity_fragment_registracija);
 
         viewPager = (ViewPager) findViewById(R.id.viewpager);
         setupViewPager(viewPager);
@@ -33,11 +35,8 @@ public class FragmentLijekDetalji extends AppCompatActivity {
     }
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        Intent intent = getIntent();
-        ime = intent.getStringExtra("ime1");
-        Log.e("TAG", ime);
-        adapter.addFragment(OsnovneInformacijeFragment.newIstance(ime),"Osnovne informacije");
-        adapter.addFragment(MjereOprezaFragment.newIstance(ime),"Mjere opreza");
+        adapter.addFragment(DoktorRegistracijaFragment.newIstance("Za doktora"),"Doktor");
+        adapter.addFragment(PacijentRegistracijaFragment.newIstance("Za pacijenta"), "Pacijent");
         viewPager.setAdapter(adapter);
     }
 }
