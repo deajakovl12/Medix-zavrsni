@@ -34,4 +34,9 @@ dependencies {
     compile 'com.squareup.okhttp:okhttp:2.4.0'
 
     compile 'com.android.support:design:23.0.1'
+
+    compile('com.mikepenz:materialdrawer:4.0.1@aar') {
+        transitive = true
+    }
+
 }

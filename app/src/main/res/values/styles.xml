@@ -1,11 +1,28 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">#A22022</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorPrimaryDark">@android:color/holo_red_dark</item>
         <item name="colorAccent">@android:color/holo_red_dark</item>
+
+
+        <!-- MaterialDrawer specific values -->
+        <item name="material_drawer_background">#7F1919</item>
+        <item name="material_drawer_primary_text">@color/material_drawer_dark_primary_text</item>
+        <item name="material_drawer_secondary_text">@color/material_drawer_dark_secondary_text
+        </item>
+        <item name="material_drawer_hint_text">@color/material_drawer_dark_hint_text</item>
+        <item name="material_drawer_divider">#ffffff</item>
+        <item name="material_drawer_selected">#A22022</item>
+        <item name="material_drawer_selected_text">#ffffff</item>
+        <item name="material_drawer_header_selection_text">
+            @color/material_drawer_dark_primary_text
+        </item>
+
+        <!-- CAB :D -->
+        <item name="windowActionModeOverlay">true</item>
     </style>
 
     <style name="Boja_EditText">
@@ -13,5 +30,6 @@
         <item name="colorControlNormal">#A22022</item>
         <!-- colorControlActivated & colorControlHighlight use the colorAccent color by default -->
     </style>
+
 
 </resources>

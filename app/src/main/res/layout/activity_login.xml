@@ -1,12 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:padding="10dp"
     android:layout_height="match_parent"
     android:layout_width="match_parent"
     android:background="#efefef"
     >
+
+    <android.support.v7.widget.Toolbar
+        android:padding="0dp"
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="#A22022"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        />
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:background="#efefef"
+        android:padding="10dp">
+
     <ImageView
         android:layout_width="150dp"
         android:layout_height="150dp"
@@ -63,6 +80,8 @@
         android:layout_marginBottom="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
+
+    </LinearLayout>
 
 
 
