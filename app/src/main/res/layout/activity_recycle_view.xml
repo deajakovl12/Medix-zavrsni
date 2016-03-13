@@ -4,9 +4,7 @@
     android:padding="16dp"
     android:background="#efefef"
     android:orientation="vertical"
-
     >
-
     <EditText
         android:hint="Unesite za pretragu"
         android:theme="@style/Boja_EditText"
@@ -28,8 +26,6 @@
         android:layout_height="match_parent"
         android:layout_width="match_parent"
         android:id="@+id/rv"
-        android:layout_marginTop="1dp"
-        android:layout_marginBottom="1dp"
         >
 
     </android.support.v7.widget.RecyclerView>

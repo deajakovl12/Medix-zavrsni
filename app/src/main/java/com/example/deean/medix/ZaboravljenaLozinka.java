@@ -2,6 +2,7 @@ package com.example.deean.medix;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
@@ -33,6 +34,9 @@ public class ZaboravljenaLozinka extends AppCompatActivity implements View.OnCli
 
     DoktorLokalno DoktorLokalno;
     PacijentLokalno PacijentLokalno;
+
+    ProgressDialog progressDialog;
+
 
     @Override
     protected void onCreate(Bundle icicle) {
@@ -130,6 +134,11 @@ public class ZaboravljenaLozinka extends AppCompatActivity implements View.OnCli
 
 
     private void autentifikacija_doktora(Doktor doktor, final Pacijent pacijent){
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setCancelable(false);
+        progressDialog.setTitle("Obrađujem");
+        progressDialog.setMessage("Molim sačekajte...");
+        progressDialog.show();
         ServerRequest serverRequest = new ServerRequest(this);
         serverRequest.dohvatiEmailUpozadini(doktor, new GetUserCallback() {
             @Override
@@ -137,6 +146,7 @@ public class ZaboravljenaLozinka extends AppCompatActivity implements View.OnCli
                 if(returnedDoktor == null){
                     autentifikacija_pacijenta(pacijent);
                 }else{
+                    progressDialog.dismiss();
                     prikaziPoruku_doktor();
                 }
             }
@@ -149,8 +159,10 @@ public class ZaboravljenaLozinka extends AppCompatActivity implements View.OnCli
             @Override
             public void done(Pacijent returnedPacijent) {
                 if (returnedPacijent == null) {
+                    progressDialog.dismiss();
                     showErrorMessage();
                 } else {
+                    progressDialog.dismiss();
                     prikaziPoruku_Pacijent();
                 }
             }
@@ -159,6 +171,7 @@ public class ZaboravljenaLozinka extends AppCompatActivity implements View.OnCli
     }
     private void showErrorMessage(){
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(ZaboravljenaLozinka.this);
+        dialogBuilder.setTitle("Nepostojeći E-mail!");
         dialogBuilder.setMessage("Račun s takvim E-mailom ne postoji!");
         dialogBuilder.setPositiveButton("Ok", null);
         dialogBuilder.show();
@@ -169,9 +182,6 @@ public class ZaboravljenaLozinka extends AppCompatActivity implements View.OnCli
         String email = lozEmail.getText().toString();
         String subject = "Zahtjev za promjenom lozinke";
         String message = "Nova lozinka glasi: ";
-        AlertDialog.Builder dialogBuilder1 = new AlertDialog.Builder(ZaboravljenaLozinka.this);
-        dialogBuilder1.setMessage("E-mail s novom lozinkom vam je poslan!");
-        dialogBuilder1.show();
         String AB = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
         Random rnd = new Random();
         StringBuilder lozinka = new StringBuilder(6);
@@ -187,7 +197,15 @@ public class ZaboravljenaLozinka extends AppCompatActivity implements View.OnCli
         serverRequest.spremiLozinkuUPozadini(doktor, new GetUserCallback() {
             @Override
             public void done(Doktor returnedDoktor) {
-                startActivity(new Intent(ZaboravljenaLozinka.this,Login.class));
+                AlertDialog.Builder dialogBuilder1 = new AlertDialog.Builder(ZaboravljenaLozinka.this);
+                dialogBuilder1.setTitle("Uspješno!");
+                dialogBuilder1.setMessage("E-mail s novom lozinkom vam je poslan!");
+                dialogBuilder1.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        startActivity(new Intent(ZaboravljenaLozinka.this, Login.class));
+                    }
+                });
+                dialogBuilder1.show();
             }
         });
     }
@@ -195,9 +213,6 @@ public class ZaboravljenaLozinka extends AppCompatActivity implements View.OnCli
         String email = lozEmail.getText().toString();
         String subject = "Zahtjev za promjenom lozinke";
         String message = "Nova lozinka glasi: ";
-        AlertDialog.Builder dialogBuilder1 = new AlertDialog.Builder(ZaboravljenaLozinka.this);
-        dialogBuilder1.setMessage("E-mail s novom lozinkom vam je poslan!");
-        dialogBuilder1.show();
         String AB = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
         Random rnd = new Random();
         StringBuilder lozinka = new StringBuilder(6);
@@ -213,7 +228,15 @@ public class ZaboravljenaLozinka extends AppCompatActivity implements View.OnCli
         serverRequest.spremiLozinkuUPozadiniPacijent(pacijent, new GetUserCallbackPacijent() {
             @Override
             public void done(Pacijent returnedPacijent) {
-                startActivity(new Intent(ZaboravljenaLozinka.this,Login.class));
+                AlertDialog.Builder dialogBuilder1 = new AlertDialog.Builder(ZaboravljenaLozinka.this);
+                dialogBuilder1.setTitle("Uspješno!");
+                dialogBuilder1.setMessage("E-mail s novom lozinkom vam je poslan!");
+                dialogBuilder1.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        startActivity(new Intent(ZaboravljenaLozinka.this, Login.class));
+                    }
+                });
+                dialogBuilder1.show();
             }
         });
         }

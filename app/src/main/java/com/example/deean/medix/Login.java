@@ -1,6 +1,8 @@
 package com.example.deean.medix;
 
 import android.app.AlertDialog;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
@@ -12,6 +14,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.example.deean.medix.tabs_fragments.OMedixAppFragment;
+import com.example.deean.medix.tabs_fragments.PomocFragment;
 import com.mikepenz.materialdrawer.Drawer;
 import com.mikepenz.materialdrawer.DrawerBuilder;
 import com.mikepenz.materialdrawer.model.DividerDrawerItem;
@@ -72,14 +76,26 @@ public class Login extends AppCompatActivity  implements View.OnClickListener{
                 .withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
                     @Override
                     public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
+                        FragmentManager fragmentManager = getFragmentManager();
+                        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                         switch (position) {
                             case 0:
-                                //startActivity(new Intent(getApplicationContext(),Login.class));
+                                startActivity(new Intent(getApplicationContext(),Login.class));
                                 //ne treba jer kad kliknem pocetni sam se makne
                                 break;
-
+                            case 2:
+                                OMedixAppFragment f1 = new OMedixAppFragment();
+                                fragmentTransaction.add(R.id.fragment_container, f1);
+                                fragmentTransaction.addToBackStack(null);
+                                fragmentTransaction.commit();
+                                break;
+                            case 3:
+                                PomocFragment f2 = new PomocFragment();
+                                fragmentTransaction.add(R.id.fragment_container,f2);
+                                fragmentTransaction.addToBackStack(null);
+                                fragmentTransaction.commit();
+                                break;
                         }
-
                         Log.e("Pozicija", String.valueOf(position));
                         return false;
                     }

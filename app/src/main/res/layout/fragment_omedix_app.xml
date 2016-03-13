@@ -1,0 +1,33 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".tabs_fragments.OMedixAppFragment"
+    android:background="#efefef"
+    >
+    <!-- TODO: Update blank fragment layout -->
+    <ImageView
+        android:id="@+id/slika"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_gravity="center_horizontal"
+        android:src="@drawable/logo1"/>
+    <!--<TextView
+        android:text="11"
+        android:textColor="#434343"
+        android:layout_width="wrap_content"
+        android:id="@+id/tvOappa"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="180dp">
+    </TextView> -->
+    <me.biubiubiu.justifytext.library.JustifyTextView
+        android:textColor="#434343"
+        android:layout_width="wrap_content"
+        android:id="@+id/tvOapp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="180dp"
+        />
+
+</FrameLayout>

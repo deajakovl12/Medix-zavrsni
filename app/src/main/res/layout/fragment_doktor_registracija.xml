@@ -11,7 +11,6 @@
         android:layout_marginTop="20dp"
         android:theme="@style/Boja_EditText"
         android:hint="Ime"
-        android:layout_below="@+id/bdoktor"
         android:textColor="#434343"
         android:id="@+id/etIme"
         android:layout_width="match_parent"

@@ -17,24 +17,29 @@
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
         />
 
-    <LinearLayout
+    <RelativeLayout
         android:orientation="vertical"
         android:layout_height="match_parent"
         android:layout_width="match_parent"
         android:background="#efefef"
-        android:padding="10dp">
-
+        android:padding="10dp"
+        android:id="@+id/fragment_container"
+        >
     <ImageView
+        android:id="@+id/slika"
         android:layout_width="150dp"
         android:layout_height="150dp"
-        android:layout_gravity="center"
+        android:layout_marginLeft="100dp"
         android:src="@drawable/logo1"/>
     <TextView
+        android:layout_below="@+id/slika"
+        android:id="@+id/tvemtext"
         android:textColor="#434343"
         android:layout_width="wrap_content"
         android:text="Email"
         android:layout_height="wrap_content" />
     <EditText
+        android:layout_below="@id/tvemtext"
         android:theme="@style/Boja_EditText"
         android:textColor="#434343"
         android:id="@+id/etEmail"
@@ -42,11 +47,14 @@
         android:layout_marginBottom="10dp"
         android:layout_height="wrap_content" />
     <TextView
+        android:id="@+id/tvloztext"
         android:textColor="#434343"
         android:layout_width="wrap_content"
         android:text="Lozinka"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/etEmail"/>
     <EditText
+        android:layout_below="@+id/tvloztext"
         android:theme="@style/Boja_EditText"
         android:textColor="#434343"
         android:id="@+id/etLozinka"
@@ -55,24 +63,28 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
     <TextView
+        android:layout_below="@+id/etLozinka"
         android:layout_marginBottom="10dp"
         android:textColor="#434343"
         android:id="@+id/tvRegistracijaLink"
         android:layout_width="wrap_content"
         android:text="Registiriraj se ovdje"
         android:textStyle="bold"
-        android:layout_gravity="center_horizontal"
-        android:layout_height="wrap_content" />
+        android:layout_marginLeft="110dp"
+        android:layout_height="wrap_content"
+        />
     <TextView
+        android:layout_below="@+id/tvRegistracijaLink"
         android:layout_marginBottom="10dp"
         android:textColor="#434343"
         android:id="@+id/tvLozinkaLink"
         android:layout_width="wrap_content"
         android:text="Zaboravili ste lozinku?"
         android:textStyle="bold"
-        android:layout_gravity="center_horizontal"
+        android:layout_marginLeft="100dp"
         android:layout_height="wrap_content" />
     <Button
+        android:layout_below="@id/tvLozinkaLink"
         android:background="#A22022"
         android:textColor="@android:color/background_light"
         android:id="@+id/bPrijava"
@@ -80,10 +92,5 @@
         android:layout_marginBottom="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
-
-    </LinearLayout>
-
-
-
-
+    </RelativeLayout>
 </LinearLayout>

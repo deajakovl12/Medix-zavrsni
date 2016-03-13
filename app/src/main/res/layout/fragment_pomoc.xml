@@ -1,0 +1,63 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.deean.medix.tabs_fragments.PomocFragment"
+    android:background="#efefef"
+    android:padding="10dp"
+    >
+    <TextView
+        android:text="Kako započeti rad s Medix app?"
+        android:textColor="#434343"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left">
+    </TextView>
+    <TextView
+        android:text="zapoceti"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="30dp"
+        android:id="@+id/tvzapocetirad"
+        android:textColor="#434343"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left">
+    </TextView>
+    <TextView
+        android:text="Kako se registrirati?"
+        android:layout_marginTop="70dp"
+        android:textColor="#434343"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left">
+    </TextView>
+    <TextView
+        android:text="registrirat"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="100dp"
+        android:id="@+id/tvregistriratise"
+        android:textColor="#434343"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left">
+    </TextView>
+    <TextView
+        android:text="Zaboravili ste lozinku?"
+        android:layout_marginTop="190dp"
+        android:textColor="#434343"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left">
+    </TextView>
+    <TextView
+        android:text="zaboraviti"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="220dp"
+        android:id="@+id/tvzaboraviti"
+        android:textColor="#434343"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left">
+    </TextView>
+
+</FrameLayout>

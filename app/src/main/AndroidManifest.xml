@@ -40,10 +40,10 @@
             android:label="Lijekovi" />
         <activity
             android:name=".FragmentLijekDetalji"
-            android:label="Lijek detalji"></activity>
-        <activity android:name=".FragmentRegistracija"
-            android:label="Registracija"
-            ></activity>
+            android:label="Lijek detalji" />
+        <activity
+            android:name=".FragmentRegistracija"
+            android:label="Registracija" />
     </application>
 
 </manifest>
