@@ -27,6 +27,7 @@ public class ToolbarActivity extends AppCompatActivity {
 
     protected Toolbar toolbar;
     protected DrawerBuilder result;
+    //protected DrawerBuilder result1;
 
 
 
@@ -35,7 +36,9 @@ public class ToolbarActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_toolbar);
 
-        //postaviDrawer(postaviToolbar("Medix"));
+        //result1  = postaviDrawer(postaviToolbar("Medix"),null,null,null);
+
+
 
     }
     protected Toolbar postaviToolbar(String title) {
@@ -68,13 +71,13 @@ public class ToolbarActivity extends AppCompatActivity {
         result = new DrawerBuilder()
                 .withAccountHeader(headerResult)
                 .withActivity(this)
-                .withTranslucentStatusBar(false)
-                .withActionBarDrawerToggle(false)
+                //.withTranslucentStatusBar(false)
+                //.withActionBarDrawerToggle(false)
                 .withToolbar(toolbar2)
                 .addDrawerItems(
-                        item1,
+                        item1.withSelectable(false),
                         new DividerDrawerItem(),
-                        item2,
+                        item2.withSelectable(false),
                         new DividerDrawerItem(),
                         item3,
                         item4,

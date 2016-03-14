@@ -23,11 +23,15 @@ public class RecycleView extends ToolbarActivity implements View.OnClickListener
     Button bPretraga;
     EditText etPretraga;
 
+
     private ArrayList<String> spremi;
     private List<Lijek> lijeks;
     private RecyclerView rv;
     public static int [] poljeSlika = {R.drawable.lupocet_100,R.drawable.neofen_100,R.drawable.naklofen_100};
 
+
+    private Doktor doktor;
+    DoktorLokalno DoktorLokalno;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,16 +45,13 @@ public class RecycleView extends ToolbarActivity implements View.OnClickListener
         rv.setHasFixedSize(true);
         etPretraga = (EditText) findViewById(R.id.etPretraga);
         bPretraga = (Button) findViewById(R.id.bPretraga);
-
         bPretraga.setOnClickListener(this);
 
-        //postaviDrawer(postaviToolbar("Doktor"),null,null,null).build();
 
+        DoktorLokalno = new DoktorLokalno(this);
 
-
-
-
-
+        doktor = DoktorLokalno.getPrijavljenogDoktora();
+        postaviDrawer(postaviToolbar("Lijekovi"),doktor.ime,doktor.prezime,doktor.email).build();
     }
     @Override
     public void onClick(View v) {
@@ -58,8 +59,6 @@ public class RecycleView extends ToolbarActivity implements View.OnClickListener
             case R.id.bPretraga:
                     initializeData();
                 break;
-
-
         }
     }
     private void initializeData(){
