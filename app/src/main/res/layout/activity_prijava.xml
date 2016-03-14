@@ -1,13 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:padding="10dp"
     android:layout_height="match_parent"
     android:layout_width="match_parent"
-    android:background="#efefef"
-    >
+    android:background="#efefef">
 
+    <android.support.v7.widget.Toolbar
+        android:padding="0dp"
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="#A22022"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        />
+    <RelativeLayout
+        android:orientation="vertical"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:background="#efefef"
+        android:padding="10dp"
+        android:id="@+id/fragment_container"
+        >
     <ImageView
         android:layout_width="100dp"
         android:layout_height="100dp"
@@ -174,22 +189,7 @@
         android:layout_below="@id/tvMobitel"
         android:layout_toEndOf="@+id/ivMobitel"/>
     />
-    <Button
-        android:background="#A22022"
-        android:textColor="@android:color/background_light"
-        android:id="@+id/bOdjava"
-        android:text="Odjavi se"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/etMobitel" />
-    <Button
-        android:background="#A22022"
-        android:textColor="@android:color/background_light"
-        android:id="@+id/bLijek"
-        android:text="Lijekovi"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/bOdjava" />
+    </RelativeLayout>
 
 
-</RelativeLayout>
+</LinearLayout>

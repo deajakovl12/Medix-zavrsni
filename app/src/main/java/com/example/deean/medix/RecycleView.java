@@ -18,7 +18,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 
-public class RecycleView extends AppCompatActivity implements View.OnClickListener {
+public class RecycleView extends ToolbarActivity implements View.OnClickListener {
     public String tekst;
     Button bPretraga;
     EditText etPretraga;
@@ -43,6 +43,11 @@ public class RecycleView extends AppCompatActivity implements View.OnClickListen
         bPretraga = (Button) findViewById(R.id.bPretraga);
 
         bPretraga.setOnClickListener(this);
+
+        //postaviDrawer(postaviToolbar("Doktor"),null,null,null).build();
+
+
+
 
 
 

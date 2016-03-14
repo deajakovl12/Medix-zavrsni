@@ -85,15 +85,15 @@ public class Login extends AppCompatActivity  implements View.OnClickListener{
                                 break;
                             case 2:
                                 OMedixAppFragment f1 = new OMedixAppFragment();
-                                fragmentTransaction.add(R.id.fragment_container, f1);
-                                fragmentTransaction.addToBackStack(null);
-                                fragmentTransaction.commit();
+                                //fragmentTransaction.add(R.id.fragment_container, f1);
+                                //fragmentTransaction.addToBackStack(null);
+                                fragmentTransaction.replace(R.id.fragment_container,f1).commit();
                                 break;
                             case 3:
                                 PomocFragment f2 = new PomocFragment();
-                                fragmentTransaction.add(R.id.fragment_container,f2);
-                                fragmentTransaction.addToBackStack(null);
-                                fragmentTransaction.commit();
+                                //fragmentTransaction.add(R.id.fragment_container,f2);
+                                //fragmentTransaction.addToBackStack(null);
+                                fragmentTransaction.replace(R.id.fragment_container,f2).commit();
                                 break;
                         }
                         Log.e("Pozicija", String.valueOf(position));

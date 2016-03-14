@@ -10,7 +10,7 @@
 
         <!-- MaterialDrawer specific values -->
         <item name="material_drawer_background">#7F1919</item>
-        <item name="material_drawer_primary_text">@color/material_drawer_dark_primary_text</item>
+        <item name="material_drawer_primary_text">@color/material_drawer_dark_secondary_text</item>
         <item name="material_drawer_secondary_text">@color/material_drawer_dark_secondary_text
         </item>
         <item name="material_drawer_hint_text">@color/material_drawer_dark_hint_text</item>

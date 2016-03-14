@@ -4,20 +4,30 @@ import android.app.ActionBar;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-public class Prijava extends AppCompatActivity implements View.OnClickListener {
-    Button bOdjava,bLijek;
+import com.mikepenz.materialdrawer.Drawer;
+import com.mikepenz.materialdrawer.DrawerBuilder;
+import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
+
+public class Prijava extends ToolbarActivity {
     TextView etRadnoVrijeme, etSavjet, etTelefon, etAdresa,etPrezime,etIme,etMobitel,etTitula;
     DoktorLokalno DoktorLokalno;
+
+    private Doktor doktor;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_prijava);
+
 
         etRadnoVrijeme = (TextView) findViewById(R.id.etRadnoVrijeme);
         etSavjet = (TextView) findViewById(R.id.etSavjet);
@@ -27,11 +37,6 @@ public class Prijava extends AppCompatActivity implements View.OnClickListener {
         etPrezime = (TextView) findViewById(R.id.etPrezime);
         etMobitel = (TextView) findViewById(R.id.etMobitel);
         etTitula = (TextView) findViewById(R.id.etTitula);
-        bOdjava = (Button) findViewById(R.id.bOdjava);
-        bLijek = (Button) findViewById(R.id.bLijek);
-
-        bOdjava.setOnClickListener(this);
-        bLijek.setOnClickListener(this);
 
         DoktorLokalno = new DoktorLokalno(this);
     }
@@ -39,6 +44,7 @@ public class Prijava extends AppCompatActivity implements View.OnClickListener {
     @Override
     protected void onStart() {
         super.onStart();
+        Log.e("Blabla", "pokrenuto");
         if(provjera()==true){
             prikaziDoktorovePodatke();
         }
@@ -50,8 +56,10 @@ public class Prijava extends AppCompatActivity implements View.OnClickListener {
     private boolean provjera(){
         return DoktorLokalno.provjeriPrijavljenogDoktora();
     }
+
     private void prikaziDoktorovePodatke(){
-        Doktor doktor = DoktorLokalno.getPrijavljenogDoktora();
+
+        doktor = DoktorLokalno.getPrijavljenogDoktora();
         etRadnoVrijeme.setText(doktor.radno_vrijeme);
         etIme.setText(doktor.ime.toUpperCase());
         etPrezime.setText(doktor.prezime.toUpperCase());
@@ -61,21 +69,20 @@ public class Prijava extends AppCompatActivity implements View.OnClickListener {
         etMobitel.setText(doktor.mobitel);
         etTitula.setText(doktor.titula);
 
+        postaviDrawer(postaviToolbar("Doktor"),etIme.getText().toString(),etPrezime.getText().toString(),doktor.email).build();
     }
+
     @Override
-    public void onClick(View v) {
-        switch(v.getId()){
-            case R.id.bOdjava:
-                DoktorLokalno.obrisiDoktorPodatke();
-                DoktorLokalno.postaviPrijavljenogDoktora(false);
+    protected void onDestroy() {
+        super.onDestroy();
+        Log.e("Blabla","unisteno");
+    }
 
-                startActivity(new Intent(this, Login.class));
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Log.e("Blabla", "pauzirano");
 
-                break;
-            case R.id.bLijek:
-                startActivity(new Intent(this,RecycleView.class));
-                break;
 
-        }
     }
 }
