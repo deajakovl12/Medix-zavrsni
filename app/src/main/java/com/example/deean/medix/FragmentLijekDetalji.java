@@ -10,12 +10,15 @@ import android.util.Log;
 import com.example.deean.medix.tabs_fragments.MjereOprezaFragment;
 import com.example.deean.medix.tabs_fragments.OsnovneInformacijeFragment;
 
-public class FragmentLijekDetalji extends AppCompatActivity {
+public class FragmentLijekDetalji extends ToolbarActivity {
 
     private ViewPager viewPager;
     private TabLayout tabLayout;
     private String ime;
     private int[] tabIcons = {R.drawable.caution_white,R.drawable.information_white};
+
+    private Doktor doktor;
+    DoktorLokalno DoktorLokalno;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +33,11 @@ public class FragmentLijekDetalji extends AppCompatActivity {
 
         tabLayout.getTabAt(0).setIcon(tabIcons[1]);
         tabLayout.getTabAt(1).setIcon(tabIcons[0]);
+
+        DoktorLokalno = new DoktorLokalno(this);
+
+        doktor = DoktorLokalno.getPrijavljenogDoktora();
+        postaviDrawer(postaviToolbar("Lijek detalji"), doktor.ime.toUpperCase(), doktor.prezime.toUpperCase(), doktor.email).build();
     }
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());

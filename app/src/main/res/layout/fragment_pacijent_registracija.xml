@@ -8,10 +8,9 @@
     android:background="#efefef">
 
     <EditText
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:theme="@style/Boja_EditText"
         android:hint="Ime"
-        android:layout_below="@+id/bdoktor"
         android:textColor="#434343"
         android:id="@+id/etIme"
         android:layout_width="match_parent"
@@ -71,7 +70,7 @@
         android:id="@+id/etAdresa"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"/>
+        android:layout_marginBottom="5dp"/>
     <Button
         android:layout_below="@id/etAdresa"
         android:background="#A22022"

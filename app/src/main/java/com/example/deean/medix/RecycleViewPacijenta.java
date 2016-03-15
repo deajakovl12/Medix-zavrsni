@@ -18,17 +18,15 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 
-public class RecycleView extends ToolbarActivity implements View.OnClickListener {
+public class RecycleViewPacijenta extends ToolbarActivity implements View.OnClickListener {
+
     public String tekst;
     Button bPretraga;
     EditText etPretraga;
 
-
-    private ArrayList<String> spremi;
-    private List<Lijek> lijeks;
+    private ArrayList<Pacijent> spremi;
+    private List<Pacijent> pacijents;
     private RecyclerView rv;
-    public static int [] poljeSlika = {R.drawable.lupocet_100,R.drawable.neofen_100,R.drawable.naklofen_100};
-
 
     private Doktor doktor;
     DoktorLokalno DoktorLokalno;
@@ -36,7 +34,7 @@ public class RecycleView extends ToolbarActivity implements View.OnClickListener
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_recycle_view);
+        setContentView(R.layout.activity_recycle_view_pacijenta);
 
         rv = (RecyclerView) findViewById(R.id.rv);
 
@@ -51,13 +49,13 @@ public class RecycleView extends ToolbarActivity implements View.OnClickListener
         DoktorLokalno = new DoktorLokalno(this);
 
         doktor = DoktorLokalno.getPrijavljenogDoktora();
-        postaviDrawer(postaviToolbar("Lijekovi"),doktor.ime.toUpperCase(),doktor.prezime.toUpperCase(),doktor.email).build();
+        postaviDrawer(postaviToolbar("Pacijenti"),doktor.ime.toUpperCase(),doktor.prezime.toUpperCase(),doktor.email).build();
     }
     @Override
     public void onClick(View v) {
         switch(v.getId()){
             case R.id.bPretraga:
-                    initializeData();
+                initializeData();
                 break;
         }
     }
@@ -65,35 +63,35 @@ public class RecycleView extends ToolbarActivity implements View.OnClickListener
         tekst = String.valueOf(etPretraga.getText());
         //Log.i("TAG",tekst);
         spremi = new ArrayList<>();
-        lijeks = new ArrayList<>();
-        LijekAPI.Factory.getIstance().response().enqueue(new Callback<ArrayList<Lijek>>() {
+        pacijents = new ArrayList<>();
+        PacijentAPI.Factory.getIstance().response().enqueue(new Callback<ArrayList<Pacijent>>() {
             @Override
-            public void onResponse(Call<ArrayList<Lijek>> call, Response<ArrayList<Lijek>> response) {
+            public void onResponse(Call<ArrayList<Pacijent>> call, Response<ArrayList<Pacijent>> response) {
                 initializeAdapter();
                 for (int i = 0; i < response.body().size(); i++) {
                     //lijeks.add(new Lijek(response.body().get(i).getNaziv(),poljeSlika[i]));
-                    spremi.add(response.body().get(i).getNaziv());
+                    spremi.add(new Pacijent(response.body().get(i).getIme(),response.body().get(i).getPrezime(),response.body().get(i).getAdresa(),response.body().get(i).getOib()));
                 }
                 //Log.i("TAG", responbodyse.body().get(0).getNaziv());
                 //Log.i("TAG2", spremi.get(0));
                 //Log.i("VELICINA PRVO", String.valueOf(spremi.size()));
                 // napravit polje u kojem su slike i onda citat od tamo i tu upisivat
                 for (int i = 0; i < spremi.size(); i++) {
-                    if (spremi.get(i).toLowerCase().contains(tekst.toLowerCase())) {
-                        lijeks.add(new Lijek(spremi.get(i), poljeSlika[i]));
+                    if (spremi.get(i).getIme().toLowerCase().contains(tekst.toLowerCase()) || spremi.get(i).getPrezime().toLowerCase().contains(tekst.toLowerCase()) || spremi.get(i).getOib().contains(tekst.toLowerCase())) {
+                        pacijents.add(new Pacijent(spremi.get(i).getIme(),spremi.get(i).getPrezime(),spremi.get(i).getAdresa(),spremi.get(i).getOib()));
                     }
                 }
                 //Log.i("LIJEKS", String.valueOf(lijeks));
             }
 
             @Override
-            public void onFailure(Call<ArrayList<Lijek>> call, Throwable t) {
+            public void onFailure(Call<ArrayList<Pacijent>> call, Throwable t) {
                 Log.e("Failed", t.getMessage());
             }
         });
     }
     private void initializeAdapter(){
-        RVAdapter adapter = new RVAdapter(RecycleView.this,lijeks);
+        RVAdapterPacijenta adapter = new RVAdapterPacijenta(RecycleViewPacijenta.this,pacijents);
         rv.setAdapter(adapter);
     }
 }

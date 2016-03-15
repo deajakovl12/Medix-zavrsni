@@ -11,6 +11,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.mikepenz.materialdrawer.Drawer;
+
 import java.io.UnsupportedEncodingException;
 import java.util.Properties;
 
@@ -26,7 +28,7 @@ import javax.mail.internet.MimeMessage;
 import java.util.Random;
 
 
-public class ZaboravljenaLozinka extends AppCompatActivity implements View.OnClickListener {
+public class ZaboravljenaLozinka extends ToolbarActivityAll implements View.OnClickListener {
     Button bPosalji;
     EditText lozEmail;
     private static final String username = "medix.supp@gmail.com";
@@ -36,6 +38,8 @@ public class ZaboravljenaLozinka extends AppCompatActivity implements View.OnCli
     PacijentLokalno PacijentLokalno;
 
     ProgressDialog progressDialog;
+
+    Drawer rezultat;
 
 
     @Override
@@ -47,6 +51,10 @@ public class ZaboravljenaLozinka extends AppCompatActivity implements View.OnCli
         bPosalji.setOnClickListener(this);
         DoktorLokalno = new DoktorLokalno(this);
         PacijentLokalno = new PacijentLokalno(this);
+
+        rezultat = postaviDrawer(postaviToolbar("Zaboravljena lozinka")).build();
+        rezultat.removeItemByPosition(2);
+        rezultat.removeItemByPosition(2);
 
     }
 

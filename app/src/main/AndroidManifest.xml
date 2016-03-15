@@ -44,7 +44,12 @@
         <activity
             android:name=".FragmentRegistracija"
             android:label="Registracija" />
-        <activity android:name=".ToolbarActivity"></activity>
+        <activity android:name=".ToolbarActivity" />
+        <activity android:name=".ToolbarActivityAll" />
+        <activity android:name=".ToolbarActivityPacijent" />
+        <activity android:name=".CardViewPacijenta" />
+        <activity android:name=".RecycleViewPacijenta" />
+        <activity android:name=".FragmentPacijentDetalji"></activity>
     </application>
 
 </manifest>

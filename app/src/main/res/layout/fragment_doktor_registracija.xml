@@ -8,7 +8,7 @@
     android:background="#efefef">
 
     <EditText
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:theme="@style/Boja_EditText"
         android:hint="Ime"
         android:textColor="#434343"
@@ -70,7 +70,7 @@
         android:id="@+id/etAdresa"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
+        android:layout_marginBottom="5dp"
         />
 
     <Button

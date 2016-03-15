@@ -39,17 +39,7 @@ public class RVAdapter  extends RecyclerView.Adapter<RVAdapter.LijekViewHolder> 
         @Override
         public void onClick(View v) {
             ime=lijek_ime.getText().toString();
-            switch (ime) {
-                case "Naklofen":
-                    Pozovi_detalje(ime);
-                    break;
-                case "Lupocet 500mg tablete":
-                    Pozovi_detalje(ime);
-                    break;
-                case "Neofen":
-                    Pozovi_detalje(ime);
-                    break;
-            }
+            Pozovi_detalje(ime);
         }
         public void Pozovi_detalje(String ime){
             Intent intent1 = new Intent(context, FragmentLijekDetalji.class);

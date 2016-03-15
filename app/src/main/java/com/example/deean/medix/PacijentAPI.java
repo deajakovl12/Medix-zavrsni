@@ -7,19 +7,18 @@ import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.http.GET;
-
 /**
  * Created by Deean on 21.2.2016..
  */
-public interface LijekAPI {
+public interface PacijentAPI {
     String BASE_URL = "http://jaka12.heliohost.org";
-    @GET("/dohvati_lijek.php") Call<ArrayList<Lijek>> response();
+    @GET("/dohvati_pacijente_doktora.php") Call<ArrayList<Pacijent>> response();
     class Factory{
-        private static LijekAPI service;
-        public static LijekAPI getIstance(){
+        private static PacijentAPI service;
+        public static PacijentAPI getIstance(){
             if(service==null){
                 Retrofit retrofit = new Retrofit.Builder().addConverterFactory(GsonConverterFactory.create()).baseUrl(BASE_URL).build();
-                service = retrofit.create(LijekAPI.class);
+                service = retrofit.create(PacijentAPI.class);
                 return service;
             }
             else{
@@ -30,5 +29,5 @@ public interface LijekAPI {
     Retrofit retrofit = new Retrofit.Builder()
             .baseUrl(BASE_URL)
             .build();
-    LijekAPI service = retrofit.create(LijekAPI.class);
+    PacijentAPI service = retrofit.create(PacijentAPI.class);
 }

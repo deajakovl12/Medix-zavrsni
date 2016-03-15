@@ -8,8 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-public class Prijava_Pacijent extends AppCompatActivity implements View.OnClickListener {
-    Button bOdjava;
+public class Prijava_Pacijent extends ToolbarActivityPacijent {
     TextView  etSpol, etTelefon, etAdresa,etPrezime,etIme,etMobitel,etOIB;
     PacijentLokalno PacijentLokalno;
 
@@ -25,9 +24,6 @@ public class Prijava_Pacijent extends AppCompatActivity implements View.OnClickL
         etPrezime = (TextView) findViewById(R.id.etPrezime);
         etMobitel = (TextView) findViewById(R.id.etMobitel);
         etOIB = (TextView) findViewById(R.id.etOIB);
-        bOdjava = (Button) findViewById(R.id.bOdjava);
-
-        bOdjava.setOnClickListener(this);
 
         PacijentLokalno = new PacijentLokalno(this);
     }
@@ -56,18 +52,7 @@ public class Prijava_Pacijent extends AppCompatActivity implements View.OnClickL
         etMobitel.setText(pacijent.mobitel);
         etOIB.setText(pacijent.oib);
 
-    }
-    @Override
-    public void onClick(View v) {
-        switch(v.getId()){
-            case R.id.bOdjava:
-                PacijentLokalno.obrisiPacijentPodatke();
-                PacijentLokalno.postaviPrijavljenogPacijenta(false);
+        postaviDrawer(postaviToolbar("Pacijent"),etIme.getText().toString(),etPrezime.getText().toString(),pacijent.email).build();
 
-                startActivity(new Intent(this, Login.class));
-
-                break;
-
-        }
     }
 }
