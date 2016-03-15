@@ -49,7 +49,7 @@
         <activity android:name=".ToolbarActivityPacijent" />
         <activity android:name=".CardViewPacijenta" />
         <activity android:name=".RecycleViewPacijenta" />
-        <activity android:name=".FragmentPacijentDetalji"></activity>
+        <activity android:name=".FragmentPacijentDetalji" />
     </application>
 
 </manifest>
