@@ -17,6 +17,7 @@ import android.widget.TextView;
 import com.example.deean.medix.Lijek;
 import com.example.deean.medix.LijekAPI;
 import com.example.deean.medix.LijekDetaljiAPI;
+import com.example.deean.medix.LijekoviPacijentaAPI;
 import com.example.deean.medix.R;
 import com.example.deean.medix.RVAdapter;
 import com.example.deean.medix.RecycleView;
@@ -81,6 +82,8 @@ public class LijekoveKoristiFragment extends android.support.v4.app.Fragment imp
 
         bPretraga.setOnClickListener(this);
         ivDodaj.setOnClickListener(this);
+        Log.e("ID", OsobniPodaciFragment.id_pacijenta);
+
 
         return view;
     }
@@ -103,7 +106,7 @@ public class LijekoveKoristiFragment extends android.support.v4.app.Fragment imp
         tekst = String.valueOf(etPretraga.getText());
         spremi = new ArrayList<>();
         lijeks = new ArrayList<>();
-        LijekAPI.Factory.getIstance().response().enqueue(new Callback<ArrayList<Lijek>>() {
+        LijekoviPacijentaAPI.Factory.getIstance().response(OsobniPodaciFragment.id_pacijenta).enqueue(new Callback<ArrayList<Lijek>>() {
             @Override
             public void onResponse(Call<ArrayList<Lijek>> call, Response<ArrayList<Lijek>> response) {
                 initializeAdapter();
@@ -112,7 +115,15 @@ public class LijekoveKoristiFragment extends android.support.v4.app.Fragment imp
                 }
                 for (int i = 0; i < spremi.size(); i++) {
                     if (spremi.get(i).toLowerCase().contains(tekst.toLowerCase())) {
-                        lijeks.add(new Lijek(spremi.get(i), RecycleView.poljeSlika[i]));
+                        if(spremi.get(i).equals("Lupocet 500mg tablete")) {
+                            lijeks.add(new Lijek(spremi.get(i), RecycleView.poljeSlika[0]));
+                        }
+                        if(spremi.get(i).equals("Neofen")) {
+                            lijeks.add(new Lijek(spremi.get(i), RecycleView.poljeSlika[1]));
+                        }
+                        if(spremi.get(i).equals("Naklofen")) {
+                            lijeks.add(new Lijek(spremi.get(i), RecycleView.poljeSlika[2]));
+                        }
                     }
                 }}
 

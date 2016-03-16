@@ -32,6 +32,7 @@ public class OsobniPodaciFragment extends android.support.v4.app.Fragment implem
 
     TextView  etSpol, etTelefon, etAdresa,etPrezime,etIme,etMobitel,etOIB;
     ImageView ivTelZvanje, ivMobZvanje;
+    public static String id_pacijenta;
 
     private static  final String ARG_EXAMPLE = "this_is_a_constant";
     private String oib;
@@ -84,6 +85,8 @@ public class OsobniPodaciFragment extends android.support.v4.app.Fragment implem
                 etPrezime.setText(response.body().get(0).getPrezime());
                 etMobitel.setText(response.body().get(0).getMobitel());
                 etOIB.setText(response.body().get(0).getOib());
+                id_pacijenta=response.body().get(0).getId_pacijent();
+                Log.e("ID",id_pacijenta);
 
             }
             @Override
