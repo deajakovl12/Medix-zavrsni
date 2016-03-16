@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,6 +24,8 @@ public class RecycleViewPacijenta extends ToolbarActivity implements View.OnClic
     public String tekst;
     Button bPretraga;
     EditText etPretraga;
+
+    ImageView ivDodaj;
 
     private ArrayList<Pacijent> spremi;
     private List<Pacijent> pacijents;
@@ -43,8 +46,11 @@ public class RecycleViewPacijenta extends ToolbarActivity implements View.OnClic
         rv.setHasFixedSize(true);
         etPretraga = (EditText) findViewById(R.id.etPretraga);
         bPretraga = (Button) findViewById(R.id.bPretraga);
-        bPretraga.setOnClickListener(this);
+        ivDodaj = (ImageView) findViewById(R.id.ivDodaj);
 
+
+        bPretraga.setOnClickListener(this);
+        ivDodaj.setOnClickListener(this);
 
         DoktorLokalno = new DoktorLokalno(this);
 
@@ -57,31 +63,27 @@ public class RecycleViewPacijenta extends ToolbarActivity implements View.OnClic
             case R.id.bPretraga:
                 initializeData();
                 break;
+            case R.id.ivDodaj:
+                //otvoriti novi activity za dodavanje pacijenta //TODO
+                break;
         }
     }
     private void initializeData(){
         tekst = String.valueOf(etPretraga.getText());
-        //Log.i("TAG",tekst);
         spremi = new ArrayList<>();
         pacijents = new ArrayList<>();
-        PacijentAPI.Factory.getIstance().response().enqueue(new Callback<ArrayList<Pacijent>>() {
+        PacijentAPI.Factory.getIstance().response(doktor.id_doktor).enqueue(new Callback<ArrayList<Pacijent>>() {
             @Override
             public void onResponse(Call<ArrayList<Pacijent>> call, Response<ArrayList<Pacijent>> response) {
                 initializeAdapter();
                 for (int i = 0; i < response.body().size(); i++) {
-                    //lijeks.add(new Lijek(response.body().get(i).getNaziv(),poljeSlika[i]));
-                    spremi.add(new Pacijent(response.body().get(i).getIme(),response.body().get(i).getPrezime(),response.body().get(i).getAdresa(),response.body().get(i).getOib()));
+                    spremi.add(new Pacijent(response.body().get(i).getIme(), response.body().get(i).getPrezime(), response.body().get(i).getAdresa(), response.body().get(i).getOib()));
                 }
-                //Log.i("TAG", responbodyse.body().get(0).getNaziv());
-                //Log.i("TAG2", spremi.get(0));
-                //Log.i("VELICINA PRVO", String.valueOf(spremi.size()));
-                // napravit polje u kojem su slike i onda citat od tamo i tu upisivat
                 for (int i = 0; i < spremi.size(); i++) {
                     if (spremi.get(i).getIme().toLowerCase().contains(tekst.toLowerCase()) || spremi.get(i).getPrezime().toLowerCase().contains(tekst.toLowerCase()) || spremi.get(i).getOib().contains(tekst.toLowerCase())) {
-                        pacijents.add(new Pacijent(spremi.get(i).getIme(),spremi.get(i).getPrezime(),spremi.get(i).getAdresa(),spremi.get(i).getOib()));
+                        pacijents.add(new Pacijent(spremi.get(i).getIme(), spremi.get(i).getPrezime(), spremi.get(i).getAdresa(), spremi.get(i).getOib()));
                     }
                 }
-                //Log.i("LIJEKS", String.valueOf(lijeks));
             }
 
             @Override

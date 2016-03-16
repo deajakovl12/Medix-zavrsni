@@ -141,6 +141,7 @@ public class ServerRequest {
                 if(jObject.length() == 0){
                     returnedDoktor = null;
                 }else{
+                    String id_doktor = jObject.getString("id_doktor");
                     String ime = jObject.getString("ime");
                     String prezime = jObject.getString("prezime");
                     String adresa = jObject.getString("adresa");
@@ -150,8 +151,9 @@ public class ServerRequest {
                     String rad_savjetovalista = jObject.getString("rad_savjetovalista");
                     String mobitel = jObject.getString("mobitel");
                     String titula = jObject.getString("titula");
+                    //int id = jObject.getInt("id");
 
-                    returnedDoktor = new Doktor(ime,prezime,adresa,oib,doktor.lozinka,telefon,doktor.email,radno_vrijeme,rad_savjetovalista,mobitel,titula);
+                    returnedDoktor = new Doktor(id_doktor,ime,prezime,adresa,oib,doktor.lozinka,telefon,doktor.email,radno_vrijeme,rad_savjetovalista,mobitel,titula);
 
 
                 }

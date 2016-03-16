@@ -12,6 +12,7 @@ public class Prijava_Pacijent extends ToolbarActivityPacijent {
     TextView  etSpol, etTelefon, etAdresa,etPrezime,etIme,etMobitel,etOIB;
     PacijentLokalno PacijentLokalno;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

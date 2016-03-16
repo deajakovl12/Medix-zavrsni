@@ -7,7 +7,7 @@ public class Lijek {
     String naziv, sastav, namjena, pakovanje, ime_i_adresa_proizvodaca, kada_ne_smije_primjeniti,doziranje,nuspojave;
     int photoId;
 
-    Lijek(String naziv, int photoId) {
+    public Lijek(String naziv, int photoId) {
         this.naziv = naziv;
         this.photoId = photoId;
     }

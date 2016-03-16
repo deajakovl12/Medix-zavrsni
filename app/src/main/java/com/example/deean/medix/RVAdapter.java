@@ -50,7 +50,7 @@ public class RVAdapter  extends RecyclerView.Adapter<RVAdapter.LijekViewHolder> 
 
     List<Lijek> lijeks;
 
-    RVAdapter(Context context, List<Lijek> lijeks){
+    public RVAdapter(Context context, List<Lijek> lijeks){
         this.lijeks = lijeks;
         this.context=context;
     }
