@@ -3,10 +3,11 @@ package com.example.deean.medix;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
-import android.util.Log;
-import android.view.View;
 
-import com.example.deean.medix.tabs_fragments.DoktorRegistracijaFragment;
+import com.example.deean.medix.doktorovo.GetUserCallback;
+import com.example.deean.medix.doktorovo.konsturktor_i_baza.Doktor;
+import com.example.deean.medix.pacijentovo.GetUserCallbackPacijent;
+import com.example.deean.medix.pacijentovo.konstruktor_i_baza.Pacijent;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -23,9 +24,6 @@ import org.apache.http.util.EntityUtils;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-
-import javax.mail.AuthenticationFailedException;
-import javax.mail.MessagingException;
 
 /**
  * Created by Deean on 10.2.2016..
@@ -73,13 +71,13 @@ public class ServerRequest {
         @Override
         protected Void doInBackground(Void... params) {
             ArrayList<NameValuePair> dataToSend = new ArrayList<>();
-            dataToSend.add(new BasicNameValuePair("ime",doktor.ime));
-            dataToSend.add(new BasicNameValuePair("prezime",doktor.prezime));
-            dataToSend.add(new BasicNameValuePair("adresa",doktor.adresa));
-            dataToSend.add(new BasicNameValuePair("oib",doktor.oib));
-            dataToSend.add(new BasicNameValuePair("lozinka",doktor.lozinka));
-            dataToSend.add(new BasicNameValuePair("telefon",doktor.telefon));
-            dataToSend.add(new BasicNameValuePair("email", doktor.email));
+            dataToSend.add(new BasicNameValuePair("ime",doktor.getIme()));
+            dataToSend.add(new BasicNameValuePair("prezime",doktor.getPrezime()));
+            dataToSend.add(new BasicNameValuePair("adresa",doktor.getAdresa()));
+            dataToSend.add(new BasicNameValuePair("oib",doktor.getOib()));
+            dataToSend.add(new BasicNameValuePair("lozinka",doktor.getLozinka()));
+            dataToSend.add(new BasicNameValuePair("telefon",doktor.getTelefon()));
+            dataToSend.add(new BasicNameValuePair("email", doktor.getEmail()));
 
             HttpParams httpRequestParams = new BasicHttpParams();
             HttpConnectionParams.setConnectionTimeout(httpRequestParams, CONNECTION_TIMEOUT);//koliko cmo cekat dok se POST izvrsava
@@ -117,8 +115,8 @@ public class ServerRequest {
         @Override
         protected Doktor doInBackground(Void... params) {
             ArrayList<NameValuePair> dataToSend = new ArrayList<>();
-            dataToSend.add(new BasicNameValuePair("email", doktor.email));
-            dataToSend.add(new BasicNameValuePair("lozinka",doktor.lozinka));
+            dataToSend.add(new BasicNameValuePair("email", doktor.getEmail()));
+            dataToSend.add(new BasicNameValuePair("lozinka",doktor.getLozinka()));
 
             HttpParams httpRequestParams = new BasicHttpParams();
             HttpConnectionParams.setConnectionTimeout(httpRequestParams, CONNECTION_TIMEOUT);//koliko cmo cekat dok se POST izvrsava
@@ -153,7 +151,7 @@ public class ServerRequest {
                     String titula = jObject.getString("titula");
                     //int id = jObject.getInt("id");
 
-                    returnedDoktor = new Doktor(id_doktor,ime,prezime,adresa,oib,doktor.lozinka,telefon,doktor.email,radno_vrijeme,rad_savjetovalista,mobitel,titula);
+                    returnedDoktor = new Doktor(id_doktor,ime,prezime,adresa,oib,doktor.getLozinka(),telefon,doktor.getEmail(),radno_vrijeme,rad_savjetovalista,mobitel,titula);
 
 
                 }
@@ -182,7 +180,7 @@ public class ServerRequest {
         @Override
         protected Doktor doInBackground(Void... params) {
             ArrayList<NameValuePair> dataToSend = new ArrayList<>();
-            dataToSend.add(new BasicNameValuePair("email", doktor.email));
+            dataToSend.add(new BasicNameValuePair("email", doktor.getEmail()));
             HttpParams httpRequestParams = new BasicHttpParams();
             HttpConnectionParams.setConnectionTimeout(httpRequestParams, CONNECTION_TIMEOUT);//koliko cmo cekat dok se POST izvrsava
             HttpConnectionParams.setSoTimeout(httpRequestParams, CONNECTION_TIMEOUT);
@@ -215,7 +213,7 @@ public class ServerRequest {
                     String mobitel = jObject.getString("mobitel");
                     String titula = jObject.getString("titula");
 
-                    returnedDoktor = new Doktor(ime,prezime,adresa,oib,lozinka,telefon,doktor.email,radno_vrijeme,rad_savjetovalista,mobitel,titula);
+                    returnedDoktor = new Doktor(ime,prezime,adresa,oib,lozinka,telefon,doktor.getEmail(),radno_vrijeme,rad_savjetovalista,mobitel,titula);
 
 
                 }
@@ -249,8 +247,8 @@ public class ServerRequest {
         @Override
         protected Void doInBackground(Void... params) {
             ArrayList<NameValuePair> dataToSend = new ArrayList<>();
-            dataToSend.add(new BasicNameValuePair("email",doktor.email));
-            dataToSend.add(new BasicNameValuePair("lozinka",doktor.lozinka));
+            dataToSend.add(new BasicNameValuePair("email",doktor.getEmail()));
+            dataToSend.add(new BasicNameValuePair("lozinka",doktor.getLozinka()));
 
 
             HttpParams httpRequestParams = new BasicHttpParams();
@@ -293,13 +291,13 @@ public class ServerRequest {
         @Override
         protected Void doInBackground(Void... params) {
             ArrayList<NameValuePair> dataToSend = new ArrayList<>();
-            dataToSend.add(new BasicNameValuePair("ime",pacijent.ime));
-            dataToSend.add(new BasicNameValuePair("prezime",pacijent.prezime));
-            dataToSend.add(new BasicNameValuePair("adresa",pacijent.adresa));
-            dataToSend.add(new BasicNameValuePair("lozinka",pacijent.lozinka));
-            dataToSend.add(new BasicNameValuePair("telefon",pacijent.telefon));
-            dataToSend.add(new BasicNameValuePair("oib",pacijent.oib));
-            dataToSend.add(new BasicNameValuePair("email", pacijent.email));
+            dataToSend.add(new BasicNameValuePair("ime",pacijent.getIme()));
+            dataToSend.add(new BasicNameValuePair("prezime",pacijent.getPrezime()));
+            dataToSend.add(new BasicNameValuePair("adresa",pacijent.getAdresa()));
+            dataToSend.add(new BasicNameValuePair("lozinka",pacijent.getLozinka()));
+            dataToSend.add(new BasicNameValuePair("telefon",pacijent.getTelefon()));
+            dataToSend.add(new BasicNameValuePair("oib",pacijent.getOib()));
+            dataToSend.add(new BasicNameValuePair("email", pacijent.getEmail()));
 
             HttpParams httpRequestParams = new BasicHttpParams();
             HttpConnectionParams.setConnectionTimeout(httpRequestParams, CONNECTION_TIMEOUT);//koliko cmo cekat dok se POST izvrsava
@@ -342,8 +340,8 @@ public class ServerRequest {
         @Override
         protected Pacijent doInBackground(Void... params) {
             ArrayList<NameValuePair> dataToSend = new ArrayList<>();
-            dataToSend.add(new BasicNameValuePair("email", pacijent.email));
-            dataToSend.add(new BasicNameValuePair("lozinka",pacijent.lozinka));
+            dataToSend.add(new BasicNameValuePair("email", pacijent.getEmail()));
+            dataToSend.add(new BasicNameValuePair("lozinka",pacijent.getLozinka()));
 
             HttpParams httpRequestParams = new BasicHttpParams();
             HttpConnectionParams.setConnectionTimeout(httpRequestParams, CONNECTION_TIMEOUT);//koliko cmo cekat dok se POST izvrsava
@@ -374,7 +372,7 @@ public class ServerRequest {
                     String mobitel = jObject.getString("mobitel");
                     String spol = jObject.getString("spol");
 
-                    returnedPacijent = new Pacijent(ime,prezime,adresa,oib,pacijent.lozinka,telefon,pacijent.email,spol,mobitel);
+                    returnedPacijent = new Pacijent(ime,prezime,adresa,oib,pacijent.getLozinka(),telefon,pacijent.getEmail(),spol,mobitel);
 
 
                 }
@@ -407,7 +405,7 @@ public class ServerRequest {
         @Override
         protected Pacijent doInBackground(Void... params) {
             ArrayList<NameValuePair> dataToSend = new ArrayList<>();
-            dataToSend.add(new BasicNameValuePair("email", pacijent.email));
+            dataToSend.add(new BasicNameValuePair("email", pacijent.getEmail()));
             HttpParams httpRequestParams = new BasicHttpParams();
             HttpConnectionParams.setConnectionTimeout(httpRequestParams, CONNECTION_TIMEOUT);//koliko cmo cekat dok se POST izvrsava
             HttpConnectionParams.setSoTimeout(httpRequestParams, CONNECTION_TIMEOUT);
@@ -438,7 +436,7 @@ public class ServerRequest {
                     String mobitel = jObject.getString("mobitel");
                     String spol = jObject.getString("spol");
 
-                    returnedPacijent = new Pacijent(ime,prezime,adresa,oib,lozinka,telefon,pacijent.email,spol,mobitel);
+                    returnedPacijent = new Pacijent(ime,prezime,adresa,oib,lozinka,telefon,pacijent.getEmail(),spol,mobitel);
 
 
                 }
@@ -472,8 +470,8 @@ public class ServerRequest {
         @Override
         protected Void doInBackground(Void... params) {
             ArrayList<NameValuePair> dataToSend = new ArrayList<>();
-            dataToSend.add(new BasicNameValuePair("email",pacijent.email));
-            dataToSend.add(new BasicNameValuePair("lozinka",pacijent.lozinka));
+            dataToSend.add(new BasicNameValuePair("email",pacijent.getEmail()));
+            dataToSend.add(new BasicNameValuePair("lozinka",pacijent.getLozinka()));
 
 
             HttpParams httpRequestParams = new BasicHttpParams();

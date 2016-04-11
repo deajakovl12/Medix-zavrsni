@@ -39,7 +39,5 @@ dependencies {
     compile('com.mikepenz:materialdrawer:4.0.1@aar') {
         transitive = true
     }
-
     compile 'me.biubiubiu.justifytext:library:1.1'
-
 }
