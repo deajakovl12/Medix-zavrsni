@@ -19,7 +19,7 @@ import com.example.deean.medix.doktorovo.ToolbarActivity;
 import com.example.deean.medix.doktorovo.konsturktor_i_baza.Doktor;
 import com.example.deean.medix.doktorovo.konsturktor_i_baza.DoktorLokalno;
 import com.example.deean.medix.doktorovo.pacijenti_u_bazi.PacijentuDajDoktoraAPI;
-import com.example.deean.medix.doktorovo.pacijenti_u_bazi.PacijentuPromjeniMedicinskePodatke;
+import com.example.deean.medix.doktorovo.pacijenti_od_doktora.detalji_o_pacijentu.PacijentuPromjeniMedicinskePodatkeAPI;
 import com.example.deean.medix.doktorovo.pacijenti_u_bazi.RecycleViewPacijenata;
 import com.example.deean.medix.pacijentovo.konstruktor_i_baza.Pacijent;
 
@@ -79,7 +79,7 @@ public class UrediMedicinskePodatke extends ToolbarActivity implements View.OnCl
         }
     }
     private void promjeniPodatkePacijenta(){
-        PacijentuPromjeniMedicinskePodatke.Factory.getIstance().response(mpf.getOib(),etBolesti.getText().toString(),etLaboratorij.getText().toString()).enqueue(new Callback<ArrayList<Void>>() {
+        PacijentuPromjeniMedicinskePodatkeAPI.Factory.getIstance().response(mpf.getOib(),etBolesti.getText().toString(),etLaboratorij.getText().toString()).enqueue(new Callback<ArrayList<Void>>() {
             @Override
             public void onResponse(Call<ArrayList<Void>> call, Response<ArrayList<Void>> response) {
                 Log.e("Proslo", doktor.getId_doktor());

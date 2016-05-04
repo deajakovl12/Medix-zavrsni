@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#efefef"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.Toolbar
+        android:padding="0dp"
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="#A22022"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        />
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_height="440dp"
+        android:layout_width="match_parent"
+        android:background="#efefef"
+        android:padding="10dp">
+
+        <TextView
+            android:layout_marginTop="10dp"
+            android:textColor="#A22022"
+            android:layout_width="wrap_content"
+            android:text="Povijest Bolesti"
+            android:textSize="18dp"
+            android:textStyle="bold"
+            android:layout_height="wrap_content"
+            android:id="@+id/tvbolesti"/>
+
+        <EditText
+            android:theme="@style/Boja_EditText"
+            android:textColor="#434343"
+            android:id="@+id/etUrediBolesti"
+            android:layout_width="match_parent"
+            android:layout_marginBottom="10dp"
+            android:layout_height="wrap_content"
+            android:maxLines="7"
+            android:inputType="textMultiLine"
+            android:background="@drawable/okvir"
+            android:padding="5dp"/>
+        <TextView
+            android:id="@+id/tvlaboratorijski"
+            android:textColor="#A22022"
+            android:layout_width="wrap_content"
+            android:text="Laboratorijski podaci"
+            android:textSize="18dp"
+            android:textStyle="bold"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/etUrediBolesti"
+            />
+
+        <EditText
+            android:theme="@style/Boja_EditText"
+            android:textColor="#434343"
+            android:id="@+id/etUrediLaboratorij"
+            android:layout_width="match_parent"
+            android:layout_marginBottom="10dp"
+            android:layout_height="wrap_content"
+            android:maxLines="7"
+            android:inputType="textMultiLine"
+            android:background="@drawable/okvir"
+            android:padding="5dp"/>
+
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_height="100dp"
+            android:layout_width="match_parent"
+            android:background="#efefef"
+            android:padding="10dp">
+        <Button
+            android:background="#A22022"
+            android:textColor="@android:color/background_light"
+            android:id="@+id/bSpremi"
+            android:text="Spremi promjene"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/etUrediLaboratorij"
+            />
+
+    </LinearLayout>
+
+
+</LinearLayout>
