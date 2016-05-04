@@ -1,5 +1,7 @@
 package com.example.deean.medix.doktorovo.pacijenti_od_doktora.detalji_o_pacijentu;
 
+import android.app.Fragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.Log;
@@ -9,8 +11,10 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.deean.medix.doktorovo.pacijenti_u_bazi.RecycleViewPacijenata;
 import com.example.deean.medix.pacijentovo.konstruktor_i_baza.Pacijent;
 import com.example.deean.medix.R;
+import com.example.deean.medix.pocetni_zaslon.Login;
 
 import java.util.ArrayList;
 
@@ -25,6 +29,24 @@ public class MedicinskiPodaciFragment extends android.support.v4.app.Fragment im
 
     TextView  etbolesti, etlaboratorijski;
     Button uredi;
+
+    public String getBolest() {
+        return bolest;
+    }
+
+    public void setBolest(String bolest) {
+        this.bolest = bolest;
+    }
+
+    public String getLaboratorij() {
+        return laboratorij;
+    }
+
+    public void setLaboratorij(String laboratorij) {
+        this.laboratorij = laboratorij;
+    }
+
+    String bolest, laboratorij;
 
 
     private static  final String ARG_EXAMPLE = "this_is_a_constant";
@@ -79,7 +101,11 @@ public class MedicinskiPodaciFragment extends android.support.v4.app.Fragment im
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.bUredi:
-                //napraviti da moze uredivati medicinske podatke //TODO
+                bolest = etbolesti.getText().toString();
+                laboratorij = etlaboratorijski.getText().toString();
+                startActivity(new Intent(getContext(),UrediMedicinskePodatke.class));
+
+
                 break;
         }
     }

@@ -39,13 +39,13 @@
         android:layout_below="@id/tvlaboratorijski"
         />
     <Button
-        android:layout_below="@id/etlaboratorijski"
         android:background="#A22022"
         android:textColor="@android:color/background_light"
         android:id="@+id/bUredi"
         android:text="Uredi medicinske podatke"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        />
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true" />
 
 </RelativeLayout>
