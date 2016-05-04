@@ -20,6 +20,7 @@ public class UrediMedicinskePodatke extends ToolbarActivity {
 
         doktorLokalno = new DoktorLokalno(this);
 
+
         doktor = doktorLokalno.getPrijavljenogDoktora();
         postaviDrawer(postaviToolbar("Uredi medicinske podatke"), doktor.getIme().toUpperCase(), doktor.getPrezime().toUpperCase(), doktor.getEmail()).build();
 
