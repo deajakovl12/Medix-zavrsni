@@ -44,9 +44,9 @@ public class RVAdapterPacijenta  extends RecyclerView.Adapter<RVAdapterPacijenta
             Pozovi_detalje(oib);
         }
 
-        public void Pozovi_detalje(String ime){
+        public void Pozovi_detalje(String oib){
             Intent intent1 = new Intent(context, FragmentPacijentDetalji.class);
-            intent1.putExtra("ime1",ime);
+            intent1.putExtra("oib1",oib);
             context.startActivity(intent1);
         }
 

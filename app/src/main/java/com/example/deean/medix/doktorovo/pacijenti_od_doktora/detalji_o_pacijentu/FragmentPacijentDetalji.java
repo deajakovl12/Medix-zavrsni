@@ -45,7 +45,7 @@ public class FragmentPacijentDetalji extends ToolbarActivity {
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapterPacijenta adapter = new ViewPagerAdapterPacijenta(getSupportFragmentManager());
         Intent intent = getIntent();
-        oib = intent.getStringExtra("ime1");
+        oib = intent.getStringExtra("oib1");
         Log.e("OIB", oib);
         adapter.addFragment(OsobniPodaciFragment.newIstance(oib), "");
         adapter.addFragment(MedicinskiPodaciFragment.newIstance(oib),"");

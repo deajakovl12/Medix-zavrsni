@@ -1,9 +1,13 @@
 package com.example.deean.medix.doktorovo.pacijenti_od_doktora.detalji_o_pacijentu;
 
+import android.app.Activity;
 import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.util.AttributeSet;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +21,7 @@ import com.example.deean.medix.R;
 import com.example.deean.medix.pocetni_zaslon.Login;
 
 import java.util.ArrayList;
+import java.util.logging.Logger;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -34,23 +39,23 @@ public class MedicinskiPodaciFragment extends android.support.v4.app.Fragment im
         return bolest;
     }
 
-    public void setBolest(String bolest) {
-        this.bolest = bolest;
-    }
 
     public String getLaboratorij() {
         return laboratorij;
     }
 
-    public void setLaboratorij(String laboratorij) {
-        this.laboratorij = laboratorij;
-    }
 
-    String bolest, laboratorij;
+    static String bolest, laboratorij;
 
 
     private static  final String ARG_EXAMPLE = "this_is_a_constant";
-    private String oib;
+
+    public String getOib() {
+        return oib;
+    }
+
+    private static String oib;
+
     public MedicinskiPodaciFragment(){
     }
     public static MedicinskiPodaciFragment newIstance (String example_argument){
@@ -82,12 +87,21 @@ public class MedicinskiPodaciFragment extends android.support.v4.app.Fragment im
 
         uredi.setOnClickListener(this);
 
+        //FragmentTransaction ft = getFragmentManager().beginTransaction();
+        //ft.detach(this).attach(this).commit();
 
+
+        dohvati();
+        return view;
+    }
+    private void dohvati(){
         PacijentDetaljiAPI.Factory.getIstance().response(oib).enqueue(new Callback<ArrayList<Pacijent>>() { //u response ime
             @Override
             public void onResponse(Call<ArrayList<Pacijent>> call, Response<ArrayList<Pacijent>> response) {
                 etbolesti.setText(response.body().get(0).getBolesti());
                 etlaboratorijski.setText(response.body().get(0).getLaboratorijski());
+                bolest = etbolesti.getText().toString();
+                laboratorij = etlaboratorijski.getText().toString();
             }
             @Override
             public void onFailure(Call<ArrayList<Pacijent>> call, Throwable t) {
@@ -95,18 +109,25 @@ public class MedicinskiPodaciFragment extends android.support.v4.app.Fragment im
                 Log.e("TAG", t.getMessage());
             }
         });
-        return view;
     }
     @Override
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.bUredi:
-                bolest = etbolesti.getText().toString();
-                laboratorij = etlaboratorijski.getText().toString();
                 startActivity(new Intent(getContext(),UrediMedicinskePodatke.class));
-
-
                 break;
         }
+
+}
+    @Override
+    public void onResume() {
+        super.onResume();
+        Log.i("Refresh","refreshalo");
+        UrediMedicinskePodatke ump = new UrediMedicinskePodatke();
+        etbolesti.setText(ump.getBol());
+        etlaboratorijski.setText(ump.getLab());
+        bolest = etbolesti.getText().toString();
+        laboratorij = etlaboratorijski.getText().toString();
     }
+
 }
