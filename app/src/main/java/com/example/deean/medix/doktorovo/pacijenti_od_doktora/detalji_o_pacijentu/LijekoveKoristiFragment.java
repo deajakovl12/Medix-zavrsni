@@ -1,5 +1,6 @@
 package com.example.deean.medix.doktorovo.pacijenti_od_doktora.detalji_o_pacijentu;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
@@ -90,8 +91,7 @@ public class LijekoveKoristiFragment extends android.support.v4.app.Fragment imp
                     initializeData();
                     break;
                 case R.id.ivDodaj:
-                    //omoguciti dodavanje lijekova!! //TODO
-
+                    startActivity(new Intent(getContext(),DodajLijekPacijentu.class));
                     break;
 
             }
@@ -120,7 +120,8 @@ public class LijekoveKoristiFragment extends android.support.v4.app.Fragment imp
                             lijeks.add(new Lijek(spremi.get(i), RecycleView.poljeSlika[2]));
                         }
                     }
-                }}
+                }
+            }
 
             @Override
             public void onFailure(Call<ArrayList<Lijek>> call, Throwable t) {

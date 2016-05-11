@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.deean.medix.R;
+import com.example.deean.medix.doktorovo.pacijenti_od_doktora.detalji_o_pacijentu.DodajLijekPacijentu;
 import com.example.deean.medix.lijekovi.detalji_o_lijeku.FragmentLijekDetalji;
 
 import java.util.List;
@@ -29,6 +31,9 @@ public class RVAdapter  extends RecyclerView.Adapter<RVAdapter.LijekViewHolder> 
         TextView lijek_ime;
         ImageView lijek_slika;
         String ime;
+        String dohvati_ime_klase;
+
+        DodajLijekPacijentu dlp = new DodajLijekPacijentu();
 
         LijekViewHolder(View itemView) {
             super(itemView);
@@ -40,8 +45,17 @@ public class RVAdapter  extends RecyclerView.Adapter<RVAdapter.LijekViewHolder> 
 
         @Override
         public void onClick(View v) {
-            ime=lijek_ime.getText().toString();
-            Pozovi_detalje(ime);
+            /*dohvati_ime_klase = dlp.getImeKlase();
+            Log.e("Ime klase u rvaadapter",dlp.getImeKlase()+"  bla");
+            if(dohvati_ime_klase.equals("DodajLijekPacijentu")){
+                Log.e("Ime klase","dodaj lijek pacijentu");
+            }*/
+            //else{
+                ime=lijek_ime.getText().toString();
+                Pozovi_detalje(ime);
+                Log.e("Ime klase",this.getClass().getSimpleName().toString());
+            //}
+
         }
         public void Pozovi_detalje(String ime){
             Intent intent1 = new Intent(context, FragmentLijekDetalji.class);

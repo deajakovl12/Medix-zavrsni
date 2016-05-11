@@ -52,7 +52,8 @@
         <activity android:name=".doktorovo.pacijenti_od_doktora.RecycleViewPacijenta" />
         <activity android:name=".doktorovo.pacijenti_od_doktora.detalji_o_pacijentu.FragmentPacijentDetalji" />
         <activity android:name=".doktorovo.pacijenti_u_bazi.RecycleViewPacijenata" />
-        <activity android:name=".doktorovo.pacijenti_od_doktora.detalji_o_pacijentu.UrediMedicinskePodatke"></activity>
+        <activity android:name=".doktorovo.pacijenti_od_doktora.detalji_o_pacijentu.UrediMedicinskePodatke" />
+        <activity android:name=".doktorovo.pacijenti_od_doktora.detalji_o_pacijentu.DodajLijekPacijentu"></activity>
     </application>
 
 </manifest>

@@ -79,13 +79,13 @@ public class UrediMedicinskePodatke extends ToolbarActivity implements View.OnCl
         }
     }
     private void promjeniPodatkePacijenta(){
-        PacijentuPromjeniMedicinskePodatkeAPI.Factory.getIstance().response(mpf.getOib(),etBolesti.getText().toString(),etLaboratorij.getText().toString()).enqueue(new Callback<ArrayList<Void>>() {
+        PacijentuPromjeniMedicinskePodatkeAPI.Factory.getIstance().response(mpf.getOib(),etBolesti.getText().toString(),etLaboratorij.getText().toString()).enqueue(new Callback<ArrayList<Integer>>() {
             @Override
-            public void onResponse(Call<ArrayList<Void>> call, Response<ArrayList<Void>> response) {
+            public void onResponse(Call<ArrayList<Integer>> call, Response<ArrayList<Integer>> response) {
                 Log.e("Proslo", doktor.getId_doktor());
             }
             @Override
-            public void onFailure(Call<ArrayList<Void>> call, Throwable t) {
+            public void onFailure(Call<ArrayList<Integer>> call, Throwable t) {
                 Log.e("Nije proslo",doktor.getId_doktor());
                 AlertDialog.Builder dialogBuilder1 = new AlertDialog.Builder(UrediMedicinskePodatke.this);
                 dialogBuilder1.setTitle("Uspješno!");
