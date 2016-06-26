@@ -7,6 +7,8 @@ public class Doktor {
     String id_doktor,ime, prezime, adresa, lozinka, telefon, oib,email,radno_vrijeme,rad_savjetovalista,mobitel,titula;
 
 
+
+
     public Doktor(String ime, String prezime, String adresa,String oib, String lozinka, String telefon,  String email, String radno_vrijeme, String rad_savjetovalista, String mobitel,String titula){
 
         this.ime=ime;

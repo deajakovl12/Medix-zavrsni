@@ -39,10 +39,6 @@ public class DodajLijekPacijentu extends ToolbarActivity implements View.OnClick
 
     private String tekst1;
 
-
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
