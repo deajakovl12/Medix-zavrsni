@@ -48,6 +48,11 @@ public class Pacijent {
         this.adresa=adresa;
         this.oib=oib;
     }
+    public Pacijent(String ime, String prezime,String oib){
+        this.ime=ime;
+        this.prezime=prezime;
+        this.oib=oib;
+    }
 
     public Pacijent(String ime, String prezime, String adresa,String oib, String lozinka, String telefon,  String email, String spol,String mobitel, String bolesti, String laboratorijski){
 

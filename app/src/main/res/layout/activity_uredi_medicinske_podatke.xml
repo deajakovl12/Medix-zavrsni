@@ -65,7 +65,6 @@
             android:inputType="textMultiLine"
             android:background="@drawable/okvir"
             android:padding="5dp"/>
-
         </LinearLayout>
         <LinearLayout
             android:orientation="vertical"

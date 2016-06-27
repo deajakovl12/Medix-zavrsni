@@ -1,5 +1,6 @@
 package com.example.deean.medix.doktorovo.pregledi;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -66,7 +67,7 @@ public class PreglediOdDoktora extends ToolbarActivity implements View.OnClickLi
                 initializeData();
                 break;
             case R.id.ivDodaj:
-                //startActivity(new Intent(this, RecycleViewPacijenata.class));
+                startActivity(new Intent(this, DodajNoviPregled.class));
                 break;
 
         }
