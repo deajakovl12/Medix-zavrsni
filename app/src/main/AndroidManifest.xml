@@ -53,7 +53,9 @@
         <activity android:name=".doktorovo.pacijenti_od_doktora.detalji_o_pacijentu.FragmentPacijentDetalji" />
         <activity android:name=".doktorovo.pacijenti_u_bazi.RecycleViewPacijenata" />
         <activity android:name=".doktorovo.pacijenti_od_doktora.detalji_o_pacijentu.UrediMedicinskePodatke" />
-        <activity android:name=".doktorovo.pacijenti_od_doktora.detalji_o_pacijentu.DodajLijekPacijentu"></activity>
+        <activity android:name=".doktorovo.pacijenti_od_doktora.detalji_o_pacijentu.DodajLijekPacijentu" />
+        <activity android:name=".doktorovo.pregledi.PreglediOdDoktora" />
+        <activity android:name=".doktorovo.pregledi.CardViewPregleda"></activity>
     </application>
 
 </manifest>
