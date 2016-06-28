@@ -1,7 +1,10 @@
 package com.example.deean.medix.doktorovo.pregledi;
 
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -18,7 +21,9 @@ import com.example.deean.medix.doktorovo.ToolbarActivity;
 import com.example.deean.medix.doktorovo.konsturktor_i_baza.Doktor;
 import com.example.deean.medix.doktorovo.konsturktor_i_baza.DoktorLokalno;
 import com.example.deean.medix.doktorovo.pacijenti_od_doktora.PacijentAPI;
+import com.example.deean.medix.doktorovo.pacijenti_od_doktora.detalji_o_pacijentu.SpremiPodatkeOZakazanomPregleduAPI;
 import com.example.deean.medix.pacijentovo.konstruktor_i_baza.Pacijent;
+import com.example.deean.medix.pocetni_zaslon.Login;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -29,8 +34,8 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class DodajNoviPregled extends ToolbarActivity implements View.OnClickListener {
-    Button bDatum, bVrijeme;
-    EditText etDatum, etVrijeme;
+    Button bDatum, bVrijeme,bSpremi;
+    EditText etDatum, etVrijeme, etKomentar;
     private int mYear, mMonth, mDay, mHour, mMinute;
 
     Doktor doktor;
@@ -48,12 +53,15 @@ public class DodajNoviPregled extends ToolbarActivity implements View.OnClickLis
 
         bDatum=(Button)findViewById(R.id.bDatum);
         bVrijeme=(Button)findViewById(R.id.bVrijeme);
+        bSpremi = (Button) findViewById(R.id.bSpremi);
         etDatum=(EditText)findViewById(R.id.etDatum);
         etVrijeme=(EditText)findViewById(R.id.etVrijeme);
+        etKomentar = (EditText) findViewById(R.id.etKomentar);
         spinner = (Spinner) findViewById(R.id.spinner);
 
         bDatum.setOnClickListener(this);
         bVrijeme.setOnClickListener(this);
+        bSpremi.setOnClickListener(this);
 
         doktorLokalno = new DoktorLokalno(this);
         doktor = doktorLokalno.getPrijavljenogDoktora();
@@ -113,7 +121,50 @@ public class DodajNoviPregled extends ToolbarActivity implements View.OnClickLis
                         }, mHour, mMinute, false);
                 timePickerDialog.show();
                 break;
+            case R.id.bSpremi:
+                spremi_podatke();
+                //Log.e("KLIKNUTO","klikno spremi");
+                break;
+
         }
+    }
+
+    private void spremi_podatke() {
+        String dat = etDatum.getText().toString();
+        String vrij = etVrijeme.getText().toString();
+        String kom = etKomentar.getText().toString();
+        String pac = spinner.getSelectedItem().toString();
+        String[] oib = pac.split("-");
+        String dat_vrij = dat + " " + vrij;
+        //Log.e("Ispis podataka: ", dat + " " + vrij + " " + kom + " " + oib[1] + " " + dat_vrij);
+        if(dat.equals("") || vrij.equals("") || kom.equals("")) {
+            AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(DodajNoviPregled.this);
+            dialogBuilder.setMessage("Popunite sve podatke o pregledu!");
+            dialogBuilder.setPositiveButton("Ok",null);
+            dialogBuilder.show();
+        }
+        else {
+            SpremiPodatkeOZakazanomPregleduAPI.Factory.getIstance().response(oib[1],dat_vrij,kom,doktor.getId_doktor()).enqueue(new Callback<ArrayList<Integer>>() {
+                @Override
+                public void onResponse(Call<ArrayList<Integer>> call, Response<ArrayList<Integer>> response) {
+                        Log.e("USPESNO", "SPREMLJENO");
+                }
+
+                @Override
+                public void onFailure(Call<ArrayList<Integer>> call, Throwable t) {
+                    AlertDialog.Builder dialogBuilder1 = new AlertDialog.Builder(DodajNoviPregled.this);
+                    dialogBuilder1.setTitle("Uspješno!");
+                    dialogBuilder1.setMessage("Dodali ste novi pregled!");
+                    dialogBuilder1.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            startActivity(new Intent(DodajNoviPregled.this, PreglediOdDoktora.class));
+                        }
+                    });
+                    dialogBuilder1.show();
+                }
+            });
+        }
+
     }
 
     private void dohvatiPacijente() {
