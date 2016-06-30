@@ -86,7 +86,7 @@ public class PreglediOdDoktora extends ToolbarActivity implements View.OnClickLi
 
                 }
                 for (int i = 0; i < spremi.size(); i++) {
-                    if (spremi.get(i).getIme().toLowerCase().contains(tekst.toLowerCase()) || spremi.get(i).getPrezime().toLowerCase().contains(tekst.toLowerCase()) || spremi.get(i).getOib().contains(tekst.toLowerCase())) {
+                    if (spremi.get(i).getIme().toLowerCase().contains(tekst.toLowerCase()) || spremi.get(i).getPrezime().toLowerCase().contains(tekst.toLowerCase()) || spremi.get(i).getOib().contains(tekst.toLowerCase()) || spremi.get(i).getDatum_pregleda().contains(tekst)) {
                         pregledis.add(new Pregledi(spremi.get(i).getIme(), spremi.get(i).getPrezime(), spremi.get(i).getOib(), spremi.get(i).getDatum_pregleda(), spremi.get(i).getKomentar()));
                     }
                 }
