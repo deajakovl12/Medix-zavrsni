@@ -67,10 +67,10 @@ public class OsnovneInformacijeFragment extends android.support.v4.app.Fragment{
             ivLijek.setImageResource(RecycleView.poljeSlika[0]);
         }
         else if(ime.equals("Naklofen")){
-            ivLijek.setImageResource(RecycleView.poljeSlika[2]);
+            ivLijek.setImageResource(RecycleView.poljeSlika[1]);
         }
         else if(ime.equals("Neofen")){
-            ivLijek.setImageResource(RecycleView.poljeSlika[1]);
+            ivLijek.setImageResource(RecycleView.poljeSlika[2]);
         }
 
 

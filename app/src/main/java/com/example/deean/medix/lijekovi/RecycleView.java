@@ -31,7 +31,7 @@ public class RecycleView extends ToolbarActivity implements View.OnClickListener
     private List<Lijek> lijeks;
     private RecyclerView rv;
 
-    public static int [] poljeSlika = {R.drawable.lupocet_100,R.drawable.neofen_100,R.drawable.naklofen_100};
+    public static int [] poljeSlika = {R.drawable.lupocet_100,R.drawable.naklofen_100,R.drawable.neofen_100};
 
 
     private Doktor doktor;

@@ -114,10 +114,10 @@ public class LijekoveKoristiFragment extends android.support.v4.app.Fragment imp
                             lijeks.add(new Lijek(spremi.get(i), RecycleView.poljeSlika[0]));
                         }
                         if(spremi.get(i).equals("Neofen")) {
-                            lijeks.add(new Lijek(spremi.get(i), RecycleView.poljeSlika[1]));
+                            lijeks.add(new Lijek(spremi.get(i), RecycleView.poljeSlika[2]));
                         }
                         if(spremi.get(i).equals("Naklofen")) {
-                            lijeks.add(new Lijek(spremi.get(i), RecycleView.poljeSlika[2]));
+                            lijeks.add(new Lijek(spremi.get(i), RecycleView.poljeSlika[1]));
                         }
                     }
                 }

@@ -10,6 +10,7 @@ import android.view.View;
 
 import com.example.deean.medix.R;
 import com.example.deean.medix.doktorovo.pacijenti_od_doktora.RecycleViewPacijenta;
+import com.example.deean.medix.doktorovo.pomoc.PomocDoktor;
 import com.example.deean.medix.doktorovo.postavke_profila.PostavkeProfilaDoktora;
 import com.example.deean.medix.doktorovo.pregledi.PreglediOdDoktora;
 import com.example.deean.medix.lijekovi.RecycleView;
@@ -107,6 +108,9 @@ public class ToolbarActivity extends AppCompatActivity {
                                 break;
                             case 8:
                                 startActivity(new Intent(getApplicationContext(), PostavkeProfilaDoktora.class));
+                                break;
+                            case 9:
+                                startActivity(new Intent(getApplicationContext(), PomocDoktor.class));
                                 break;
                             case 10:
                                 startActivity(new Intent(getApplicationContext(), Login.class));

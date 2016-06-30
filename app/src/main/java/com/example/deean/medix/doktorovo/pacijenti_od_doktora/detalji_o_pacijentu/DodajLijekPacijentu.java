@@ -89,10 +89,10 @@ public class DodajLijekPacijentu extends ToolbarActivity implements View.OnClick
                             lijeks.add(new Lijek(spremi.get(i), RecycleView.poljeSlika[0]));
                         }
                         if(spremi.get(i).equals("Neofen")) {
-                            lijeks.add(new Lijek(spremi.get(i), RecycleView.poljeSlika[1]));
+                            lijeks.add(new Lijek(spremi.get(i), RecycleView.poljeSlika[2]));
                         }
                         if(spremi.get(i).equals("Naklofen")) {
-                            lijeks.add(new Lijek(spremi.get(i), RecycleView.poljeSlika[2]));
+                            lijeks.add(new Lijek(spremi.get(i), RecycleView.poljeSlika[1]));
                         }
                     }
                 }
