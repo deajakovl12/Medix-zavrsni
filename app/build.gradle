@@ -40,4 +40,6 @@ dependencies {
         transitive = true
     }
     compile 'me.biubiubiu.justifytext:library:1.1'
+
+    compile 'com.squareup.picasso:picasso:2.5.2'
 }

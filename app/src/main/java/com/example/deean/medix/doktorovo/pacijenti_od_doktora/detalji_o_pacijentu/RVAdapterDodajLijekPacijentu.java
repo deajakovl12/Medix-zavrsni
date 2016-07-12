@@ -18,9 +18,11 @@ import com.example.deean.medix.R;
 import com.example.deean.medix.doktorovo.pacijenti_od_doktora.detalji_o_pacijentu.DodajLijekPacijentu;
 import com.example.deean.medix.doktorovo.pacijenti_u_bazi.PacijentuDajDoktoraAPI;
 import com.example.deean.medix.doktorovo.pacijenti_u_bazi.RecycleViewPacijenata;
+import com.example.deean.medix.doktorovo.pregledi.DodajNoviPregled;
 import com.example.deean.medix.lijekovi.Lijek;
 import com.example.deean.medix.lijekovi.detalji_o_lijeku.FragmentLijekDetalji;
 import com.example.deean.medix.pacijentovo.konstruktor_i_baza.Pacijent;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,6 +36,7 @@ import retrofit2.Response;
  */
 public class RVAdapterDodajLijekPacijentu  extends RecyclerView.Adapter<RVAdapterDodajLijekPacijentu.LijekViewHolder> {
     static Context context;
+    static LijekoveKoristiFragment lkf = new LijekoveKoristiFragment();
     public static class LijekViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         CardView cv;
@@ -85,6 +88,10 @@ public class RVAdapterDodajLijekPacijentu  extends RecyclerView.Adapter<RVAdapte
                             dialogBuilder1.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int id) {
                                     context.startActivity(new Intent(context, DodajLijekPacijentu.class));
+                                    //Intent intent1 = new Intent(context, FragmentPacijentDetalji.class);
+                                    //intent1.putExtra("oib1",lkf.getOib());
+                                    //Log.e("OIB",lkf.getOib() + " aa");
+                                    //context.startActivity(intent1);
                                 }
                             });
                             dialogBuilder1.show();
@@ -119,7 +126,8 @@ public class RVAdapterDodajLijekPacijentu  extends RecyclerView.Adapter<RVAdapte
     @Override
     public void onBindViewHolder(LijekViewHolder lijekViewHolder, int i) {
         lijekViewHolder.lijek_ime.setText(lijeks.get(i).getNaziv());
-        lijekViewHolder.lijek_slika.setImageResource(lijeks.get(i).getPhotoId());
+        //lijekViewHolder.lijek_slika.setImageResource(lijeks.get(i).getPhotoId());
+        Picasso.with(context).load(lijeks.get(i).getSlika_lijeka()).into(lijekViewHolder.lijek_slika);
     }
 
     @Override

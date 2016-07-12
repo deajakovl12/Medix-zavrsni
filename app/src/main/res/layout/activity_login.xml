@@ -84,12 +84,11 @@
         android:layout_marginLeft="100dp"
         android:layout_height="wrap_content" />
     <Button
-        android:layout_below="@id/tvLozinkaLink"
         android:background="#A22022"
         android:textColor="@android:color/background_light"
         android:id="@+id/bPrijava"
         android:text="Prijava"
-        android:layout_marginBottom="10dp"
+        android:layout_alignParentBottom="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
     </RelativeLayout>

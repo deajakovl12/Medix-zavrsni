@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.example.deean.medix.R;
 import com.example.deean.medix.lijekovi.Lijek;
 import com.example.deean.medix.lijekovi.RecycleView;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -60,7 +61,7 @@ public class MjereOprezaFragment extends android.support.v4.app.Fragment{
         ivLijek = (ImageView) view.findViewById(R.id.ivLijek);
 
 
-        if(ime.equals("Lupocet 500mg tablete")){
+        /*if(ime.equals("Lupocet 500mg tablete")){
             ivLijek.setImageResource(RecycleView.poljeSlika[0]);
         }
         else if(ime.equals("Naklofen")){
@@ -68,13 +69,14 @@ public class MjereOprezaFragment extends android.support.v4.app.Fragment{
         }
         else if(ime.equals("Neofen")){
             ivLijek.setImageResource(RecycleView.poljeSlika[2]);
-        }
+        }*/
         LijekDetaljiAPI.Factory.getIstance().response(ime).enqueue(new Callback<ArrayList<Lijek>>() { //u response ime
             @Override
             public void onResponse(Call<ArrayList<Lijek>> call, Response<ArrayList<Lijek>> response) {
                 kadne.setText(response.body().get(0).getKada_ne_smije_primjeniti());
                 doziranje.setText(response.body().get(0).getDoziranje());
                 nuspojave.setText(response.body().get(0).getNuspojave());
+                Picasso.with(getContext()).load(response.body().get(0).getSlika_lijeka()).into(ivLijek);
             }
             @Override
             public void onFailure(Call<ArrayList<Lijek>> call, Throwable t) {

@@ -14,6 +14,7 @@ import android.widget.TextView;
 import com.example.deean.medix.R;
 import com.example.deean.medix.doktorovo.pacijenti_od_doktora.detalji_o_pacijentu.DodajLijekPacijentu;
 import com.example.deean.medix.lijekovi.detalji_o_lijeku.FragmentLijekDetalji;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -51,9 +52,10 @@ public class RVAdapter  extends RecyclerView.Adapter<RVAdapter.LijekViewHolder> 
                 Log.e("Ime klase","dodaj lijek pacijentu");
             }*/
             //else{
-                ime=lijek_ime.getText().toString();
-                Pozovi_detalje(ime);
-                Log.e("Ime klase",this.getClass().getSimpleName().toString());
+            ime=lijek_ime.getText().toString();
+
+            Pozovi_detalje(ime);
+            Log.e("Ime klase",this.getClass().getSimpleName().toString());
             //}
 
         }
@@ -86,7 +88,7 @@ public class RVAdapter  extends RecyclerView.Adapter<RVAdapter.LijekViewHolder> 
     @Override
     public void onBindViewHolder(LijekViewHolder lijekViewHolder, int i) {
         lijekViewHolder.lijek_ime.setText(lijeks.get(i).getNaziv());
-        lijekViewHolder.lijek_slika.setImageResource(lijeks.get(i).getPhotoId());
+        Picasso.with(context).load(lijeks.get(i).getSlika_lijeka()).into(lijekViewHolder.lijek_slika);
     }
 
     @Override

@@ -27,12 +27,11 @@ public class RecycleView extends ToolbarActivity implements View.OnClickListener
     EditText etPretraga;
 
 
-    private ArrayList<String> spremi;
+    private ArrayList<Lijek> spremi;
     private List<Lijek> lijeks;
     private RecyclerView rv;
 
-    public static int [] poljeSlika = {R.drawable.lupocet_100,R.drawable.naklofen_100,R.drawable.neofen_100};
-
+    //public static int [] poljeSlika = {R.drawable.lupocet_100,R.drawable.naklofen_100,R.drawable.neofen_100};
 
     private Doktor doktor;
     com.example.deean.medix.doktorovo.konsturktor_i_baza.DoktorLokalno DoktorLokalno;
@@ -76,15 +75,11 @@ public class RecycleView extends ToolbarActivity implements View.OnClickListener
                 initializeAdapter();
                 for (int i = 0; i < response.body().size(); i++) {
                     //lijeks.add(new Lijek(response.body().get(i).getNaziv(),poljeSlika[i]));
-                    spremi.add(response.body().get(i).getNaziv());
+                    spremi.add(new Lijek(response.body().get(i).getNaziv(),response.body().get(i).getSlika_lijeka()));
                 }
-                //Log.i("TAG", responbodyse.body().get(0).getNaziv());
-                //Log.i("TAG2", spremi.get(0));
-                //Log.i("VELICINA PRVO", String.valueOf(spremi.size()));
-                // napravit polje u kojem su slike i onda citat od tamo i tu upisivat
                 for (int i = 0; i < spremi.size(); i++) {
-                    if (spremi.get(i).toLowerCase().contains(tekst.toLowerCase())) {
-                        lijeks.add(new Lijek(spremi.get(i), poljeSlika[i]));
+                    if (spremi.get(i).getNaziv().toLowerCase().contains(tekst.toLowerCase())) {
+                        lijeks.add(new Lijek(spremi.get(i).getNaziv(), spremi.get(i).getSlika_lijeka()));
                     }
                 }
                 //Log.i("LIJEKS", String.valueOf(lijeks));

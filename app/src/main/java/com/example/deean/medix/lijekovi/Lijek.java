@@ -4,12 +4,16 @@ package com.example.deean.medix.lijekovi;
  * Created by Deean on 21.2.2016..
  */
 public class Lijek {
-    String naziv, sastav, namjena, pakovanje, ime_i_adresa_proizvodaca, kada_ne_smije_primjeniti,doziranje,nuspojave;
+    String naziv, sastav, namjena, pakovanje, ime_i_adresa_proizvodaca, kada_ne_smije_primjeniti,doziranje,nuspojave,slika_lijeka;
     int photoId;
 
     public Lijek(String naziv, int photoId) {
         this.naziv = naziv;
         this.photoId = photoId;
+    }
+    public Lijek(String naziv, String slika_lijeka) {
+        this.naziv = naziv;
+        this.slika_lijeka = slika_lijeka;
     }
     Lijek(String naziv, String sastav, String namjena, String pakovanje, String ime_i_adresa_proizvodaca, String kada_ne_smije_primjeniti, String doziranje, String nuspojave){
         this.naziv=naziv;
@@ -91,5 +95,13 @@ public class Lijek {
 
     public void setNuspojave(String nuspojave) {
         this.nuspojave = nuspojave;
+    }
+
+    public String getSlika_lijeka() {
+        return slika_lijeka;
+    }
+
+    public void setSlika_lijeka(String slika_lijeka) {
+        this.slika_lijeka = slika_lijeka;
     }
 }

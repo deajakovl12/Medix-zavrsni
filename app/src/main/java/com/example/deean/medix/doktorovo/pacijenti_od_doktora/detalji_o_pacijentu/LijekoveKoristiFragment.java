@@ -31,7 +31,12 @@ import retrofit2.Response;
 public class LijekoveKoristiFragment extends android.support.v4.app.Fragment implements View.OnClickListener {
 
     private static  final String ARG_EXAMPLE = "this_is_a_constant";
+
     private String oib;
+
+    public String getOib() {
+        return oib;
+    }
 
     public String tekst;
     Button bPretraga;
@@ -40,7 +45,7 @@ public class LijekoveKoristiFragment extends android.support.v4.app.Fragment imp
     ImageView ivDodaj;
 
 
-    private ArrayList<String> spremi;
+    private ArrayList<Lijek> spremi;
     private List<Lijek> lijeks;
     private RecyclerView rv;
 
@@ -106,23 +111,14 @@ public class LijekoveKoristiFragment extends android.support.v4.app.Fragment imp
             public void onResponse(Call<ArrayList<Lijek>> call, Response<ArrayList<Lijek>> response) {
                 initializeAdapter();
                 for (int i = 0; i < response.body().size(); i++) {
-                    spremi.add(response.body().get(i).getNaziv());
+                    spremi.add(new Lijek(response.body().get(i).getNaziv(),response.body().get(i).getSlika_lijeka()));
                 }
                 for (int i = 0; i < spremi.size(); i++) {
-                    if (spremi.get(i).toLowerCase().contains(tekst.toLowerCase())) {
-                        if(spremi.get(i).equals("Lupocet 500mg tablete")) {
-                            lijeks.add(new Lijek(spremi.get(i), RecycleView.poljeSlika[0]));
-                        }
-                        if(spremi.get(i).equals("Neofen")) {
-                            lijeks.add(new Lijek(spremi.get(i), RecycleView.poljeSlika[2]));
-                        }
-                        if(spremi.get(i).equals("Naklofen")) {
-                            lijeks.add(new Lijek(spremi.get(i), RecycleView.poljeSlika[1]));
-                        }
+                    if (spremi.get(i).getNaziv().toLowerCase().contains(tekst.toLowerCase())) {
+                            lijeks.add(new Lijek(spremi.get(i).getNaziv(), spremi.get(i).getSlika_lijeka()));
                     }
                 }
             }
-
             @Override
             public void onFailure(Call<ArrayList<Lijek>> call, Throwable t) {
                 Log.e("Failed", t.getMessage());

@@ -30,7 +30,12 @@ public class OsobniPodaciFragment extends android.support.v4.app.Fragment implem
     public static String id_pacijenta;
 
     private static  final String ARG_EXAMPLE = "this_is_a_constant";
+
     private String oib;
+
+    public String getOib() {
+        return oib;
+    }
     public OsobniPodaciFragment(){
     }
     public static OsobniPodaciFragment newIstance (String example_argument){

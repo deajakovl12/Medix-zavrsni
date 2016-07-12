@@ -33,7 +33,7 @@ public class DodajLijekPacijentu extends ToolbarActivity implements View.OnClick
     Button bPretraga;
     EditText etPretraga;
 
-    private ArrayList<String> spremi;
+    private ArrayList<Lijek> spremi;
     private List<Lijek> lijeks;
     private RecyclerView rv;
 
@@ -54,8 +54,6 @@ public class DodajLijekPacijentu extends ToolbarActivity implements View.OnClick
         bPretraga = (Button) findViewById(R.id.bPretraga);
 
         bPretraga.setOnClickListener(this);
-
-
 
         doktorLokalno = new DoktorLokalno(this);
         doktor = doktorLokalno.getPrijavljenogDoktora();
@@ -81,19 +79,11 @@ public class DodajLijekPacijentu extends ToolbarActivity implements View.OnClick
             public void onResponse(Call<ArrayList<Lijek>> call, Response<ArrayList<Lijek>> response) {
                 initializeAdapter();
                 for (int i = 0; i < response.body().size(); i++) {
-                    spremi.add(response.body().get(i).getNaziv());
+                    spremi.add(new Lijek(response.body().get(i).getNaziv(),response.body().get(i).getSlika_lijeka()));
                 }
                 for (int i = 0; i < spremi.size(); i++) {
-                    if (spremi.get(i).toLowerCase().contains(tekst1.toLowerCase())) {
-                        if(spremi.get(i).equals("Lupocet 500mg tablete")) {
-                            lijeks.add(new Lijek(spremi.get(i), RecycleView.poljeSlika[0]));
-                        }
-                        if(spremi.get(i).equals("Neofen")) {
-                            lijeks.add(new Lijek(spremi.get(i), RecycleView.poljeSlika[2]));
-                        }
-                        if(spremi.get(i).equals("Naklofen")) {
-                            lijeks.add(new Lijek(spremi.get(i), RecycleView.poljeSlika[1]));
-                        }
+                    if (spremi.get(i).getNaziv().toLowerCase().contains(tekst1.toLowerCase())) {
+                        lijeks.add(new Lijek(spremi.get(i).getNaziv(),spremi.get(i).getSlika_lijeka() ));
                     }
                 }
             }
