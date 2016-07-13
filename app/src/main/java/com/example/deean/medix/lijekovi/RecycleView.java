@@ -54,7 +54,7 @@ public class RecycleView extends ToolbarActivity implements View.OnClickListener
         DoktorLokalno = new DoktorLokalno(this);
 
         doktor = DoktorLokalno.getPrijavljenogDoktora();
-        postaviDrawer(postaviToolbar("Lijekovi"),doktor.getIme().toUpperCase(),doktor.getPrezime().toUpperCase(),doktor.getEmail()).build();
+        postaviDrawer(postaviToolbar("Lijekovi"),doktor.getIme().toUpperCase(),doktor.getPrezime().toUpperCase(),doktor.getEmail(),doktor.getSpol()).build();
     }
     @Override
     public void onClick(View v) {

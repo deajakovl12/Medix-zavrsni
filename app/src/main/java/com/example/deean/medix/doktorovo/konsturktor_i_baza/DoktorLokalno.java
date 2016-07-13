@@ -29,6 +29,7 @@ public class DoktorLokalno {
         spEditor.putString("rad_savjetovalista",doktor.rad_savjetovalista);
         spEditor.putString("mobitel",doktor.mobitel);
         spEditor.putString("titula",doktor.titula);
+        spEditor.putString("spol",doktor.spol);
         //spEditor.putInt("id", doktor.id);
         spEditor.commit();
     }
@@ -45,10 +46,11 @@ public class DoktorLokalno {
         String mobitel = doktorLokalnaBaza.getString("mobitel","");
         String titula = doktorLokalnaBaza.getString("titula","");
         String id_doktor = doktorLokalnaBaza.getString("id_doktor","");
+        String spol = doktorLokalnaBaza.getString("spol","");
         //int id = doktorLokalnaBaza.getInt("id",0);
 
 
-        Doktor spremljeniDoktor = new Doktor(id_doktor,ime,prezime,adresa,oib,lozinka,telefon,email,radno_vrijeme,rad_savjetovalista,mobitel,titula);
+        Doktor spremljeniDoktor = new Doktor(id_doktor,ime,prezime,adresa,oib,lozinka,telefon,email,radno_vrijeme,rad_savjetovalista,mobitel,titula,spol);
         return spremljeniDoktor;
     }
     public void postaviPrijavljenogDoktora(boolean prijavljen){

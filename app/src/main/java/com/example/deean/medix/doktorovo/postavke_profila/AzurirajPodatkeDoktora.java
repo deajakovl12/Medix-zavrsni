@@ -18,7 +18,7 @@ import retrofit2.http.Query;
  */
 public interface AzurirajPodatkeDoktora {
     String BASE_URL = "http://jaka12.heliohost.org";
-    @GET("/spremi_nove_podatke_o_doktoru.php") Call<ArrayList<Integer>> response(@Query("dok_id") String dok_id,@Query("ime") String ime,@Query("prezime") String prezime,@Query("titula") String titula,@Query("radno_vrijeme") String radno_vrijeme,@Query("rad_savjetovalista") String rad_savjetovalista,@Query("adresa") String adresa,@Query("telefon") String telefon,@Query("mobitel") String mobitel);
+    @GET("/spremi_nove_podatke_o_doktoru.php") Call<ArrayList<Integer>> response(@Query("dok_id") String dok_id,@Query("ime") String ime,@Query("prezime") String prezime,@Query("titula") String titula,@Query("radno_vrijeme") String radno_vrijeme,@Query("rad_savjetovalista") String rad_savjetovalista,@Query("adresa") String adresa,@Query("telefon") String telefon,@Query("mobitel") String mobitel,@Query("spol") String spol);
     class Factory{
         private static AzurirajPodatkeDoktora service;
         public static AzurirajPodatkeDoktora getIstance(){

@@ -40,7 +40,7 @@ public class FragmentPacijentDetalji extends ToolbarActivity {
         DoktorLokalno = new DoktorLokalno(this);
 
         doktor = DoktorLokalno.getPrijavljenogDoktora();
-        postaviDrawer(postaviToolbar("Pacijent detalji"), doktor.getIme().toUpperCase(), doktor.getPrezime().toUpperCase(), doktor.getEmail()).build();
+        postaviDrawer(postaviToolbar("Pacijent detalji"), doktor.getIme().toUpperCase(), doktor.getPrezime().toUpperCase(), doktor.getEmail(),doktor.getSpol()).build();
     }
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapterPacijenta adapter = new ViewPagerAdapterPacijenta(getSupportFragmentManager());

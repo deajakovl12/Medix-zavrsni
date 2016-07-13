@@ -39,7 +39,7 @@ public class FragmentLijekDetalji extends ToolbarActivity {
         DoktorLokalno = new DoktorLokalno(this);
 
         doktor = DoktorLokalno.getPrijavljenogDoktora();
-        postaviDrawer(postaviToolbar("Lijek detalji"), doktor.getIme().toUpperCase(), doktor.getPrezime().toUpperCase(), doktor.getEmail()).build();
+        postaviDrawer(postaviToolbar("Lijek detalji"), doktor.getIme().toUpperCase(), doktor.getPrezime().toUpperCase(), doktor.getEmail(),doktor.getSpol()).build();
     }
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());

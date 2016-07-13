@@ -58,7 +58,7 @@ public class DodajLijekPacijentu extends ToolbarActivity implements View.OnClick
         doktorLokalno = new DoktorLokalno(this);
         doktor = doktorLokalno.getPrijavljenogDoktora();
 
-        postaviDrawer(postaviToolbar("Dodaj lijek pacijentu"), doktor.getIme().toUpperCase(), doktor.getPrezime().toUpperCase(), doktor.getEmail()).build();
+        postaviDrawer(postaviToolbar("Dodaj lijek pacijentu"), doktor.getIme().toUpperCase(), doktor.getPrezime().toUpperCase(), doktor.getEmail(),doktor.getSpol()).build();
 
     }
 

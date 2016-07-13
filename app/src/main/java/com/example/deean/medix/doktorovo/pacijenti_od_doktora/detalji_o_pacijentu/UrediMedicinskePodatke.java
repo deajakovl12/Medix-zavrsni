@@ -64,7 +64,7 @@ public class UrediMedicinskePodatke extends ToolbarActivity implements View.OnCl
         etLaboratorij.setText(mpf.getLaboratorij());
 
         doktor = doktorLokalno.getPrijavljenogDoktora();
-        postaviDrawer(postaviToolbar("Uredi medicinske podatke"), doktor.getIme().toUpperCase(), doktor.getPrezime().toUpperCase(), doktor.getEmail()).build();
+        postaviDrawer(postaviToolbar("Uredi medicinske podatke"), doktor.getIme().toUpperCase(), doktor.getPrezime().toUpperCase(), doktor.getEmail(),doktor.getSpol()).build();
 
     }
 

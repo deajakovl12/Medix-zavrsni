@@ -34,7 +34,7 @@ public class PomocDoktor extends ToolbarActivity {
         doktorLokalno = new DoktorLokalno(this);
         doktor = doktorLokalno.getPrijavljenogDoktora();
 
-        postaviDrawer(postaviToolbar("Pomoć"),doktor.getIme().toUpperCase(),doktor.getPrezime().toUpperCase(),doktor.getEmail()).build();
+        postaviDrawer(postaviToolbar("Pomoć"),doktor.getIme().toUpperCase(),doktor.getPrezime().toUpperCase(),doktor.getEmail(),doktor.getSpol()).build();
 
     }
 }

@@ -67,7 +67,7 @@ public class DodajNoviPregled extends ToolbarActivity implements View.OnClickLis
         doktor = doktorLokalno.getPrijavljenogDoktora();
 
 
-        postaviDrawer(postaviToolbar("Dodaj novi termin pregleda"),doktor.getIme().toUpperCase(),doktor.getPrezime().toUpperCase(),doktor.getEmail()).build();
+        postaviDrawer(postaviToolbar("Dodaj novi termin pregleda"),doktor.getIme().toUpperCase(),doktor.getPrezime().toUpperCase(),doktor.getEmail(),doktor.getSpol()).build();
         dohvatiPacijente();
         //popuniSpinner();
     }

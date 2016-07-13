@@ -50,18 +50,37 @@ public class ToolbarActivity extends AppCompatActivity {
         return toolbar;
     }
 
-    protected DrawerBuilder postaviDrawer(Toolbar toolbar2, String ime, String prezime, String email){
+    protected DrawerBuilder postaviDrawer(Toolbar toolbar2, String ime, String prezime, String email,String spol){
 
-        AccountHeader headerResult = new AccountHeaderBuilder()
-                .withActivity(this)
-                .withHeaderBackground(R.drawable.pozadina)
-                .addProfiles(
-                        new ProfileDrawerItem().withName(ime + " " + prezime).withEmail(email).withIcon(getResources().getDrawable(R.drawable.doctor_white_small))
-                )
-                .withSelectionListEnabledForSingleProfile(false)
-                .build();
+        AccountHeader headerResult = null;
+        if(spol.equals("Musko")) {
+             headerResult = new AccountHeaderBuilder()
+                    .withActivity(this)
+                    .withHeaderBackground(R.drawable.pozadina)
+                    .addProfiles(
+                            new ProfileDrawerItem().withName(ime + " " + prezime).withEmail(email).withIcon(getResources().getDrawable(R.drawable.doctor))
+                    )
+                    .withSelectionListEnabledForSingleProfile(false)
+                    .build();
+        }
+        else if(spol.equals("Zensko")){
+             headerResult = new AccountHeaderBuilder()
+                    .withActivity(this)
+                    .withHeaderBackground(R.drawable.pozadina)
+                    .addProfiles(
+                            new ProfileDrawerItem().withName(ime + " " + prezime).withEmail(email).withIcon(getResources().getDrawable(R.drawable.doktorica_white))
+                    )
+                    .withSelectionListEnabledForSingleProfile(false)
+                    .build();
+        }
 
-        PrimaryDrawerItem item1 = new PrimaryDrawerItem().withName("Profil").withIcon(getResources().getDrawable(R.drawable.doctor_white_small));
+        PrimaryDrawerItem item1 = null;
+        if(spol.equals("Musko")) {
+             item1 = new PrimaryDrawerItem().withName("Profil").withIcon(getResources().getDrawable(R.drawable.doctor_white_small));
+        }
+        else if(spol.equals("Zensko")){
+             item1 = new PrimaryDrawerItem().withName("Profil").withIcon(getResources().getDrawable(R.drawable.doktorica_white_small));
+        }
         SecondaryDrawerItem item2 = new SecondaryDrawerItem().withName("Lijekovi").withIcon(getResources().getDrawable(R.drawable.lijekovi_white_small));
         SecondaryDrawerItem item3 = new SecondaryDrawerItem().withName("Pacijenti").withIcon(getResources().getDrawable(R.drawable.patient_white_small));
         SecondaryDrawerItem item4 = new SecondaryDrawerItem().withName("Zakazani pregledi").withIcon(getResources().getDrawable(R.drawable.pregled_white_small));

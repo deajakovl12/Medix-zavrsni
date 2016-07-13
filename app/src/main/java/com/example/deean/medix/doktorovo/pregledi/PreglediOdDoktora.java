@@ -17,6 +17,7 @@ import com.example.deean.medix.doktorovo.konsturktor_i_baza.Doktor;
 import com.example.deean.medix.doktorovo.pacijenti_u_bazi.RVAdapterPacijenata;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import retrofit2.Call;
@@ -57,7 +58,7 @@ public class PreglediOdDoktora extends ToolbarActivity implements View.OnClickLi
 
         doktorLokalno = new DoktorLokalno(this);
         doktor = doktorLokalno.getPrijavljenogDoktora();
-        postaviDrawer(postaviToolbar("Zakazani pregledi"),doktor.getIme().toUpperCase(),doktor.getPrezime().toUpperCase(),doktor.getEmail()).build();
+        postaviDrawer(postaviToolbar("Zakazani pregledi"),doktor.getIme().toUpperCase(),doktor.getPrezime().toUpperCase(),doktor.getEmail(),doktor.getSpol()).build();
     }
 
     @Override
@@ -87,9 +88,31 @@ public class PreglediOdDoktora extends ToolbarActivity implements View.OnClickLi
                 }
                 for (int i = 0; i < spremi.size(); i++) {
                     if (spremi.get(i).getIme().toLowerCase().contains(tekst.toLowerCase()) || spremi.get(i).getPrezime().toLowerCase().contains(tekst.toLowerCase()) || spremi.get(i).getOib().contains(tekst.toLowerCase()) || spremi.get(i).getDatum_pregleda().contains(tekst)) {
-                        pregledis.add(new Pregledi(spremi.get(i).getIme(), spremi.get(i).getPrezime(), spremi.get(i).getOib(), spremi.get(i).getDatum_pregleda(), spremi.get(i).getKomentar()));
+                        String[] datumi = spremi.get(i).getDatum_pregleda().split("-");
+                        String[] datumiGodina = datumi[2].split(" ");
+                        final Calendar c = Calendar.getInstance();
+                        if(c.get(Calendar.YEAR) > Integer.parseInt(datumiGodina[0]) ){
+                            continue;
+                        }
+                        else {
+                            if(c.get(Calendar.MONTH)+1 > Integer.parseInt(datumi[1]))
+                            {
+                                continue;
+                            }
+                            else {
+                                if (c.get(Calendar.DAY_OF_MONTH) > Integer.parseInt(datumi[0])) {
+                                    continue;
+                                }
+                                else{
+                                    pregledis.add(new Pregledi(spremi.get(i).getIme(), spremi.get(i).getPrezime(), spremi.get(i).getOib(), spremi.get(i).getDatum_pregleda(), spremi.get(i).getKomentar()));
+                                }
+                            }
+                        }
                     }
                 }
+                //Log.e("DATUMI","Dan: " + Integer.parseInt(datumi[0]) + "Mjesec: " + Integer.parseInt(datumi[1]) + "Godina: " + datumiGodina[0] );
+                //Log.e("DATUMI DANAS", "DAN: " + c.get(Calendar.DAY_OF_MONTH) + "MJESEC: " + c.get(Calendar.MONTH) + "GODINA: " + c.get(Calendar.YEAR) );
+
             }
             @Override
             public void onFailure(Call<ArrayList<Pregledi>> call, Throwable t) {

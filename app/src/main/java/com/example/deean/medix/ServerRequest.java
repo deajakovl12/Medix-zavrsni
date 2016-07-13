@@ -149,9 +149,10 @@ public class ServerRequest {
                     String rad_savjetovalista = jObject.getString("rad_savjetovalista");
                     String mobitel = jObject.getString("mobitel");
                     String titula = jObject.getString("titula");
+                    String spol = jObject.getString("spol");
                     //int id = jObject.getInt("id");
 
-                    returnedDoktor = new Doktor(id_doktor,ime,prezime,adresa,oib,doktor.getLozinka(),telefon,doktor.getEmail(),radno_vrijeme,rad_savjetovalista,mobitel,titula);
+                    returnedDoktor = new Doktor(id_doktor,ime,prezime,adresa,oib,doktor.getLozinka(),telefon,doktor.getEmail(),radno_vrijeme,rad_savjetovalista,mobitel,titula,spol);
 
 
                 }
