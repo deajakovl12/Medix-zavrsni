@@ -3,11 +3,13 @@ package com.example.deean.medix;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
+import android.widget.Toast;
 
 import com.example.deean.medix.doktorovo.GetUserCallback;
 import com.example.deean.medix.doktorovo.konsturktor_i_baza.Doktor;
 import com.example.deean.medix.pacijentovo.GetUserCallbackPacijent;
 import com.example.deean.medix.pacijentovo.konstruktor_i_baza.Pacijent;
+import com.example.deean.medix.pocetni_zaslon.Login;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -372,8 +374,10 @@ public class ServerRequest {
                     String telefon = jObject.getString("telefon");
                     String mobitel = jObject.getString("mobitel");
                     String spol = jObject.getString("spol");
+                    String id_pacijent = jObject.getString("id_pacijent");
+                    String id_doktor = jObject.getString("id_doktor");
 
-                    returnedPacijent = new Pacijent(ime,prezime,adresa,oib,pacijent.getLozinka(),telefon,pacijent.getEmail(),spol,mobitel);
+                    returnedPacijent = new Pacijent(id_pacijent,ime,prezime,adresa,oib,pacijent.getLozinka(),telefon,pacijent.getEmail(),spol,mobitel,id_doktor);
 
 
                 }

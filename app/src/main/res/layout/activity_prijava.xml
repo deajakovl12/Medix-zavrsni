@@ -1,10 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<ScrollView
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/scroll"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content">
+<LinearLayout
     android:orientation="vertical"
     android:layout_height="match_parent"
     android:layout_width="match_parent"
-    android:background="#efefef">
+    android:background="#efefef"
+    >
 
     <android.support.v7.widget.Toolbar
         android:padding="0dp"
@@ -28,7 +35,7 @@
         android:layout_height="100dp"
         android:id="@+id/ivDoktor"
         android:layout_gravity="left"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="10dp"
          />
     <TextView
         android:textColor="#A22022"
@@ -164,6 +171,7 @@
     <ImageView
         android:layout_width="20dp"
         android:layout_height="20dp"
+        android:layout_marginTop="10dp"
         android:id="@+id/ivMobitel"
         android:src="@drawable/mobile"
         android:layout_gravity="left"
@@ -178,6 +186,7 @@
         android:textStyle="bold"
         android:layout_height="wrap_content"
         android:layout_below="@id/etTelefon"
+        android:layout_marginTop="10dp"
         android:layout_toEndOf="@+id/ivMobitel"/>
     <TextView
         android:textColor="#434343"
@@ -187,8 +196,30 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/tvMobitel"
         android:layout_toEndOf="@+id/ivMobitel"/>
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:id="@+id/ivTelZvanje"
+            android:src="@drawable/phone_green_small"
+            android:layout_gravity="left"
+            android:layout_toEndOf="@+id/tvTelefon"
+            android:layout_below="@+id/etAdresa"
+            android:layout_marginLeft="80dp"
+            />
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:id="@+id/ivMobZvanje"
+            android:src="@drawable/mobile_green_small"
+            android:layout_gravity="left"
+            android:layout_toEndOf="@+id/tvTelefon"
+            android:layout_below="@+id/ivTelZvanje"
+            android:layout_marginLeft="80dp"
+            android:layout_marginTop="20dp"
+            />
     />
     </RelativeLayout>
 
 
 </LinearLayout>
+</ScrollView>

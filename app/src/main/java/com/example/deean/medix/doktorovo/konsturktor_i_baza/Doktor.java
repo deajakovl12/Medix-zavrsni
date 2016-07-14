@@ -34,6 +34,19 @@ public class Doktor {
         this.mobitel=mobitel;
         this.titula=titula;
     }
+    public Doktor(String ime, String prezime, String titula,String radno_vrijeme,String rad_savjetovalista, String adresa, String telefon, String mobitel, String spol){
+
+        this.ime=ime;
+        this.prezime=prezime;
+        this.titula=titula;
+        this.radno_vrijeme=radno_vrijeme;
+        this.rad_savjetovalista=rad_savjetovalista;
+        this.adresa=adresa;
+        this.telefon=telefon;
+        this.mobitel=mobitel;
+        this.spol = spol;
+
+    }
 
     public Doktor(String email, String lozinka){
         this.email=email;

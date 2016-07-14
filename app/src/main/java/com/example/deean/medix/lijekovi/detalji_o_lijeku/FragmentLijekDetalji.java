@@ -10,6 +10,8 @@ import com.example.deean.medix.doktorovo.konsturktor_i_baza.Doktor;
 import com.example.deean.medix.doktorovo.konsturktor_i_baza.DoktorLokalno;
 import com.example.deean.medix.R;
 import com.example.deean.medix.doktorovo.ToolbarActivity;
+import com.example.deean.medix.pacijentovo.konstruktor_i_baza.Pacijent;
+import com.example.deean.medix.pacijentovo.konstruktor_i_baza.PacijentLokalno;
 import com.example.deean.medix.registracija.ViewPagerAdapter;
 
 public class FragmentLijekDetalji extends ToolbarActivity {
@@ -21,6 +23,9 @@ public class FragmentLijekDetalji extends ToolbarActivity {
 
     private Doktor doktor;
     com.example.deean.medix.doktorovo.konsturktor_i_baza.DoktorLokalno DoktorLokalno;
+
+    private Pacijent pacijent;
+    PacijentLokalno pacijentLokalno;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,9 +42,17 @@ public class FragmentLijekDetalji extends ToolbarActivity {
         tabLayout.getTabAt(1).setIcon(tabIcons[0]);
 
         DoktorLokalno = new DoktorLokalno(this);
+        pacijentLokalno = new PacijentLokalno(this);
 
         doktor = DoktorLokalno.getPrijavljenogDoktora();
-        postaviDrawer(postaviToolbar("Lijek detalji"), doktor.getIme().toUpperCase(), doktor.getPrezime().toUpperCase(), doktor.getEmail(),doktor.getSpol()).build();
+        pacijent = pacijentLokalno.getPrijavljenogPacijenta();
+
+        if(DoktorLokalno.provjeriPrijavljenogDoktora()) {
+            postaviDrawer(postaviToolbar("Lijek detalji"), doktor.getIme().toUpperCase(), doktor.getPrezime().toUpperCase(), doktor.getEmail(), doktor.getSpol()).build();
+        }
+        else if(pacijentLokalno.provjeriPrijavljenogPacijenta()){
+            postaviDrawer(postaviToolbar("Dobiveni lijekovi"),pacijent.getIme(),pacijent.getPrezime(),pacijent.getEmail()).build();
+        }
     }
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());

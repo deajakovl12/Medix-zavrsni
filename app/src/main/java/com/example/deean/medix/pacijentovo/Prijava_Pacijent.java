@@ -5,14 +5,16 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
 
+import com.example.deean.medix.doktorovo.ToolbarActivity;
 import com.example.deean.medix.pacijentovo.konstruktor_i_baza.Pacijent;
 import com.example.deean.medix.pacijentovo.konstruktor_i_baza.PacijentLokalno;
 import com.example.deean.medix.R;
 import com.example.deean.medix.pocetni_zaslon.Login;
 
-public class Prijava_Pacijent extends ToolbarActivityPacijent {
+public class Prijava_Pacijent extends ToolbarActivity {
     TextView  etSpol, etTelefon, etAdresa,etPrezime,etIme,etMobitel,etOIB;
     com.example.deean.medix.pacijentovo.konstruktor_i_baza.PacijentLokalno PacijentLokalno;
+    Pacijent pacijent1;
 
 
     @Override
@@ -29,6 +31,8 @@ public class Prijava_Pacijent extends ToolbarActivityPacijent {
         etOIB = (TextView) findViewById(R.id.etOIB);
 
         PacijentLokalno = new PacijentLokalno(this);
+        pacijent1 = PacijentLokalno.getPrijavljenogPacijenta();
+        postaviDrawer(postaviToolbar("Pacijent"),pacijent1.getIme(),pacijent1.getPrezime(),pacijent1.getEmail()).build();
     }
 
     @Override
@@ -55,7 +59,6 @@ public class Prijava_Pacijent extends ToolbarActivityPacijent {
         etMobitel.setText(pacijent.getMobitel());
         etOIB.setText(pacijent.getOib());
 
-        postaviDrawer(postaviToolbar("Pacijent"),etIme.getText().toString(),etPrezime.getText().toString(),pacijent.getEmail()).build();
 
     }
 }

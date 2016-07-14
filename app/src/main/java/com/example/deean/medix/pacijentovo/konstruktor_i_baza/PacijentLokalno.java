@@ -16,6 +16,7 @@ public class PacijentLokalno {
     }
     public void spremiPacijentPodatke(Pacijent pacijent){
         SharedPreferences.Editor spEditor = pacijentLokalnaBaza.edit();
+        spEditor.putString("id_pacijent",pacijent.id_pacijent);
         spEditor.putString("ime",pacijent.ime);
         spEditor.putString("prezime",pacijent.prezime);
         spEditor.putString("adresa",pacijent.adresa);
@@ -25,9 +26,11 @@ public class PacijentLokalno {
         spEditor.putString("email",pacijent.email);
         spEditor.putString("spol",pacijent.spol);
         spEditor.putString("mobitel",pacijent.mobitel);
+        spEditor.putString("id_doktor",pacijent.id_doktor);
         spEditor.commit();
     }
     public Pacijent getPrijavljenogPacijenta(){
+        String id_pacijent = pacijentLokalnaBaza.getString("id_pacijent","");
         String ime = pacijentLokalnaBaza.getString("ime", "");
         String prezime = pacijentLokalnaBaza.getString("prezime","");
         String adresa = pacijentLokalnaBaza.getString("adresa","");
@@ -37,8 +40,9 @@ public class PacijentLokalno {
         String email = pacijentLokalnaBaza.getString("email","");
         String spol = pacijentLokalnaBaza.getString("spol","");
         String mobitel = pacijentLokalnaBaza.getString("mobitel","");
+        String id_doktor = pacijentLokalnaBaza.getString("id_doktor","");
 
-        Pacijent spremljeniPacijent = new Pacijent(ime,prezime,adresa,oib,lozinka,telefon,email,spol,mobitel);
+        Pacijent spremljeniPacijent = new Pacijent(id_pacijent,ime,prezime,adresa,oib,lozinka,telefon,email,spol,mobitel,id_doktor);
         return spremljeniPacijent;
     }
     public void postaviPrijavljenogPacijenta(boolean prijavljen){

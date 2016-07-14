@@ -62,6 +62,8 @@ public class RecycleViewPacijenta extends ToolbarActivity implements View.OnClic
 
         doktor = DoktorLokalno.getPrijavljenogDoktora();
         postaviDrawer(postaviToolbar("Vaši pacijenti"),doktor.getIme().toUpperCase(),doktor.getPrezime().toUpperCase(),doktor.getEmail(),doktor.getSpol()).build();
+        initializeData();
+
     }
     @Override
     public void onClick(View v) {

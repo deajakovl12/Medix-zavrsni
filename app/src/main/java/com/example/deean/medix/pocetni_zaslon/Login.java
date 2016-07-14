@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.deean.medix.doktorovo.konsturktor_i_baza.Doktor;
 import com.example.deean.medix.doktorovo.konsturktor_i_baza.DoktorLokalno;
@@ -27,6 +28,8 @@ public class Login extends ToolbarActivityAll implements View.OnClickListener{
     Button bPrijava;
     EditText etEmail, etLozinka;
     TextView tvRegistracijaLink, tvLozinkaLink;
+
+    Pacijent pacijent;
 
     com.example.deean.medix.doktorovo.konsturktor_i_baza.DoktorLokalno DoktorLokalno;
     com.example.deean.medix.pacijentovo.konstruktor_i_baza.PacijentLokalno PacijentLokalno;
@@ -55,6 +58,12 @@ public class Login extends ToolbarActivityAll implements View.OnClickListener{
         postaviDrawer(postaviToolbar("Početna")).build();
 
 
+        if(DoktorLokalno.provjeriPrijavljenogDoktora()){
+            startActivity(new Intent(this,Prijava.class));
+        }
+        if(PacijentLokalno.provjeriPrijavljenogPacijenta()){
+            startActivity(new Intent(this,Prijava_Pacijent.class));
+        }
     }
 
     @Override
@@ -64,11 +73,10 @@ public class Login extends ToolbarActivityAll implements View.OnClickListener{
                 String email = etEmail.getText().toString();
                 String lozinka = etLozinka.getText().toString();
 
-                Pacijent pacijent = new Pacijent(email,lozinka);
+                pacijent = new Pacijent(email,lozinka);
                 Doktor doktor = new Doktor(email,lozinka);
 
                 autentifikacija_doktora(doktor);
-                autentifikacija_pacijenta(pacijent);
 
                 //DoktorLokalno.spremiDoktorPodatke(doktor);
                 //DoktorLokalno.postaviPrijavljenogDoktora(true);
@@ -94,6 +102,7 @@ public class Login extends ToolbarActivityAll implements View.OnClickListener{
             @Override
             public void done(Doktor returnedDoktor) {
                 if(returnedDoktor == null){
+                    autentifikacija_pacijenta(pacijent);
                 }else{
                     logDoktorIn(returnedDoktor);
                 }
@@ -118,6 +127,7 @@ public class Login extends ToolbarActivityAll implements View.OnClickListener{
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(Login.this);
         dialogBuilder.setMessage("Krivo uneseni podaci!");
         dialogBuilder.setPositiveButton("Ok",null);
+        Toast.makeText(Login.this, "Problems with server", Toast.LENGTH_SHORT).show();
         dialogBuilder.show();
     }
 

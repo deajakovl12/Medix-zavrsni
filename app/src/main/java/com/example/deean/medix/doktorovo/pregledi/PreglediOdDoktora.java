@@ -59,6 +59,8 @@ public class PreglediOdDoktora extends ToolbarActivity implements View.OnClickLi
         doktorLokalno = new DoktorLokalno(this);
         doktor = doktorLokalno.getPrijavljenogDoktora();
         postaviDrawer(postaviToolbar("Zakazani pregledi"),doktor.getIme().toUpperCase(),doktor.getPrezime().toUpperCase(),doktor.getEmail(),doktor.getSpol()).build();
+
+        initializeData();
     }
 
     @Override
@@ -94,12 +96,12 @@ public class PreglediOdDoktora extends ToolbarActivity implements View.OnClickLi
                         if(c.get(Calendar.YEAR) > Integer.parseInt(datumiGodina[0]) ){
                             continue;
                         }
-                        else {
+                        else if(c.get(Calendar.YEAR) == Integer.parseInt(datumiGodina[0])) {
                             if(c.get(Calendar.MONTH)+1 > Integer.parseInt(datumi[1]))
                             {
                                 continue;
                             }
-                            else {
+                            else if(c.get(Calendar.MONTH)+1 == Integer.parseInt(datumi[1])) {
                                 if (c.get(Calendar.DAY_OF_MONTH) > Integer.parseInt(datumi[0])) {
                                     continue;
                                 }
@@ -107,6 +109,12 @@ public class PreglediOdDoktora extends ToolbarActivity implements View.OnClickLi
                                     pregledis.add(new Pregledi(spremi.get(i).getIme(), spremi.get(i).getPrezime(), spremi.get(i).getOib(), spremi.get(i).getDatum_pregleda(), spremi.get(i).getKomentar()));
                                 }
                             }
+                            else{
+                                pregledis.add(new Pregledi(spremi.get(i).getIme(), spremi.get(i).getPrezime(), spremi.get(i).getOib(), spremi.get(i).getDatum_pregleda(), spremi.get(i).getKomentar()));
+                            }
+                        }
+                        else{
+                            pregledis.add(new Pregledi(spremi.get(i).getIme(), spremi.get(i).getPrezime(), spremi.get(i).getOib(), spremi.get(i).getDatum_pregleda(), spremi.get(i).getKomentar()));
                         }
                     }
                 }

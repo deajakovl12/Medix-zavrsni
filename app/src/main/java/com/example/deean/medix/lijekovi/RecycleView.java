@@ -12,6 +12,9 @@ import com.example.deean.medix.doktorovo.konsturktor_i_baza.Doktor;
 import com.example.deean.medix.doktorovo.konsturktor_i_baza.DoktorLokalno;
 import com.example.deean.medix.R;
 import com.example.deean.medix.doktorovo.ToolbarActivity;
+import com.example.deean.medix.doktorovo.pacijenti_od_doktora.detalji_o_pacijentu.LijekoviPacijentaAPI;
+import com.example.deean.medix.pacijentovo.konstruktor_i_baza.Pacijent;
+import com.example.deean.medix.pacijentovo.konstruktor_i_baza.PacijentLokalno;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,6 +38,8 @@ public class RecycleView extends ToolbarActivity implements View.OnClickListener
 
     private Doktor doktor;
     com.example.deean.medix.doktorovo.konsturktor_i_baza.DoktorLokalno DoktorLokalno;
+    private Pacijent pacijent;
+    PacijentLokalno pacijentLokalno;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,15 +57,31 @@ public class RecycleView extends ToolbarActivity implements View.OnClickListener
 
 
         DoktorLokalno = new DoktorLokalno(this);
+        pacijentLokalno = new PacijentLokalno(this);
 
         doktor = DoktorLokalno.getPrijavljenogDoktora();
-        postaviDrawer(postaviToolbar("Lijekovi"),doktor.getIme().toUpperCase(),doktor.getPrezime().toUpperCase(),doktor.getEmail(),doktor.getSpol()).build();
+        pacijent = pacijentLokalno.getPrijavljenogPacijenta();
+
+        if(DoktorLokalno.provjeriPrijavljenogDoktora()) {
+            postaviDrawer(postaviToolbar("Lijekovi"), doktor.getIme().toUpperCase(), doktor.getPrezime().toUpperCase(), doktor.getEmail(), doktor.getSpol()).build();
+            initializeData();
+        }
+        else if(pacijentLokalno.provjeriPrijavljenogPacijenta()){
+            postaviDrawer(postaviToolbar("Dobiveni lijekovi"),pacijent.getIme(),pacijent.getPrezime(),pacijent.getEmail()).build();
+            initializeData2();
+        }
+
     }
     @Override
     public void onClick(View v) {
         switch(v.getId()){
             case R.id.bPretraga:
+                if(DoktorLokalno.provjeriPrijavljenogDoktora()) {
                     initializeData();
+                }
+                else if(pacijentLokalno.provjeriPrijavljenogPacijenta()){
+                    initializeData2();
+                }
                 break;
         }
     }
@@ -83,6 +104,31 @@ public class RecycleView extends ToolbarActivity implements View.OnClickListener
                     }
                 }
                 //Log.i("LIJEKS", String.valueOf(lijeks));
+            }
+
+            @Override
+            public void onFailure(Call<ArrayList<Lijek>> call, Throwable t) {
+                Log.e("Failed", t.getMessage());
+            }
+        });
+    }
+    private void initializeData2(){
+        tekst = String.valueOf(etPretraga.getText());
+        //Log.i("TAG",tekst);
+        spremi = new ArrayList<>();
+        lijeks = new ArrayList<>();
+        LijekoviPacijentaAPI.Factory.getIstance().response(pacijent.getId_pacijent()).enqueue(new Callback<ArrayList<Lijek>>() {
+            @Override
+            public void onResponse(Call<ArrayList<Lijek>> call, Response<ArrayList<Lijek>> response) {
+                initializeAdapter();
+                for (int i = 0; i < response.body().size(); i++) {
+                    spremi.add(new Lijek(response.body().get(i).getNaziv(),response.body().get(i).getSlika_lijeka()));
+                }
+                for (int i = 0; i < spremi.size(); i++) {
+                    if (spremi.get(i).getNaziv().toLowerCase().contains(tekst.toLowerCase())) {
+                        lijeks.add(new Lijek(spremi.get(i).getNaziv(), spremi.get(i).getSlika_lijeka()));
+                    }
+                }
             }
 
             @Override

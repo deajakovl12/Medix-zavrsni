@@ -151,12 +151,11 @@
             android:padding="5dp"
             />
         <Button
-            android:layout_below="@id/etKomentar"
             android:background="#A22022"
             android:textColor="@android:color/background_light"
             android:id="@+id/bSpremi"
             android:text="Spremi podatke o pregledu"
-            android:layout_marginBottom="10dp"
+            android:layout_alignParentBottom="true"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         />

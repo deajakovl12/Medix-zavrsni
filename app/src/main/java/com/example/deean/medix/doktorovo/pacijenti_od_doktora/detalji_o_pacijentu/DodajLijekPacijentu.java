@@ -60,6 +60,7 @@ public class DodajLijekPacijentu extends ToolbarActivity implements View.OnClick
 
         postaviDrawer(postaviToolbar("Dodaj lijek pacijentu"), doktor.getIme().toUpperCase(), doktor.getPrezime().toUpperCase(), doktor.getEmail(),doktor.getSpol()).build();
 
+        initializeData();
     }
 
     @Override

@@ -4,7 +4,7 @@ package com.example.deean.medix.pacijentovo.konstruktor_i_baza;
  * Created by Deean on 10.2.2016..
  */
 public class Pacijent {
-    String ime, prezime, adresa, lozinka, telefon, oib,email,spol,mobitel,bolesti,laboratorijski, id_pacijent;
+    String ime, prezime, adresa, lozinka, telefon, oib,email,spol,mobitel,bolesti,laboratorijski, id_pacijent, id_doktor;
 
     public Pacijent(String ime, String prezime, String adresa,String oib, String lozinka, String telefon,  String email, String spol,String mobitel){
 
@@ -17,6 +17,21 @@ public class Pacijent {
         this.email=email;
         this.spol=spol;
         this.mobitel=mobitel;
+    }
+
+    public Pacijent(String id_pacijent, String ime, String prezime, String adresa,String oib, String lozinka, String telefon,  String email, String spol,String mobitel, String id_doktor){
+
+        this.id_pacijent = id_pacijent;
+        this.ime=ime;
+        this.prezime=prezime;
+        this.adresa=adresa;
+        this.lozinka=lozinka;
+        this.telefon=telefon;
+        this.oib=oib;
+        this.email=email;
+        this.spol=spol;
+        this.mobitel=mobitel;
+        this.id_doktor = id_doktor;
     }
 
     public Pacijent(String email, String lozinka){
@@ -54,21 +69,6 @@ public class Pacijent {
         this.oib=oib;
     }
 
-    public Pacijent(String ime, String prezime, String adresa,String oib, String lozinka, String telefon,  String email, String spol,String mobitel, String bolesti, String laboratorijski){
-
-        this.ime=ime;
-        this.prezime=prezime;
-        this.adresa=adresa;
-        this.lozinka=lozinka;
-        this.telefon=telefon;
-        this.oib=oib;
-        this.email=email;
-        this.spol=spol;
-        this.mobitel=mobitel;
-        this.bolesti=bolesti;
-        this.laboratorijski=laboratorijski;
-    }
-
     public Pacijent(String id_pacijent,String ime, String prezime, String adresa,String oib, String lozinka, String telefon,  String email, String spol,String mobitel, String bolesti, String laboratorijski){
         this.id_pacijent=id_pacijent;
         this.ime=ime;
@@ -86,6 +86,14 @@ public class Pacijent {
 
     public String getId_pacijent() {
         return id_pacijent;
+    }
+
+    public String getId_doktor() {
+        return id_doktor;
+    }
+
+    public void setId_doktor(String id_doktor) {
+        this.id_doktor = id_doktor;
     }
 
     public void setId_pacijent(String id_pacijent) {

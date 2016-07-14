@@ -9,7 +9,10 @@ import android.util.Log;
 import android.view.View;
 
 import com.example.deean.medix.R;
+import com.example.deean.medix.doktorovo.Prijava;
+import com.example.deean.medix.lijekovi.RecycleView;
 import com.example.deean.medix.pacijentovo.Prijava_Pacijent;
+import com.example.deean.medix.pacijentovo.konstruktor_i_baza.PacijentLokalno;
 import com.example.deean.medix.pocetni_zaslon.Login;
 import com.mikepenz.materialdrawer.AccountHeader;
 import com.mikepenz.materialdrawer.AccountHeaderBuilder;
@@ -56,7 +59,7 @@ public class ToolbarActivityPacijent extends AppCompatActivity {
                 .build();
 
         PrimaryDrawerItem item1 = new PrimaryDrawerItem().withName("Profil").withIcon(getResources().getDrawable(R.drawable.patient_white_small));
-        SecondaryDrawerItem item2 = new SecondaryDrawerItem().withName("Lijekovi").withIcon(getResources().getDrawable(R.drawable.lijekovi_white_small));
+        SecondaryDrawerItem item2 = new SecondaryDrawerItem().withName("Dobiveni lijekovi").withIcon(getResources().getDrawable(R.drawable.lijekovi_white_small));
         SecondaryDrawerItem item3 = new SecondaryDrawerItem().withName("Raspored uzimanja lijekova").withIcon(getResources().getDrawable(R.drawable.kalendar_pilule_white_small));
         SecondaryDrawerItem item4 = new SecondaryDrawerItem().withName("Doktor").withIcon(getResources().getDrawable(R.drawable.doctor_white_small));
         SecondaryDrawerItem item5 = new SecondaryDrawerItem().withName("Zakazani pregledi").withIcon(getResources().getDrawable(R.drawable.pregled_white_small));
@@ -91,12 +94,15 @@ public class ToolbarActivityPacijent extends AppCompatActivity {
                             case 1:
                                 startActivity(new Intent(getApplicationContext(), Prijava_Pacijent.class));
                                 break;
-                            case 2:
-                                break;
                             case 3:
-                                //startActivity(new Intent(getApplicationContext(), RecycleViewPacijenta.class));
+                                startActivity(new Intent(getApplicationContext(), RecycleView.class));
+                                break;
+                            case 6:
+                                startActivity(new Intent(getApplicationContext(), Prijava.class));
                                 break;
                             case 11:
+                                PacijentLokalno pacijentLokalno = new PacijentLokalno(getApplicationContext());
+                                pacijentLokalno.obrisiPacijentPodatke();
                                 startActivity(new Intent(getApplicationContext(), Login.class));
                                 break;
                         }

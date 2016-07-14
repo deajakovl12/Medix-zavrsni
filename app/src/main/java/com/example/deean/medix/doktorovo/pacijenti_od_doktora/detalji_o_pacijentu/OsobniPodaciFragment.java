@@ -101,7 +101,6 @@ public class OsobniPodaciFragment extends android.support.v4.app.Fragment implem
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-
             case R.id.ivMobZvanje:
                 Intent callIntent = new Intent(Intent.ACTION_CALL);
                 callIntent.setData(Uri.parse("tel:" + etMobitel.getText().toString()));
@@ -114,7 +113,5 @@ public class OsobniPodaciFragment extends android.support.v4.app.Fragment implem
                 startActivity(telefonIntent);
                 break;
         }
-
-
         }
 }

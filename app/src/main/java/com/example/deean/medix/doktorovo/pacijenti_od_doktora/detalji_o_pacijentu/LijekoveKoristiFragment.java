@@ -85,6 +85,8 @@ public class LijekoveKoristiFragment extends android.support.v4.app.Fragment imp
         ivDodaj.setOnClickListener(this);
         Log.e("ID", OsobniPodaciFragment.id_pacijenta);
 
+        initializeData();
+
 
         return view;
     }

@@ -21,30 +21,32 @@
         android:layout_height="match_parent"
         android:layout_width="match_parent"
         android:background="#efefef">
-    <ImageView
-        android:layout_marginTop="50dp"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
-        android:id="@+id/ivImePrezime"
-        android:src="@drawable/patient_red"
-        android:layout_gravity="left"
-        />
+        <ImageView
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="10dp"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:id="@+id/ivPacijent"
+            android:src="@drawable/patient_red"
+            android:layout_gravity="left"
+            android:layout_marginBottom="20dp"
+            />
     <TextView
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="30dp"
         android:textColor="#A22022"
         android:layout_width="wrap_content"
         android:text="Ime i Prezime"
         android:textSize="18dp"
         android:textStyle="bold"
         android:layout_height="wrap_content"
-        android:layout_toEndOf="@+id/ivImePrezime"
+        android:layout_toEndOf="@+id/ivPacijent"
         android:id="@+id/tvImePrezime"/>
     <TextView
         android:textColor="#434343"
         android:id="@+id/etIme"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_toEndOf="@+id/ivImePrezime"
+        android:layout_toEndOf="@+id/ivPacijent"
         android:layout_below="@id/tvImePrezime"/>
     <TextView
         android:textColor="#434343"
@@ -52,7 +54,7 @@
         android:layout_width="match_parent"
         android:layout_marginBottom="10dp"
         android:layout_height="wrap_content"
-        android:layout_toEndOf="@+id/ivImePrezime"
+        android:layout_toEndOf="@+id/ivPacijent"
         android:layout_below="@id/etIme"/>
     <ImageView
         android:layout_width="20dp"
@@ -60,7 +62,7 @@
         android:id="@+id/ivSpol"
         android:src="@drawable/spol"
         android:layout_gravity="left"
-        android:layout_below="@id/etPrezime"
+        android:layout_below="@id/ivPacijent"
         />
     <TextView
         android:id="@+id/tvSpol"
@@ -71,7 +73,7 @@
         android:textStyle="bold"
         android:layout_toEndOf="@+id/ivSpol"
         android:layout_height="wrap_content"
-        android:layout_below="@id/etPrezime"/>
+        android:layout_below="@id/ivPacijent"/>
     <TextView
         android:textColor="#434343"
         android:id="@+id/etSpol"

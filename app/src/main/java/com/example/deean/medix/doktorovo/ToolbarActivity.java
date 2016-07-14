@@ -9,11 +9,14 @@ import android.util.Log;
 import android.view.View;
 
 import com.example.deean.medix.R;
+import com.example.deean.medix.doktorovo.konsturktor_i_baza.DoktorLokalno;
 import com.example.deean.medix.doktorovo.pacijenti_od_doktora.RecycleViewPacijenta;
 import com.example.deean.medix.doktorovo.pomoc.PomocDoktor;
 import com.example.deean.medix.doktorovo.postavke_profila.PostavkeProfilaDoktora;
 import com.example.deean.medix.doktorovo.pregledi.PreglediOdDoktora;
 import com.example.deean.medix.lijekovi.RecycleView;
+import com.example.deean.medix.pacijentovo.Prijava_Pacijent;
+import com.example.deean.medix.pacijentovo.konstruktor_i_baza.PacijentLokalno;
 import com.example.deean.medix.pocetni_zaslon.Login;
 import com.mikepenz.materialdrawer.AccountHeader;
 import com.mikepenz.materialdrawer.AccountHeaderBuilder;
@@ -132,6 +135,76 @@ public class ToolbarActivity extends AppCompatActivity {
                                 startActivity(new Intent(getApplicationContext(), PomocDoktor.class));
                                 break;
                             case 10:
+                                DoktorLokalno doktorLokalno = new DoktorLokalno(getApplicationContext());
+                                doktorLokalno.obrisiDoktorPodatke();
+                                startActivity(new Intent(getApplicationContext(), Login.class));
+                                break;
+                        }
+                        Log.e("Pozicija", String.valueOf(position));
+                        return false;
+                    }
+                });
+        //.build();
+        return result;
+
+    }
+
+    protected DrawerBuilder postaviDrawer(Toolbar toolbar2, String ime, String prezime, String email){
+
+        AccountHeader headerResult = new AccountHeaderBuilder()
+                .withActivity(this)
+                .withHeaderBackground(R.drawable.pozadina)
+                .addProfiles(
+                        new ProfileDrawerItem().withName(ime + " " + prezime).withEmail(email).withIcon(getResources().getDrawable(R.drawable.patient_white_small))
+                )
+                .withSelectionListEnabledForSingleProfile(false)
+                .build();
+
+        PrimaryDrawerItem item1 = new PrimaryDrawerItem().withName("Profil").withIcon(getResources().getDrawable(R.drawable.patient_white_small));
+        SecondaryDrawerItem item2 = new SecondaryDrawerItem().withName("Dobiveni lijekovi").withIcon(getResources().getDrawable(R.drawable.lijekovi_white_small));
+        SecondaryDrawerItem item3 = new SecondaryDrawerItem().withName("Raspored uzimanja lijekova").withIcon(getResources().getDrawable(R.drawable.kalendar_pilule_white_small));
+        SecondaryDrawerItem item4 = new SecondaryDrawerItem().withName("Doktor").withIcon(getResources().getDrawable(R.drawable.doctor_white_small));
+        SecondaryDrawerItem item5 = new SecondaryDrawerItem().withName("Zakazani pregledi").withIcon(getResources().getDrawable(R.drawable.pregled_white_small));
+        SecondaryDrawerItem item6 = new SecondaryDrawerItem().withName("Postavke profila").withIcon(getResources().getDrawable(R.drawable.postavke_white_small));
+        SecondaryDrawerItem item7 = new SecondaryDrawerItem().withName("Pomoć").withIcon(getResources().getDrawable(R.drawable.help_small_white));
+        SecondaryDrawerItem item8 = new SecondaryDrawerItem().withName("Odjava").withIcon(getResources().getDrawable(R.drawable.logout_white_small));
+        result = new DrawerBuilder()
+                .withAccountHeader(headerResult)
+                .withActivity(this)
+                //.withTranslucentStatusBar(false)
+                //.withActionBarDrawerToggle(false)
+                .withToolbar(toolbar2)
+                .addDrawerItems(
+                        item1,
+                        new DividerDrawerItem(),
+                        item2,
+                        item3,
+                        new DividerDrawerItem(),
+                        item4,
+                        item5,
+                        new DividerDrawerItem(),
+                        item6,
+                        item7,
+                        item8
+
+                )
+                .withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
+                    @Override
+                    public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
+
+                        switch (position) {
+                            case 1:
+                                startActivity(new Intent(getApplicationContext(), Prijava_Pacijent.class));
+                                break;
+                            case 3:
+                                startActivity(new Intent(getApplicationContext(), RecycleView.class));
+                                break;
+                            case 6:
+                                startActivity(new Intent(getApplicationContext(), Prijava.class));
+                                break;
+                            case 11:
+                                PacijentLokalno pacijentLokalno = new PacijentLokalno(getApplicationContext());
+                                pacijentLokalno.obrisiPacijentPodatke();
                                 startActivity(new Intent(getApplicationContext(), Login.class));
                                 break;
                         }
