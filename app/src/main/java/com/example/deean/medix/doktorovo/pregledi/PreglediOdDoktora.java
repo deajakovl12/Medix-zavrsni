@@ -15,6 +15,8 @@ import com.example.deean.medix.doktorovo.ToolbarActivity;
 import com.example.deean.medix.doktorovo.konsturktor_i_baza.DoktorLokalno;
 import com.example.deean.medix.doktorovo.konsturktor_i_baza.Doktor;
 import com.example.deean.medix.doktorovo.pacijenti_u_bazi.RVAdapterPacijenata;
+import com.example.deean.medix.pacijentovo.konstruktor_i_baza.Pacijent;
+import com.example.deean.medix.pacijentovo.konstruktor_i_baza.PacijentLokalno;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -27,6 +29,9 @@ import retrofit2.Response;
 public class PreglediOdDoktora extends ToolbarActivity implements View.OnClickListener {
     private Doktor doktor;
     DoktorLokalno doktorLokalno;
+
+    private Pacijent pacijent;
+    PacijentLokalno pacijentLokalno;
 
     public String tekst;
     Button bPretraga;
@@ -58,9 +63,18 @@ public class PreglediOdDoktora extends ToolbarActivity implements View.OnClickLi
 
         doktorLokalno = new DoktorLokalno(this);
         doktor = doktorLokalno.getPrijavljenogDoktora();
-        postaviDrawer(postaviToolbar("Zakazani pregledi"),doktor.getIme().toUpperCase(),doktor.getPrezime().toUpperCase(),doktor.getEmail(),doktor.getSpol()).build();
 
-        initializeData();
+        pacijentLokalno = new PacijentLokalno(this);
+        pacijent = pacijentLokalno.getPrijavljenogPacijenta();
+
+        if(doktorLokalno.provjeriPrijavljenogDoktora()) {
+            postaviDrawer(postaviToolbar("Zakazani pregledi"), doktor.getIme().toUpperCase(), doktor.getPrezime().toUpperCase(), doktor.getEmail(), doktor.getSpol()).build();
+            initializeData();
+        }
+        else if(pacijentLokalno.provjeriPrijavljenogPacijenta()){
+            postaviDrawer(postaviToolbar("Zakazani pregledi"),pacijent.getIme(),pacijent.getPrezime(),pacijent.getEmail()).build();
+            ivDodaj.setVisibility(View.GONE);
+        }
     }
 
     @Override
@@ -132,5 +146,4 @@ public class PreglediOdDoktora extends ToolbarActivity implements View.OnClickLi
         RVAdapterPregleda  adapter = new RVAdapterPregleda(PreglediOdDoktora.this,pregledis);
         rv.setAdapter(adapter);
     }
-
 }

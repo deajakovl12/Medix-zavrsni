@@ -202,6 +202,9 @@ public class ToolbarActivity extends AppCompatActivity {
                             case 6:
                                 startActivity(new Intent(getApplicationContext(), Prijava.class));
                                 break;
+                            case 7:
+                                startActivity(new Intent(getApplicationContext(), PreglediOdDoktora.class));
+                                break;
                             case 11:
                                 PacijentLokalno pacijentLokalno = new PacijentLokalno(getApplicationContext());
                                 pacijentLokalno.obrisiPacijentPodatke();
