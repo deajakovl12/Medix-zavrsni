@@ -58,7 +58,8 @@
         <activity android:name=".doktorovo.pregledi.CardViewPregleda" />
         <activity android:name=".doktorovo.pregledi.DodajNoviPregled" />
         <activity android:name=".doktorovo.postavke_profila.PostavkeProfilaDoktora" />
-        <activity android:name=".doktorovo.pomoc.PomocDoktor"></activity>
+        <activity android:name=".doktorovo.pomoc.PomocDoktor" />
+        <activity android:name=".pacijentovo.postavke_profila.PostavkeProfilaPacijenta"></activity>
     </application>
 
 </manifest>

@@ -79,6 +79,10 @@ public class Prijava extends ToolbarActivity implements View.OnClickListener {
         }
     }
 
+    @Override
+    public void onBackPressed() {
+    }
+
     private boolean provjera() {
         return DoktorLokalno.provjeriPrijavljenogDoktora();
     }

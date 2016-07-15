@@ -17,6 +17,7 @@ import com.example.deean.medix.doktorovo.pregledi.PreglediOdDoktora;
 import com.example.deean.medix.lijekovi.RecycleView;
 import com.example.deean.medix.pacijentovo.Prijava_Pacijent;
 import com.example.deean.medix.pacijentovo.konstruktor_i_baza.PacijentLokalno;
+import com.example.deean.medix.pacijentovo.postavke_profila.PostavkeProfilaPacijenta;
 import com.example.deean.medix.pocetni_zaslon.Login;
 import com.mikepenz.materialdrawer.AccountHeader;
 import com.mikepenz.materialdrawer.AccountHeaderBuilder;
@@ -204,6 +205,9 @@ public class ToolbarActivity extends AppCompatActivity {
                                 break;
                             case 7:
                                 startActivity(new Intent(getApplicationContext(), PreglediOdDoktora.class));
+                                break;
+                            case 9:
+                                startActivity(new Intent(getApplicationContext(), PostavkeProfilaPacijenta.class));
                                 break;
                             case 11:
                                 PacijentLokalno pacijentLokalno = new PacijentLokalno(getApplicationContext());

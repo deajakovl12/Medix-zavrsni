@@ -46,6 +46,10 @@ public class Prijava_Pacijent extends ToolbarActivity {
         }
     }
 
+    @Override
+    public void onBackPressed() {
+    }
+
     private boolean provjera(){
         return PacijentLokalno.provjeriPrijavljenogPacijenta();
     }

@@ -14,6 +14,13 @@ public class Pregledi {
         this.datum_pregleda = datum_pregleda;
         this.komentar = komentar;
     }
+    public Pregledi(String ime, String prezime, String datum_pregleda, String komentar) {
+
+        this.ime = ime;
+        this.prezime = prezime;
+        this.datum_pregleda = datum_pregleda;
+        this.komentar = komentar;
+    }
 
     public String getIme() {
         return ime;
