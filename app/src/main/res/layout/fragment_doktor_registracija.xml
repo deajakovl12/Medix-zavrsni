@@ -45,6 +45,8 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"/>
     <EditText
+        android:maxLength="11"
+        android:inputType="number"
         android:theme="@style/Boja_EditText"
         android:layout_below="@+id/etLozinka"
         android:hint="OIB"
@@ -54,6 +56,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"/>
     <EditText
+        android:inputType="number"
         android:theme="@style/Boja_EditText"
         android:layout_below="@+id/etOIB"
         android:hint="Telefon"

@@ -72,6 +72,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/spinner"/>
         <EditText
+            android:digits="0123456789-"
             android:textColor="#434343"
             android:theme="@style/Boja_EditText"
             android:id="@+id/etDatum"
@@ -93,6 +94,7 @@
             android:layout_toEndOf="@+id/etDatum"
             />
         <EditText
+            android:digits="0123456789:"
             android:theme="@style/Boja_EditText"
             android:layout_marginTop="8dp"
             android:textColor="#434343"

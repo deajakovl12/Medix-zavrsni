@@ -8,11 +8,16 @@ import com.example.deean.medix.R;
 import com.example.deean.medix.doktorovo.ToolbarActivity;
 import com.example.deean.medix.doktorovo.konsturktor_i_baza.Doktor;
 import com.example.deean.medix.doktorovo.konsturktor_i_baza.DoktorLokalno;
+import com.example.deean.medix.pacijentovo.konstruktor_i_baza.Pacijent;
+import com.example.deean.medix.pacijentovo.konstruktor_i_baza.PacijentLokalno;
 
 public class PomocDoktor extends ToolbarActivity {
-    TextView tvPlus,tvPostavke,tvPregledi,tvLozinka;
+    TextView tvPlus,tvPostavke,tvPregledi,tvLozinka,trecePitanje;
     Doktor doktor;
     DoktorLokalno doktorLokalno;
+
+    Pacijent pacijent;
+    PacijentLokalno pacijentLokalno;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,18 +28,28 @@ public class PomocDoktor extends ToolbarActivity {
         tvPostavke = (TextView) findViewById(R.id.tvPostavke);
         tvPregledi = (TextView) findViewById(R.id.tvPregled);
         tvLozinka = (TextView) findViewById(R.id.tvLozinka);
-
-
-        tvPlus.setText("Znak '+' znaći dodavanje npr. novog pacijenta, novog termina pregleda, dodavanje lijekova pacijentu i slično.");
-        tvPostavke.setText("Postavke profila su postavke koje će biti prikazane za određenog doktora, doktor u bilo kojem trenutku može promijeniti postavke." +
-                "Npr. može mjenjati radno vrijeme, vrijeme rada savjetovališta, promjeniti broj telefon, mobitela i slično.");
-        tvPregledi.setText("Preglede doktor može filtrirati na način da u pretraživanje upiše npr. određeni datum, te će mu onda biti prikazani svi pregledi koje ima zakazane za taj dan koji je upisan.");
-        tvLozinka.setText("Ako je lozinka kojim slučajem zaboravljena, doktor ju može resetirati tako da ode na zaboravljenu lozinku, te upiše e-mail adresu.");
+        trecePitanje = (TextView) findViewById(R.id.trecePitanje);
 
         doktorLokalno = new DoktorLokalno(this);
         doktor = doktorLokalno.getPrijavljenogDoktora();
 
-        postaviDrawer(postaviToolbar("Pomoć"),doktor.getIme().toUpperCase(),doktor.getPrezime().toUpperCase(),doktor.getEmail(),doktor.getSpol()).build();
+        pacijentLokalno = new PacijentLokalno(this);
+        pacijent = pacijentLokalno.getPrijavljenogPacijenta();
 
+        if(doktorLokalno.provjeriPrijavljenogDoktora()) {
+            postaviDrawer(postaviToolbar("Pomoć"), doktor.getIme().toUpperCase(), doktor.getPrezime().toUpperCase(), doktor.getEmail(), doktor.getSpol()).build();
+            tvPlus.setText(R.string.plus_znak);
+            tvPostavke.setText(R.string.postavke_profila);
+            tvPregledi.setText(R.string.pregledi);
+            tvLozinka.setText(R.string.lozinka);
+        }
+        else if(pacijentLokalno.provjeriPrijavljenogPacijenta()){
+            tvPlus.setText(R.string.plus_znak_pacijent);
+            tvPostavke.setText(R.string.postavke_profila);
+            trecePitanje.setText("Kako si pacijent sam može namjestiti vrijeme uzimanja nekog lijeka?");
+            tvPregledi.setText(R.string.uzimanje_lijekova);
+            tvLozinka.setText(R.string.lozinka);
+            postaviDrawer(postaviToolbar("Pomoć"),pacijent.getIme(),pacijent.getPrezime(),pacijent.getEmail()).build();
+        }
     }
 }

@@ -154,6 +154,7 @@
             android:layout_below="@+id/etRadSavjetovalista"
             />
         <EditText
+            android:inputType="number"
             android:hint="Telefon"
             android:textColor="#434343"
             android:theme="@style/Boja_EditText"
@@ -176,6 +177,7 @@
             android:layout_below="@+id/etAdresa"
             />
         <EditText
+            android:inputType="number"
             android:hint="Mobitel"
             android:textColor="#434343"
             android:theme="@style/Boja_EditText"

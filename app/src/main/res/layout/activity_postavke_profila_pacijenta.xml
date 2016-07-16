@@ -104,6 +104,7 @@
             android:layout_below="@+id/spinner"
             />
         <EditText
+            android:inputType="number"
             android:hint="Telefon"
             android:text="@{pacijent.telefon}"
             android:textColor="#434343"
@@ -127,6 +128,7 @@
             android:layout_below="@+id/etAdresa"
             />
         <EditText
+            android:inputType="number"
             android:hint="Mobitel"
             android:text="@{pacijent.mobitel}"
             android:textColor="#434343"
