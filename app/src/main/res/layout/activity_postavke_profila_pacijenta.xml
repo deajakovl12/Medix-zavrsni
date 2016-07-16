@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/tools">
+    <data>
+        <variable name="pacijent" type="com.example.deean.medix.pacijentovo.konstruktor_i_baza.Pacijent"/>
+    </data>
+    <LinearLayout
     android:orientation="vertical"
     android:layout_height="match_parent"
     android:layout_width="match_parent"
@@ -29,6 +34,7 @@
 
         <EditText
             android:hint="Ime"
+            android:text="@{pacijent.ime}"
             android:textColor="#434343"
             android:theme="@style/Boja_EditText"
             android:id="@+id/etIme"
@@ -40,6 +46,7 @@
             />
         <EditText
             android:hint="Prezime"
+            android:text="@{pacijent.prezime}"
             android:textColor="#434343"
             android:theme="@style/Boja_EditText"
             android:id="@+id/etPrezime"
@@ -75,6 +82,7 @@
 
         <EditText
             android:hint="Adresa"
+            android:text="@{pacijent.adresa}"
             android:textColor="#434343"
             android:theme="@style/Boja_EditText"
             android:id="@+id/etAdresa"
@@ -97,6 +105,7 @@
             />
         <EditText
             android:hint="Telefon"
+            android:text="@{pacijent.telefon}"
             android:textColor="#434343"
             android:theme="@style/Boja_EditText"
             android:id="@+id/etTelefon"
@@ -119,6 +128,7 @@
             />
         <EditText
             android:hint="Mobitel"
+            android:text="@{pacijent.mobitel}"
             android:textColor="#434343"
             android:theme="@style/Boja_EditText"
             android:id="@+id/etMobitel"
@@ -152,3 +162,4 @@
         />
     </RelativeLayout>
 </LinearLayout>
+</layout>

@@ -69,7 +69,7 @@ public class Pacijent {
         this.oib=oib;
     }
 
-    public Pacijent(String id_pacijent,String ime, String prezime, String adresa,String oib, String lozinka, String telefon,  String email, String spol,String mobitel, String bolesti, String laboratorijski){
+    public Pacijent(String id_pacijent,String ime, String prezime, String adresa,String oib, String lozinka, String telefon,  String email, String spol,String mobitel, String bolesti, String laboratorijski,String id_doktor){
         this.id_pacijent=id_pacijent;
         this.ime=ime;
         this.prezime=prezime;
@@ -82,6 +82,16 @@ public class Pacijent {
         this.mobitel=mobitel;
         this.bolesti=bolesti;
         this.laboratorijski=laboratorijski;
+        this.id_doktor = id_doktor;
+    }
+
+    public Pacijent(String ime, String prezime, String adresa, String telefon,String mobitel){
+
+        this.ime=ime;
+        this.prezime=prezime;
+        this.adresa=adresa;
+        this.telefon=telefon;
+        this.mobitel=mobitel;
     }
 
     public String getId_pacijent() {
