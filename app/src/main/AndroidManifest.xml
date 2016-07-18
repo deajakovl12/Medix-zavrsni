@@ -4,6 +4,7 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="com.android.alarm.permission.SET_ALARM" />
 
     <application
         android:allowBackup="true"
@@ -60,7 +61,11 @@
         <activity android:name=".doktorovo.postavke_profila.PostavkeProfilaDoktora" />
         <activity android:name=".doktorovo.pomoc.PomocDoktor" />
         <activity android:name=".pacijentovo.postavke_profila.PostavkeProfilaPacijenta" />
-        <activity android:name=".pacijentovo.raspored_uzimanja_lijekova.RasporedUzimanjaLijekova"></activity>
+        <activity android:name=".pacijentovo.raspored_uzimanja_lijekova.RasporedUzimanjaLijekova" />
+
+        <receiver android:name=".pacijentovo.raspored_uzimanja_lijekova.NotificationReceiver" />
+
+        <activity android:name=".pacijentovo.raspored_uzimanja_lijekova.DodajNoviLijekZaUzimanje"></activity>
     </application>
 
 </manifest>
