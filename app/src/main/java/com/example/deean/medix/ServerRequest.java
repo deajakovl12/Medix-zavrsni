@@ -53,7 +53,7 @@ public class ServerRequest {
     }
 
     public void dohvatiPodatkeUPozadini(Doktor doktor, GetUserCallback callback){
-        progressDialog.show();
+        //progressDialog.show();
         new DohvatiPodatkeAsyncTask(doktor,callback).execute();
     }
     public void dohvatiEmailUpozadini(Doktor doktor, GetUserCallback emailcallback){
@@ -215,8 +215,9 @@ public class ServerRequest {
                     String rad_savjetovalista = jObject.getString("rad_savjetovalista");
                     String mobitel = jObject.getString("mobitel");
                     String titula = jObject.getString("titula");
+                    String spol = jObject.getString("spol");
 
-                    returnedDoktor = new Doktor(ime,prezime,adresa,oib,lozinka,telefon,doktor.getEmail(),radno_vrijeme,rad_savjetovalista,mobitel,titula);
+                    returnedDoktor = new Doktor(ime,prezime,adresa,oib,lozinka,telefon,doktor.getEmail(),radno_vrijeme,rad_savjetovalista,mobitel,titula,spol);
 
 
                 }

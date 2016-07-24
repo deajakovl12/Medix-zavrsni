@@ -18,6 +18,7 @@ import com.example.deean.medix.doktorovo.pacijenti_u_bazi.RVAdapterPacijenata;
 import com.example.deean.medix.pacijentovo.konstruktor_i_baza.Pacijent;
 import com.example.deean.medix.pacijentovo.konstruktor_i_baza.PacijentLokalno;
 import com.example.deean.medix.pacijentovo.pregledi_pacijenta.PreglediPacijentaAPI;
+import com.github.ybq.android.spinkit.SpinKitView;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -36,6 +37,7 @@ public class PreglediOdDoktora extends ToolbarActivity implements View.OnClickLi
 
     public String tekst;
     Button bPretraga;
+    SpinKitView skv;
     EditText etPretraga;
 
     ImageView ivDodaj;
@@ -56,6 +58,7 @@ public class PreglediOdDoktora extends ToolbarActivity implements View.OnClickLi
         rv.setHasFixedSize(true);
         etPretraga = (EditText) findViewById(R.id.etPretraga);
         bPretraga = (Button) findViewById(R.id.bPretraga);
+        skv = (SpinKitView) findViewById(R.id.loading_view);
         ivDodaj = (ImageView) findViewById(R.id.ivDodaj);
 
 
@@ -83,8 +86,16 @@ public class PreglediOdDoktora extends ToolbarActivity implements View.OnClickLi
     public void onClick(View v) {
         switch(v.getId()){
             case R.id.bPretraga:
-                initializeData();
-                break;
+                bPretraga.setVisibility(View.GONE);
+                skv.setVisibility(View.VISIBLE);
+                if(doktorLokalno.provjeriPrijavljenogDoktora()) {
+                    initializeData();
+                    break;
+                }
+                else if(pacijentLokalno.provjeriPrijavljenogPacijenta()) {
+                    initializeData2();
+                    break;
+                }
             case R.id.ivDodaj:
                 startActivity(new Intent(this, DodajNoviPregled.class));
                 break;
@@ -92,12 +103,16 @@ public class PreglediOdDoktora extends ToolbarActivity implements View.OnClickLi
         }
     }
     private void initializeData() {
+        bPretraga.setVisibility(View.GONE);
+        skv.setVisibility(View.VISIBLE);
         tekst = String.valueOf(etPretraga.getText());
         spremi = new ArrayList<>();
         pregledis = new ArrayList<>();
         PregledAPI.Factory.getIstance().response(doktor.getId_doktor()).enqueue(new Callback<ArrayList<Pregledi>>() {
             @Override
             public void onResponse(Call<ArrayList<Pregledi>> call, Response<ArrayList<Pregledi>> response) {
+                bPretraga.setVisibility(View.VISIBLE);
+                skv.setVisibility(View.GONE);
                 initializeAdapter();
                 for (int i = 0; i < response.body().size(); i++) {
                     spremi.add(new Pregledi(response.body().get(i).getIme(), response.body().get(i).getPrezime(), response.body().get(i).getOib(), response.body().get(i).getDatum_pregleda(), response.body().get(i).getKomentar()));
@@ -140,18 +155,24 @@ public class PreglediOdDoktora extends ToolbarActivity implements View.OnClickLi
             }
             @Override
             public void onFailure(Call<ArrayList<Pregledi>> call, Throwable t) {
+                bPretraga.setVisibility(View.VISIBLE);
+                skv.setVisibility(View.GONE);
                 Log.e("Failed", t.getMessage());
             }
         });
     }
 
     private void initializeData2() {
+        bPretraga.setVisibility(View.GONE);
+        skv.setVisibility(View.VISIBLE);
         tekst = String.valueOf(etPretraga.getText());
         spremi = new ArrayList<>();
         pregledis = new ArrayList<>();
         PreglediPacijentaAPI.Factory.getIstance().response(pacijent.getId_pacijent(),pacijent.getId_doktor()).enqueue(new Callback<ArrayList<Pregledi>>() {
             @Override
             public void onResponse(Call<ArrayList<Pregledi>> call, Response<ArrayList<Pregledi>> response) {
+                bPretraga.setVisibility(View.VISIBLE);
+                skv.setVisibility(View.GONE);
                 initializeAdapter();
                 for (int i = 0; i < response.body().size(); i++) {
                     spremi.add(new Pregledi(response.body().get(i).getIme(), response.body().get(i).getPrezime(), response.body().get(i).getDatum_pregleda(), response.body().get(i).getKomentar()));
@@ -189,6 +210,8 @@ public class PreglediOdDoktora extends ToolbarActivity implements View.OnClickLi
             }
             @Override
             public void onFailure(Call<ArrayList<Pregledi>> call, Throwable t) {
+                bPretraga.setVisibility(View.VISIBLE);
+                skv.setVisibility(View.GONE);
                 Log.e("Failed", t.getMessage());
             }
         });

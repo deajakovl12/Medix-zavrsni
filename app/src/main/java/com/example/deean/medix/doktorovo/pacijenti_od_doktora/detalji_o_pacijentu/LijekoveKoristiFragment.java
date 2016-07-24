@@ -17,6 +17,7 @@ import com.example.deean.medix.lijekovi.Lijek;
 import com.example.deean.medix.R;
 import com.example.deean.medix.lijekovi.RVAdapter;
 import com.example.deean.medix.lijekovi.RecycleView;
+import com.github.ybq.android.spinkit.SpinKitView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,6 +41,7 @@ public class LijekoveKoristiFragment extends android.support.v4.app.Fragment imp
 
     public String tekst;
     Button bPretraga;
+    SpinKitView skv;
     EditText etPretraga;
 
     ImageView ivDodaj;
@@ -79,6 +81,7 @@ public class LijekoveKoristiFragment extends android.support.v4.app.Fragment imp
         rv.setHasFixedSize(true);
         etPretraga = (EditText) view.findViewById(R.id.etPretraga);
         bPretraga = (Button) view.findViewById(R.id.bPretraga);
+        skv = (SpinKitView) view.findViewById(R.id.loading_view);
         ivDodaj = (ImageView) view.findViewById(R.id.ivDodaj);
 
         bPretraga.setOnClickListener(this);
@@ -95,6 +98,8 @@ public class LijekoveKoristiFragment extends android.support.v4.app.Fragment imp
     public void onClick(View v) {
             switch(v.getId()) {
                 case R.id.bPretraga:
+                    bPretraga.setVisibility(View.GONE);
+                    skv.setVisibility(View.VISIBLE);
                     initializeData();
                     break;
                 case R.id.ivDodaj:
@@ -105,12 +110,16 @@ public class LijekoveKoristiFragment extends android.support.v4.app.Fragment imp
 
     }
     private void initializeData(){
+        bPretraga.setVisibility(View.GONE);
+        skv.setVisibility(View.VISIBLE);
         tekst = String.valueOf(etPretraga.getText());
         spremi = new ArrayList<>();
         lijeks = new ArrayList<>();
         LijekoviPacijentaAPI.Factory.getIstance().response(OsobniPodaciFragment.id_pacijenta).enqueue(new Callback<ArrayList<Lijek>>() {
             @Override
             public void onResponse(Call<ArrayList<Lijek>> call, Response<ArrayList<Lijek>> response) {
+                bPretraga.setVisibility(View.VISIBLE);
+                skv.setVisibility(View.GONE);
                 initializeAdapter();
                 for (int i = 0; i < response.body().size(); i++) {
                     spremi.add(new Lijek(response.body().get(i).getNaziv(),response.body().get(i).getSlika_lijeka()));
@@ -123,6 +132,8 @@ public class LijekoveKoristiFragment extends android.support.v4.app.Fragment imp
             }
             @Override
             public void onFailure(Call<ArrayList<Lijek>> call, Throwable t) {
+                bPretraga.setVisibility(View.VISIBLE);
+                skv.setVisibility(View.GONE);
                 Log.e("Failed", t.getMessage());
             }
         });

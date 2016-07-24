@@ -32,16 +32,29 @@
             android:layout_width="match_parent"
             android:layout_marginBottom="10dp"
             android:layout_height="wrap_content" />
-        <Button
-            android:background="#A22022"
-            android:textColor="@android:color/background_light"
-            android:id="@+id/bPretraga"
-            android:text="Pretrazi"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            />
 
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <com.github.ybq.android.spinkit.SpinKitView
+                android:id="@+id/loading_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/SpinKitView.ThreeBounce"
+                android:layout_marginBottom="10dp"
+                android:visibility="gone"
+                app:SpinKit_Color="@color/buttonColor"/>
+            <Button
+                android:background="#A22022"
+                android:textColor="@android:color/background_light"
+                android:id="@+id/bPretraga"
+                android:text="Pretrazi"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                />
+        </RelativeLayout>
         <android.support.v7.widget.RecyclerView
             android:layout_height="300dp"
             android:layout_width="match_parent"

@@ -20,7 +20,7 @@ public class Doktor {
 
 
 
-    public Doktor(String ime, String prezime, String adresa,String oib, String lozinka, String telefon,  String email, String radno_vrijeme, String rad_savjetovalista, String mobitel,String titula){
+    public Doktor(String ime, String prezime, String adresa,String oib, String lozinka, String telefon,  String email, String radno_vrijeme, String rad_savjetovalista, String mobitel,String titula,String spol){
 
         this.ime=ime;
         this.prezime=prezime;
@@ -33,6 +33,7 @@ public class Doktor {
         this.rad_savjetovalista=rad_savjetovalista;
         this.mobitel=mobitel;
         this.titula=titula;
+        this.spol=spol;
     }
     public Doktor(String ime, String prezime, String titula,String radno_vrijeme,String rad_savjetovalista, String adresa, String telefon, String mobitel, String spol){
 
@@ -73,6 +74,7 @@ public class Doktor {
         this.rad_savjetovalista="";
         this.mobitel="";
         this.titula="";
+        this.spol="";
     }
 
     public Doktor(String id_doktor,String ime, String prezime, String adresa,String oib, String lozinka, String telefon,  String email, String radno_vrijeme, String rad_savjetovalista, String mobitel,String titula,String spol){

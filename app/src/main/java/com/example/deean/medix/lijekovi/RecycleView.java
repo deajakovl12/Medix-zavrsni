@@ -15,6 +15,7 @@ import com.example.deean.medix.doktorovo.ToolbarActivity;
 import com.example.deean.medix.doktorovo.pacijenti_od_doktora.detalji_o_pacijentu.LijekoviPacijentaAPI;
 import com.example.deean.medix.pacijentovo.konstruktor_i_baza.Pacijent;
 import com.example.deean.medix.pacijentovo.konstruktor_i_baza.PacijentLokalno;
+import com.github.ybq.android.spinkit.SpinKitView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +28,7 @@ import retrofit2.Response;
 public class RecycleView extends ToolbarActivity implements View.OnClickListener {
     public String tekst;
     Button bPretraga;
+    SpinKitView skv;
     EditText etPretraga;
 
 
@@ -53,6 +55,7 @@ public class RecycleView extends ToolbarActivity implements View.OnClickListener
         rv.setHasFixedSize(true);
         etPretraga = (EditText) findViewById(R.id.etPretraga);
         bPretraga = (Button) findViewById(R.id.bPretraga);
+        skv = (SpinKitView) findViewById(R.id.loading_view);
         bPretraga.setOnClickListener(this);
 
 
@@ -77,15 +80,21 @@ public class RecycleView extends ToolbarActivity implements View.OnClickListener
         switch(v.getId()){
             case R.id.bPretraga:
                 if(DoktorLokalno.provjeriPrijavljenogDoktora()) {
+                    bPretraga.setVisibility(View.GONE);
+                    skv.setVisibility(View.VISIBLE);
                     initializeData();
                 }
                 else if(pacijentLokalno.provjeriPrijavljenogPacijenta()){
+                    bPretraga.setVisibility(View.GONE);
+                    skv.setVisibility(View.VISIBLE);
                     initializeData2();
                 }
                 break;
         }
     }
     private void initializeData(){
+        bPretraga.setVisibility(View.GONE);
+        skv.setVisibility(View.VISIBLE);
         tekst = String.valueOf(etPretraga.getText());
         //Log.i("TAG",tekst);
         spremi = new ArrayList<>();
@@ -93,6 +102,8 @@ public class RecycleView extends ToolbarActivity implements View.OnClickListener
         LijekAPI.Factory.getIstance().response().enqueue(new Callback<ArrayList<Lijek>>() {
             @Override
             public void onResponse(Call<ArrayList<Lijek>> call, Response<ArrayList<Lijek>> response) {
+                bPretraga.setVisibility(View.VISIBLE);
+                skv.setVisibility(View.GONE);
                 initializeAdapter();
                 for (int i = 0; i < response.body().size(); i++) {
                     //lijeks.add(new Lijek(response.body().get(i).getNaziv(),poljeSlika[i]));
@@ -108,11 +119,15 @@ public class RecycleView extends ToolbarActivity implements View.OnClickListener
 
             @Override
             public void onFailure(Call<ArrayList<Lijek>> call, Throwable t) {
+                bPretraga.setVisibility(View.VISIBLE);
+                skv.setVisibility(View.GONE);
                 Log.e("Failed", t.getMessage());
             }
         });
     }
     private void initializeData2(){
+        bPretraga.setVisibility(View.GONE);
+        skv.setVisibility(View.VISIBLE);
         tekst = String.valueOf(etPretraga.getText());
         //Log.i("TAG",tekst);
         spremi = new ArrayList<>();
@@ -120,6 +135,8 @@ public class RecycleView extends ToolbarActivity implements View.OnClickListener
         LijekoviPacijentaAPI.Factory.getIstance().response(pacijent.getId_pacijent()).enqueue(new Callback<ArrayList<Lijek>>() {
             @Override
             public void onResponse(Call<ArrayList<Lijek>> call, Response<ArrayList<Lijek>> response) {
+                bPretraga.setVisibility(View.VISIBLE);
+                skv.setVisibility(View.GONE);
                 initializeAdapter();
                 for (int i = 0; i < response.body().size(); i++) {
                     spremi.add(new Lijek(response.body().get(i).getNaziv(),response.body().get(i).getSlika_lijeka()));
@@ -133,6 +150,8 @@ public class RecycleView extends ToolbarActivity implements View.OnClickListener
 
             @Override
             public void onFailure(Call<ArrayList<Lijek>> call, Throwable t) {
+                bPretraga.setVisibility(View.VISIBLE);
+                skv.setVisibility(View.GONE);
                 Log.e("Failed", t.getMessage());
             }
         });

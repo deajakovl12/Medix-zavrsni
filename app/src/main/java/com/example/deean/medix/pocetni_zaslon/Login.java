@@ -22,12 +22,14 @@ import com.example.deean.medix.doktorovo.Prijava;
 import com.example.deean.medix.pacijentovo.Prijava_Pacijent;
 import com.example.deean.medix.R;
 import com.example.deean.medix.ServerRequest;
+import com.github.ybq.android.spinkit.SpinKitView;
 
 
 public class Login extends ToolbarActivityAll implements View.OnClickListener{
     Button bPrijava;
     EditText etEmail, etLozinka;
     TextView tvRegistracijaLink, tvLozinkaLink;
+    SpinKitView loadingView;
 
     Pacijent pacijent;
 
@@ -45,6 +47,7 @@ public class Login extends ToolbarActivityAll implements View.OnClickListener{
         bPrijava = (Button) findViewById(R.id.bPrijava);
         tvRegistracijaLink = (TextView) findViewById(R.id.tvRegistracijaLink);
         tvLozinkaLink = (TextView) findViewById(R.id.tvLozinkaLink);
+        loadingView = (SpinKitView) findViewById(R.id.loading_view);
 
 
         bPrijava.setOnClickListener(this);
@@ -98,6 +101,8 @@ public class Login extends ToolbarActivityAll implements View.OnClickListener{
 
     private void autentifikacija_doktora(Doktor doktor){
         ServerRequest serverRequest = new ServerRequest(this);
+        bPrijava.setVisibility(View.GONE);
+        loadingView.setVisibility(View.VISIBLE);
         serverRequest.dohvatiPodatkeUPozadini(doktor, new GetUserCallback() {
             @Override
             public void done(Doktor returnedDoktor) {
@@ -116,6 +121,8 @@ public class Login extends ToolbarActivityAll implements View.OnClickListener{
             @Override
             public void done(Pacijent returnedPacijent) {
                 if (returnedPacijent == null) {
+                    bPrijava.setVisibility(View.VISIBLE);
+                    loadingView.setVisibility(View.GONE);
                     showErrorMessage();
                 } else {
                     logPacijentIn(returnedPacijent);
@@ -124,11 +131,11 @@ public class Login extends ToolbarActivityAll implements View.OnClickListener{
         });
     }
     private void showErrorMessage(){
-        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(Login.this);
-        dialogBuilder.setMessage("Krivo uneseni podaci!");
-        dialogBuilder.setPositiveButton("Ok",null);
-        Toast.makeText(Login.this, "Problems with server", Toast.LENGTH_SHORT).show();
-        dialogBuilder.show();
+        //AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(Login.this);
+        //dialogBuilder.setMessage("Krivo uneseni podaci!");
+        //dialogBuilder.setPositiveButton("Ok",null);
+        Toast.makeText(Login.this, "Pogrešan email ili lozinka!", Toast.LENGTH_SHORT).show();
+        //dialogBuilder.show();
     }
 
     private void logDoktorIn(Doktor returnedDoktor){

@@ -213,8 +213,9 @@ public class DodajNoviLijekZaUzimanje extends ToolbarActivity implements View.On
             PendingIntent pendingIntent = PendingIntent.getBroadcast(getApplicationContext(),randomNum,intent,0); //PendingIntent.FLAG_UPDATE_CURRENT)
 
             AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
-            alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,calendar2.getTimeInMillis(),1000*60*Integer.parseInt(invervalUzimanjaLijeka),pendingIntent);
-
+            //alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,calendar2.getTimeInMillis(),1000*60*Integer.parseInt(invervalUzimanjaLijeka),pendingIntent);
+            alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP,calendar2.getTimeInMillis(),1000*60*Integer.parseInt(invervalUzimanjaLijeka),pendingIntent);
+            //alarmManager.se
 
             AlertDialog.Builder dialogBuilder1 = new AlertDialog.Builder(DodajNoviLijekZaUzimanje.this);
             dialogBuilder1.setTitle("Uspješno!");

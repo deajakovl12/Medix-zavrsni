@@ -18,6 +18,7 @@ import com.example.deean.medix.doktorovo.ToolbarActivity;
 import com.example.deean.medix.doktorovo.konsturktor_i_baza.Doktor;
 import com.example.deean.medix.doktorovo.konsturktor_i_baza.DoktorLokalno;
 import com.example.deean.medix.doktorovo.pregledi.PreglediOdDoktora;
+import com.github.ybq.android.spinkit.SpinKitView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,6 +33,7 @@ public class PostavkeProfilaDoktora extends ToolbarActivity implements View.OnCl
     DoktorLokalno doktorLokalno;
     EditText etIme, etPrezime, etTitula, etRadnoVrijeme, etRadSavjetovalista, etAdresa, etTelefon, etMobitel;
     Button azurirajPodatke;
+    SpinKitView skv;
     Spinner spinner;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +51,7 @@ public class PostavkeProfilaDoktora extends ToolbarActivity implements View.OnCl
         etMobitel = (EditText) findViewById(R.id.etMobitel);
         azurirajPodatke = (Button) findViewById(R.id.azurirajPodatke);
         spinner = (Spinner) findViewById(R.id.spinner);
+        skv = (SpinKitView) findViewById(R.id.loading_view);
 
 
         azurirajPodatke.setOnClickListener(this);
@@ -62,6 +65,8 @@ public class PostavkeProfilaDoktora extends ToolbarActivity implements View.OnCl
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.azurirajPodatke:
+                azurirajPodatke.setVisibility(View.GONE);
+                skv.setVisibility(View.VISIBLE);
                 spremiPodatkeODoktoru();
                 break;
         }
@@ -81,11 +86,15 @@ public class PostavkeProfilaDoktora extends ToolbarActivity implements View.OnCl
         AzurirajPodatkeDoktora.Factory.getIstance().response(doktor.getId_doktor(),etIme.getText().toString(),etPrezime.getText().toString(),etTitula.getText().toString(),etRadnoVrijeme.getText().toString(),etRadSavjetovalista.getText().toString(),etAdresa.getText().toString(),etTelefon.getText().toString(),etMobitel.getText().toString(),spinner.getSelectedItem().toString()).enqueue(new Callback<ArrayList<Integer>>() {
             @Override
             public void onResponse(Call<ArrayList<Integer>> call, Response<ArrayList<Integer>> response) {
+                azurirajPodatke.setVisibility(View.VISIBLE);
+                skv.setVisibility(View.GONE);
                 Log.e("Uspjeh", "uspio");
             }
 
             @Override
             public void onFailure(Call<ArrayList<Integer>> call, Throwable t) {
+                azurirajPodatke.setVisibility(View.VISIBLE);
+                skv.setVisibility(View.GONE);
                 Log.e("NE", "NIJE USPIO");
                 Doktor doktor1 = new Doktor(doktor.getId_doktor(),etIme.getText().toString(),etPrezime.getText().toString(),etAdresa.getText().toString(),doktor.getOib(),doktor.getLozinka(),etTelefon.getText().toString(),doktor.getEmail(),etRadnoVrijeme.getText().toString(),etRadSavjetovalista.getText().toString(),etMobitel.getText().toString(),etTitula.getText().toString(),spinner.getSelectedItem().toString());
                 doktorLokalno.spremiDoktorPodatke(doktor1);

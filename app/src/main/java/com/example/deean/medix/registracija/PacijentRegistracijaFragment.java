@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.deean.medix.doktorovo.konsturktor_i_baza.Doktor;
 import com.example.deean.medix.doktorovo.GetUserCallback;
@@ -20,6 +21,7 @@ import com.example.deean.medix.pocetni_zaslon.Login;
 import com.example.deean.medix.pacijentovo.konstruktor_i_baza.Pacijent;
 import com.example.deean.medix.R;
 import com.example.deean.medix.ServerRequest;
+import com.github.ybq.android.spinkit.SpinKitView;
 
 /**
  * Created by Deean on 4.3.2016..
@@ -32,6 +34,7 @@ public class PacijentRegistracijaFragment extends android.support.v4.app.Fragmen
     ProgressDialog progressDialog;
 
     Button bRegistracija;
+    SpinKitView skw;
     EditText etEmail, etLozinka, etOIB, etTelefon, etAdresa, etIme, etPrezime;
 
 
@@ -66,6 +69,7 @@ public class PacijentRegistracijaFragment extends android.support.v4.app.Fragmen
         etIme = (EditText) view.findViewById(R.id.etIme);
         etPrezime = (EditText) view.findViewById(R.id.etPrezime);
         bRegistracija = (Button) view.findViewById(R.id.bRegistracija);
+        skw = (SpinKitView) view.findViewById(R.id.loading_view);
 
         bRegistracija.setOnClickListener(this);
 
@@ -87,11 +91,14 @@ public class PacijentRegistracijaFragment extends android.support.v4.app.Fragmen
                 String lozinka = etLozinka.getText().toString();
                 if(email.contains("@")) {
 
-                    progressDialog = new ProgressDialog(getActivity());
+                    /*progressDialog = new ProgressDialog(getActivity());
                     progressDialog.setCancelable(false);
                     progressDialog.setTitle("Registriram");
                     progressDialog.setMessage("Molim sačekajte...");
-                    progressDialog.show();
+                    progressDialog.show();*/
+
+                    bRegistracija.setVisibility(View.GONE);
+                    skw.setVisibility(View.VISIBLE);
 
                     final Pacijent pacijent3 = new Pacijent(ime, prezime, adresa, oib, lozinka, telefon, email, null, null);
                     Doktor doktor2 = new Doktor (email);
@@ -106,28 +113,35 @@ public class PacijentRegistracijaFragment extends android.support.v4.app.Fragmen
                                     @Override
                                     public void done(Pacijent returnedPacijent) {
                                         if (returnedPacijent == null) {
-                                            progressDialog.dismiss();
+                                            //progressDialog.dismiss();
+                                            bRegistracija.setVisibility(View.VISIBLE);
+                                            skw.setVisibility(View.GONE);
                                             registrirajPacijent(pacijent3);
                                         } else {
-                                            progressDialog.dismiss();
+                                            bRegistracija.setVisibility(View.VISIBLE);
+                                            skw.setVisibility(View.GONE);
+                                            //progressDialog.dismiss();
                                             showErrorMessage();
 
                                         }
                                     }
                                 });
                             } else {
-                                progressDialog.dismiss();
+                                //progressDialog.dismiss();
                                 showErrorMessage();
+                                bRegistracija.setVisibility(View.VISIBLE);
+                                skw.setVisibility(View.GONE);
                             }
                         }
                     });
                 }
                 else{
-                    AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(getActivity());
+                    /*AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(getActivity());
                     dialogBuilder.setTitle("Neispravni E-mail");
                     dialogBuilder.setMessage("Nije ispravan E-Mail, unesite extenziju (npr. @gmail.com)");
                     dialogBuilder.setPositiveButton("Ok", null);
-                    dialogBuilder.show();
+                    dialogBuilder.show();*/
+                    Toast.makeText(getActivity(), "Nije ispravan E-mail, unesite extenziju (npr. @gmail.com)!", Toast.LENGTH_SHORT).show();
                 }
                 break;
         }
@@ -145,11 +159,13 @@ public class PacijentRegistracijaFragment extends android.support.v4.app.Fragmen
         });
     }
     private void showErrorMessage(){
-        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(getActivity());
+        /*AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(getActivity());
         dialogBuilder.setTitle("Postojeći E-mail");
         dialogBuilder.setMessage("Račun s takvim E-mailom je već kreiran!");
         dialogBuilder.setPositiveButton("Ok", null);
-        dialogBuilder.show();
+        dialogBuilder.show();*/
+        Toast.makeText(getActivity(), "Račun s takvim E-mailom je već kreiran!", Toast.LENGTH_SHORT).show();
+
 
     }
     private void potvrdnaPoruka(){

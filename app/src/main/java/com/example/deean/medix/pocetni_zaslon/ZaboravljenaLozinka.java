@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.deean.medix.doktorovo.konsturktor_i_baza.Doktor;
 import com.example.deean.medix.doktorovo.konsturktor_i_baza.DoktorLokalno;
@@ -18,6 +19,7 @@ import com.example.deean.medix.pacijentovo.konstruktor_i_baza.Pacijent;
 import com.example.deean.medix.pacijentovo.konstruktor_i_baza.PacijentLokalno;
 import com.example.deean.medix.R;
 import com.example.deean.medix.ServerRequest;
+import com.github.ybq.android.spinkit.SpinKitView;
 import com.mikepenz.materialdrawer.Drawer;
 
 import java.io.UnsupportedEncodingException;
@@ -37,6 +39,7 @@ import java.util.Random;
 
 public class ZaboravljenaLozinka extends ToolbarActivityAll implements View.OnClickListener {
     Button bPosalji;
+    SpinKitView loadingView;
     EditText lozEmail;
     private static final String username = "medix.supp@gmail.com";
     private static final String password = "docse1viv1";
@@ -55,6 +58,7 @@ public class ZaboravljenaLozinka extends ToolbarActivityAll implements View.OnCl
         setContentView(R.layout.activity_zaboravljena_lozinka);
         lozEmail = (EditText) findViewById(R.id.lozEmail);
         bPosalji = (Button) findViewById(R.id.bPosalji);
+        loadingView = (SpinKitView) findViewById(R.id.loading_view);
         bPosalji.setOnClickListener(this);
         DoktorLokalno = new DoktorLokalno(this);
         PacijentLokalno = new PacijentLokalno(this);
@@ -148,11 +152,13 @@ public class ZaboravljenaLozinka extends ToolbarActivityAll implements View.OnCl
 
 
     private void autentifikacija_doktora(Doktor doktor, final Pacijent pacijent){
-        progressDialog = new ProgressDialog(this);
+        /*progressDialog = new ProgressDialog(this);
         progressDialog.setCancelable(false);
         progressDialog.setTitle("Obrađujem");
         progressDialog.setMessage("Molim sačekajte...");
-        progressDialog.show();
+        progressDialog.show();*/
+        bPosalji.setVisibility(View.GONE);
+        loadingView.setVisibility(View.VISIBLE);
         ServerRequest serverRequest = new ServerRequest(this);
         serverRequest.dohvatiEmailUpozadini(doktor, new GetUserCallback() {
             @Override
@@ -160,7 +166,8 @@ public class ZaboravljenaLozinka extends ToolbarActivityAll implements View.OnCl
                 if(returnedDoktor == null){
                     autentifikacija_pacijenta(pacijent);
                 }else{
-                    progressDialog.dismiss();
+                    bPosalji.setVisibility(View.VISIBLE);
+                    loadingView.setVisibility(View.GONE);
                     prikaziPoruku_doktor();
                 }
             }
@@ -173,10 +180,14 @@ public class ZaboravljenaLozinka extends ToolbarActivityAll implements View.OnCl
             @Override
             public void done(Pacijent returnedPacijent) {
                 if (returnedPacijent == null) {
-                    progressDialog.dismiss();
+                    //progressDialog.dismiss();
+                    bPosalji.setVisibility(View.VISIBLE);
+                    loadingView.setVisibility(View.GONE);
                     showErrorMessage();
                 } else {
-                    progressDialog.dismiss();
+                    //progressDialog.dismiss();
+                    bPosalji.setVisibility(View.VISIBLE);
+                    loadingView.setVisibility(View.GONE);
                     prikaziPoruku_Pacijent();
                 }
             }
@@ -184,12 +195,12 @@ public class ZaboravljenaLozinka extends ToolbarActivityAll implements View.OnCl
 
     }
     private void showErrorMessage(){
-        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(ZaboravljenaLozinka.this);
+        /*AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(ZaboravljenaLozinka.this);
         dialogBuilder.setTitle("Nepostojeći E-mail!");
         dialogBuilder.setMessage("Račun s takvim E-mailom ne postoji!");
         dialogBuilder.setPositiveButton("Ok", null);
-        dialogBuilder.show();
-
+        dialogBuilder.show();*/
+        Toast.makeText(ZaboravljenaLozinka.this, "Račun s takvim E-mailom ne postoji!", Toast.LENGTH_SHORT).show();
     }
 
     private void prikaziPoruku_doktor(){

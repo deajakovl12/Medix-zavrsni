@@ -16,6 +16,7 @@ import com.example.deean.medix.pacijentovo.konstruktor_i_baza.Pacijent;
 import com.example.deean.medix.R;
 import com.example.deean.medix.doktorovo.pacijenti_u_bazi.RecycleViewPacijenata;
 import com.example.deean.medix.doktorovo.ToolbarActivity;
+import com.github.ybq.android.spinkit.SpinKitView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,6 +30,7 @@ public class RecycleViewPacijenta extends ToolbarActivity implements View.OnClic
 
     public String tekst;
     Button bPretraga;
+    SpinKitView skv;
     EditText etPretraga;
 
     ImageView ivDodaj;
@@ -52,6 +54,7 @@ public class RecycleViewPacijenta extends ToolbarActivity implements View.OnClic
         rv.setHasFixedSize(true);
         etPretraga = (EditText) findViewById(R.id.etPretraga);
         bPretraga = (Button) findViewById(R.id.bPretraga);
+        skv = (SpinKitView) findViewById(R.id.loading_view);
         ivDodaj = (ImageView) findViewById(R.id.ivDodaj);
 
 
@@ -69,6 +72,8 @@ public class RecycleViewPacijenta extends ToolbarActivity implements View.OnClic
     public void onClick(View v) {
         switch(v.getId()){
             case R.id.bPretraga:
+                bPretraga.setVisibility(View.GONE);
+                skv.setVisibility(View.VISIBLE);
                 initializeData();
                 break;
             case R.id.ivDodaj:
@@ -77,12 +82,16 @@ public class RecycleViewPacijenta extends ToolbarActivity implements View.OnClic
         }
     }
     private void initializeData(){
+        bPretraga.setVisibility(View.GONE);
+        skv.setVisibility(View.VISIBLE);
         tekst = String.valueOf(etPretraga.getText());
         spremi = new ArrayList<>();
         pacijents = new ArrayList<>();
         PacijentAPI.Factory.getIstance().response(doktor.getId_doktor()).enqueue(new Callback<ArrayList<Pacijent>>() {
             @Override
             public void onResponse(Call<ArrayList<Pacijent>> call, Response<ArrayList<Pacijent>> response) {
+                bPretraga.setVisibility(View.VISIBLE);
+                skv.setVisibility(View.GONE);
                 initializeAdapter();
                 for (int i = 0; i < response.body().size(); i++) {
                     spremi.add(new Pacijent(response.body().get(i).getIme(), response.body().get(i).getPrezime(), response.body().get(i).getAdresa(), response.body().get(i).getOib()));
@@ -96,6 +105,8 @@ public class RecycleViewPacijenta extends ToolbarActivity implements View.OnClic
 
             @Override
             public void onFailure(Call<ArrayList<Pacijent>> call, Throwable t) {
+                bPretraga.setVisibility(View.VISIBLE);
+                skv.setVisibility(View.GONE);
                 Log.e("Failed", t.getMessage());
             }
         });

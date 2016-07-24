@@ -18,6 +18,7 @@ import com.example.deean.medix.lijekovi.Lijek;
 import com.example.deean.medix.lijekovi.LijekAPI;
 import com.example.deean.medix.lijekovi.RVAdapter;
 import com.example.deean.medix.lijekovi.RecycleView;
+import com.github.ybq.android.spinkit.SpinKitView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,6 +32,7 @@ public class DodajLijekPacijentu extends ToolbarActivity implements View.OnClick
     DoktorLokalno doktorLokalno;
 
     Button bPretraga;
+    SpinKitView skv;
     EditText etPretraga;
 
     private ArrayList<Lijek> spremi;
@@ -52,6 +54,7 @@ public class DodajLijekPacijentu extends ToolbarActivity implements View.OnClick
 
         etPretraga = (EditText) findViewById(R.id.etPretraga);
         bPretraga = (Button) findViewById(R.id.bPretraga);
+        skv = (SpinKitView) findViewById(R.id.loading_view);
 
         bPretraga.setOnClickListener(this);
 
@@ -67,17 +70,23 @@ public class DodajLijekPacijentu extends ToolbarActivity implements View.OnClick
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.bPretraga:
+                bPretraga.setVisibility(View.GONE);
+                skv.setVisibility(View.VISIBLE);
                 initializeData();
                 break;
         }
     }
     private void initializeData(){
+        bPretraga.setVisibility(View.GONE);
+        skv.setVisibility(View.VISIBLE);
         tekst1 = String.valueOf(etPretraga.getText());
         spremi = new ArrayList<>();
         lijeks = new ArrayList<>();
         DohvatiLijekoveKojeNeKoristiAPI.Factory.getIstance().response(OsobniPodaciFragment.id_pacijenta).enqueue(new Callback<ArrayList<Lijek>>() {
             @Override
             public void onResponse(Call<ArrayList<Lijek>> call, Response<ArrayList<Lijek>> response) {
+                bPretraga.setVisibility(View.VISIBLE);
+                skv.setVisibility(View.GONE);
                 initializeAdapter();
                 for (int i = 0; i < response.body().size(); i++) {
                     spremi.add(new Lijek(response.body().get(i).getNaziv(),response.body().get(i).getSlika_lijeka()));
@@ -90,6 +99,8 @@ public class DodajLijekPacijentu extends ToolbarActivity implements View.OnClick
             }
             @Override
             public void onFailure(Call<ArrayList<Lijek>> call, Throwable t) {
+                bPretraga.setVisibility(View.VISIBLE);
+                skv.setVisibility(View.GONE);
                 Log.e("Failed", t.getMessage());
             }
         });

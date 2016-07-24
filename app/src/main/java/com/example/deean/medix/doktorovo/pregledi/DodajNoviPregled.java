@@ -15,6 +15,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import com.example.deean.medix.R;
 import com.example.deean.medix.doktorovo.ToolbarActivity;
@@ -24,6 +25,7 @@ import com.example.deean.medix.doktorovo.pacijenti_od_doktora.PacijentAPI;
 import com.example.deean.medix.doktorovo.pacijenti_od_doktora.detalji_o_pacijentu.SpremiPodatkeOZakazanomPregleduAPI;
 import com.example.deean.medix.pacijentovo.konstruktor_i_baza.Pacijent;
 import com.example.deean.medix.pocetni_zaslon.Login;
+import com.github.ybq.android.spinkit.SpinKitView;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -35,6 +37,7 @@ import retrofit2.Response;
 
 public class DodajNoviPregled extends ToolbarActivity implements View.OnClickListener {
     Button bDatum, bVrijeme,bSpremi;
+    SpinKitView skv;
     EditText etDatum, etVrijeme, etKomentar;
     private int mYear, mMonth, mDay, mHour, mMinute;
 
@@ -58,6 +61,7 @@ public class DodajNoviPregled extends ToolbarActivity implements View.OnClickLis
         etVrijeme=(EditText)findViewById(R.id.etVrijeme);
         etKomentar = (EditText) findViewById(R.id.etKomentar);
         spinner = (Spinner) findViewById(R.id.spinner);
+        skv = (SpinKitView) findViewById(R.id.loading_view);
 
         bDatum.setOnClickListener(this);
         bVrijeme.setOnClickListener(this);
@@ -138,20 +142,24 @@ public class DodajNoviPregled extends ToolbarActivity implements View.OnClickLis
         String dat_vrij = dat + " " + vrij;
         //Log.e("Ispis podataka: ", dat + " " + vrij + " " + kom + " " + oib[1] + " " + dat_vrij);
         if(dat.equals("") || vrij.equals("") || kom.equals("")) {
-            AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(DodajNoviPregled.this);
-            dialogBuilder.setMessage("Popunite sve podatke o pregledu!");
-            dialogBuilder.setPositiveButton("Ok",null);
-            dialogBuilder.show();
+            Toast.makeText(DodajNoviPregled.this, "Popunite sve podatke o pregledu!", Toast.LENGTH_SHORT).show();
+
         }
         else {
+            bSpremi.setVisibility(View.GONE);
+            skv.setVisibility(View.VISIBLE);
             SpremiPodatkeOZakazanomPregleduAPI.Factory.getIstance().response(oib[1],dat_vrij,kom,doktor.getId_doktor()).enqueue(new Callback<ArrayList<Integer>>() {
                 @Override
                 public void onResponse(Call<ArrayList<Integer>> call, Response<ArrayList<Integer>> response) {
+                    bSpremi.setVisibility(View.VISIBLE);
+                    skv.setVisibility(View.GONE);
                         Log.e("USPESNO", "SPREMLJENO");
                 }
 
                 @Override
                 public void onFailure(Call<ArrayList<Integer>> call, Throwable t) {
+                    bSpremi.setVisibility(View.VISIBLE);
+                    skv.setVisibility(View.GONE);
                     AlertDialog.Builder dialogBuilder1 = new AlertDialog.Builder(DodajNoviPregled.this);
                     dialogBuilder1.setTitle("Uspješno!");
                     dialogBuilder1.setMessage("Dodali ste novi pregled!");

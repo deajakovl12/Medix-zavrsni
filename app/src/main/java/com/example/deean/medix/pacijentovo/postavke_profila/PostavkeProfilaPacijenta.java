@@ -57,15 +57,21 @@ public class PostavkeProfilaPacijenta extends ToolbarActivity {
     }
 
     private void azurirajPodatke(){
+        bind.azurirajPodatke.setVisibility(View.GONE);
+        bind.loadingView.setVisibility(View.VISIBLE);
         AzurirajPodatkePacijentaAPI.Factory.getIstance().response(pacijent.getId_pacijent(),bind.etIme.getText().toString(),bind.etPrezime.getText().toString(),bind.etAdresa.getText().toString(),bind.etTelefon.getText().toString(),bind.etMobitel.getText().toString(),bind.spinner.getSelectedItem().toString()).enqueue(new Callback<ArrayList<Void>>() {
             @Override
             public void onResponse(Call<ArrayList<Void>> call, Response<ArrayList<Void>> response) {
+                bind.azurirajPodatke.setVisibility(View.VISIBLE);
+                bind.loadingView.setVisibility(View.GONE);
 
                 Log.e("DA","DADADA");
             }
 
             @Override
             public void onFailure(Call<ArrayList<Void>> call, Throwable t) {
+                bind.azurirajPodatke.setVisibility(View.VISIBLE);
+                bind.loadingView.setVisibility(View.GONE);
 
                 Log.e("NE", "NIJE USPIO");
                 Pacijent pacijent1 = new Pacijent(pacijent.getId_pacijent(),bind.etIme.getText().toString(),bind.etPrezime.getText().toString(),bind.etAdresa.getText().toString(),pacijent.getOib(),pacijent.getLozinka(),bind.etTelefon.getText().toString(),pacijent.getEmail(),bind.spinner.getSelectedItem().toString(),bind.etMobitel.getText().toString(),pacijent.getBolesti(),pacijent.getLaboratorijski(),pacijent.getId_doktor());

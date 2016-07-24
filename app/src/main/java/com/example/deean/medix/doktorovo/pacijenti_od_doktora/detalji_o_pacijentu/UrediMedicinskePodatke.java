@@ -22,6 +22,7 @@ import com.example.deean.medix.doktorovo.pacijenti_u_bazi.PacijentuDajDoktoraAPI
 import com.example.deean.medix.doktorovo.pacijenti_od_doktora.detalji_o_pacijentu.PacijentuPromjeniMedicinskePodatkeAPI;
 import com.example.deean.medix.doktorovo.pacijenti_u_bazi.RecycleViewPacijenata;
 import com.example.deean.medix.pacijentovo.konstruktor_i_baza.Pacijent;
+import com.github.ybq.android.spinkit.SpinKitView;
 
 import java.util.ArrayList;
 
@@ -32,6 +33,7 @@ import retrofit2.Response;
 public class UrediMedicinskePodatke extends ToolbarActivity implements View.OnClickListener {
      EditText etBolesti, etLaboratorij;
      Button bSpremi;
+     SpinKitView skv;
      private Doktor doktor;
      DoktorLokalno doktorLokalno;
      MedicinskiPodaciFragment mpf = new MedicinskiPodaciFragment();
@@ -55,6 +57,7 @@ public class UrediMedicinskePodatke extends ToolbarActivity implements View.OnCl
         etBolesti = (EditText) findViewById(R.id.etUrediBolesti);
         etLaboratorij = (EditText) findViewById(R.id.etUrediLaboratorij);
         bSpremi = (Button) findViewById(R.id.bSpremi);
+        skv = (SpinKitView) findViewById(R.id.loading_view);
         bSpremi.setOnClickListener(this);
 
 
@@ -73,6 +76,8 @@ public class UrediMedicinskePodatke extends ToolbarActivity implements View.OnCl
         switch (v.getId()){
             case R.id.bSpremi:
 
+                bSpremi.setVisibility(View.GONE);
+                skv.setVisibility(View.VISIBLE);
                 promjeniPodatkePacijenta();
 
                 break;
@@ -82,10 +87,14 @@ public class UrediMedicinskePodatke extends ToolbarActivity implements View.OnCl
         PacijentuPromjeniMedicinskePodatkeAPI.Factory.getIstance().response(mpf.getOib(),etBolesti.getText().toString(),etLaboratorij.getText().toString()).enqueue(new Callback<ArrayList<Integer>>() {
             @Override
             public void onResponse(Call<ArrayList<Integer>> call, Response<ArrayList<Integer>> response) {
+                bSpremi.setVisibility(View.VISIBLE);
+                skv.setVisibility(View.GONE);
                 Log.e("Proslo", doktor.getId_doktor());
             }
             @Override
             public void onFailure(Call<ArrayList<Integer>> call, Throwable t) {
+                bSpremi.setVisibility(View.VISIBLE);
+                skv.setVisibility(View.GONE);
                 Log.e("Nije proslo",doktor.getId_doktor());
                 AlertDialog.Builder dialogBuilder1 = new AlertDialog.Builder(UrediMedicinskePodatke.this);
                 dialogBuilder1.setTitle("Uspješno!");
