@@ -22,8 +22,7 @@
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
         />
-    <LinearLayout
-        android:orientation="vertical"
+    <RelativeLayout
         android:layout_height="match_parent"
         android:layout_width="match_parent"
         android:background="#efefef"
@@ -36,7 +35,19 @@
             android:layout_width="match_parent"
             android:layout_marginBottom="10dp"
             android:layout_height="wrap_content" />
+
+        <com.github.ybq.android.spinkit.SpinKitView
+            android:layout_below="@+id/etPretraga"
+            android:id="@+id/loading_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/SpinKitView.ThreeBounce"
+            android:visibility="gone"
+            app:SpinKit_Color="@color/buttonColor"
+            android:layout_marginBottom="20dp"/>
+
         <Button
+            android:layout_below="@+id/etPretraga"
             android:background="#A22022"
             android:textColor="@android:color/background_light"
             android:id="@+id/bPretraga"
@@ -48,6 +59,7 @@
         <android.support.v7.widget.RecyclerView
             android:layout_height="300dp"
             android:layout_width="match_parent"
+            android:layout_marginTop="115dp"
             android:id="@+id/rv"
             >
         </android.support.v7.widget.RecyclerView>
@@ -57,9 +69,9 @@
             android:id="@+id/ivDodaj"
             android:src="@drawable/add"
             android:layout_below="@id/rv"
-            android:layout_gravity="right"
+            android:layout_alignParentRight="true"
             android:layout_marginTop="15dp"
             />
-    </LinearLayout>
+    </RelativeLayout>
 </LinearLayout>
 </layout>

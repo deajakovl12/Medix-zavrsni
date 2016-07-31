@@ -22,7 +22,6 @@ import com.example.deean.medix.doktorovo.ToolbarActivity;
 import com.example.deean.medix.doktorovo.konsturktor_i_baza.Doktor;
 import com.example.deean.medix.doktorovo.konsturktor_i_baza.DoktorLokalno;
 import com.example.deean.medix.doktorovo.pacijenti_od_doktora.PacijentAPI;
-import com.example.deean.medix.doktorovo.pacijenti_od_doktora.detalji_o_pacijentu.SpremiPodatkeOZakazanomPregleduAPI;
 import com.example.deean.medix.pacijentovo.konstruktor_i_baza.Pacijent;
 import com.example.deean.medix.pocetni_zaslon.Login;
 import com.github.ybq.android.spinkit.SpinKitView;

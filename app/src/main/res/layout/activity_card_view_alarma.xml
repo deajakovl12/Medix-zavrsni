@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:padding="1dp"
+    android:background="#efefef"
+    android:orientation="vertical"
+    >
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/cv"
+        >
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#A22022"
+            >
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:id="@+id/lijek_slika"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginRight="16dp"
+                android:src="@drawable/lijekovi_white_small"
+                />
+
+            <TextView
+                android:text="ime lijeka"
+                android:textColor="@android:color/white"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/lijek_ime"
+                android:layout_toRightOf="@+id/lijek_slika"
+                android:layout_alignParentTop="true"
+                android:textSize="15sp"
+                />
+            <TextView
+                android:layout_below="@id/lijek_ime"
+                android:text="vrijeme pocetka"
+                android:textColor="@android:color/white"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/vrijeme_pocetka"
+                android:layout_toRightOf="@+id/lijek_slika"
+                android:textSize="15sp"
+                />
+            <TextView
+                android:layout_below="@id/vrijeme_pocetka"
+                android:text="uzeti svakih"
+                android:textColor="@android:color/white"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/uzimati_svakih"
+                android:layout_toRightOf="@+id/lijek_slika"
+                android:textSize="15sp"
+                />
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
+</LinearLayout>

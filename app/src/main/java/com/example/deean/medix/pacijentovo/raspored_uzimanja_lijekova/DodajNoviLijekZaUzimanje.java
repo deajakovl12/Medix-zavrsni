@@ -18,16 +18,19 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import com.example.deean.medix.R;
 import com.example.deean.medix.databinding.ActivityDodajNoviLijekZaUzimanjeBinding;
 import com.example.deean.medix.doktorovo.ToolbarActivity;
 import com.example.deean.medix.doktorovo.pacijenti_od_doktora.PacijentAPI;
+import com.example.deean.medix.doktorovo.pregledi.DodajNoviPregled;
 import com.example.deean.medix.doktorovo.pregledi.PreglediOdDoktora;
 import com.example.deean.medix.lijekovi.Lijek;
 import com.example.deean.medix.lijekovi.LijekAPI;
 import com.example.deean.medix.pacijentovo.konstruktor_i_baza.Pacijent;
 import com.example.deean.medix.pacijentovo.konstruktor_i_baza.PacijentLokalno;
+import com.github.ybq.android.spinkit.SpinKitView;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -44,6 +47,8 @@ public class DodajNoviLijekZaUzimanje extends ToolbarActivity implements View.On
 
     EditText etDatum, etVrijeme, etVrijemeUzimanja;
     Spinner spinner;
+    SpinKitView loadingView;
+
 
     Button bDatum, bVrijeme, bSpremiLijek;
 
@@ -75,6 +80,7 @@ public class DodajNoviLijekZaUzimanje extends ToolbarActivity implements View.On
         bDatum = (Button) findViewById(R.id.bDatum);
         bVrijeme = (Button) findViewById(R.id.bVrijeme);
         bSpremiLijek = (Button) findViewById(R.id.bSpremiTermin);
+        loadingView = (SpinKitView) findViewById(R.id.loading_view);
 
 
         bDatum.setOnClickListener(this);
@@ -174,12 +180,12 @@ public class DodajNoviLijekZaUzimanje extends ToolbarActivity implements View.On
         String invervalUzimanjaLijeka = etVrijemeUzimanja.getText().toString();
 
         if(nazivLijeka.equals("") || etVrijeme.getText().toString().equals("") || etDatum.getText().toString().equals("") || invervalUzimanjaLijeka.equals("")){
-            AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(DodajNoviLijekZaUzimanje.this);
-            dialogBuilder.setMessage("Popunite sve podatke!");
-            dialogBuilder.setPositiveButton("Ok",null);
-            dialogBuilder.show();
+            Toast.makeText(DodajNoviLijekZaUzimanje.this, "Popunite sve podatke!", Toast.LENGTH_SHORT).show();
+
         }
         else{
+            bSpremiLijek.setVisibility(View.GONE);
+            loadingView.setVisibility(View.VISIBLE);
             Calendar calendar = Calendar.getInstance();
 
             Calendar calendar2 = Calendar.getInstance();
@@ -213,19 +219,31 @@ public class DodajNoviLijekZaUzimanje extends ToolbarActivity implements View.On
             PendingIntent pendingIntent = PendingIntent.getBroadcast(getApplicationContext(),randomNum,intent,0); //PendingIntent.FLAG_UPDATE_CURRENT)
 
             AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
-            //alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,calendar2.getTimeInMillis(),1000*60*Integer.parseInt(invervalUzimanjaLijeka),pendingIntent);
-            alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP,calendar2.getTimeInMillis(),1000*60*Integer.parseInt(invervalUzimanjaLijeka),pendingIntent);
-            //alarmManager.se
+            alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,calendar2.getTimeInMillis(),1000*60*Integer.parseInt(invervalUzimanjaLijeka),pendingIntent);
 
-            AlertDialog.Builder dialogBuilder1 = new AlertDialog.Builder(DodajNoviLijekZaUzimanje.this);
-            dialogBuilder1.setTitle("Uspješno!");
-            dialogBuilder1.setMessage("Dodali ste novi termin uzimanja lijeka!");
-            dialogBuilder1.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog, int id) {
-                    startActivity(new Intent(DodajNoviLijekZaUzimanje.this,RasporedUzimanjaLijekova.class));
+
+            SpremiPodatkeOAlarmuAPI.Factory.getIstance().response(String.valueOf(randomNum),pacijent.getId_pacijent(),nazivLijeka,datumPocetkaIVrijeme,invervalUzimanjaLijeka).enqueue(new Callback<ArrayList<Integer>>() {
+                @Override
+                public void onResponse(Call<ArrayList<Integer>> call, Response<ArrayList<Integer>> response) {
+
+                }
+
+                @Override
+                public void onFailure(Call<ArrayList<Integer>> call, Throwable t) {
+                    bSpremiLijek.setVisibility(View.VISIBLE);
+                    loadingView.setVisibility(View.GONE);
+                    AlertDialog.Builder dialogBuilder1 = new AlertDialog.Builder(DodajNoviLijekZaUzimanje.this);
+                    dialogBuilder1.setTitle("Uspješno!");
+                    dialogBuilder1.setMessage("Dodali ste novi termin uzimanja lijeka!");
+                    dialogBuilder1.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            startActivity(new Intent(DodajNoviLijekZaUzimanje.this,RasporedUzimanjaLijekova.class));
+                        }
+                    });
+                    dialogBuilder1.show();
                 }
             });
-            dialogBuilder1.show();
+
         }
     }
 }

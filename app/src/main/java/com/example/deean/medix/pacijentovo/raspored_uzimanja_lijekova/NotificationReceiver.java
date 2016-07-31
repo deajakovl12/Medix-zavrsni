@@ -54,5 +54,7 @@ public class NotificationReceiver extends BroadcastReceiver {
             brojac++;
             Log.e("BROJAC", String.valueOf(brojac));
             notificationManager.notify(Integer.parseInt(rkod), builder.build());
+
     }
+
 }
