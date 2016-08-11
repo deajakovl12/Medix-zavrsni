@@ -13,7 +13,8 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".pocetni_zaslon.Login">
+        <activity android:name=".pocetni_zaslon.Login"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -22,10 +23,12 @@
         </activity>
         <activity
             android:name=".doktorovo.Prijava"
-            android:label="Doktor" />
+            android:label="Doktor"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".pocetni_zaslon.ZaboravljenaLozinka"
-            android:label="Zaboravili ste lozinku?" />
+            android:label="Zaboravili ste lozinku?"
+            android:screenOrientation="portrait"/>
         <!--
              ATTENTION: This was auto-generated to add Google Play services to your project for
              App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -36,37 +39,73 @@
 
         <activity
             android:name=".pacijentovo.Prijava_Pacijent"
-            android:label="Pacijent" />
-        <activity android:name=".lijekovi.CardViewLijek" />
+            android:label="Pacijent"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".lijekovi.CardViewLijek"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".lijekovi.RecycleView"
-            android:label="Lijekovi" />
+            android:label="Lijekovi"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".lijekovi.detalji_o_lijeku.FragmentLijekDetalji"
-            android:label="Lijek detalji" />
+            android:label="Lijek detalji"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".registracija.FragmentRegistracija"
-            android:label="Registracija" />
-        <activity android:name=".doktorovo.ToolbarActivity" />
-        <activity android:name=".pocetni_zaslon.ToolbarActivityAll" />
-        <activity android:name=".pacijentovo.ToolbarActivityPacijent" />
-        <activity android:name=".doktorovo.pacijenti_od_doktora.CardViewPacijenta" />
-        <activity android:name=".doktorovo.pacijenti_od_doktora.RecycleViewPacijenta" />
-        <activity android:name=".doktorovo.pacijenti_od_doktora.detalji_o_pacijentu.FragmentPacijentDetalji" />
-        <activity android:name=".doktorovo.pacijenti_u_bazi.RecycleViewPacijenata" />
-        <activity android:name=".doktorovo.pacijenti_od_doktora.detalji_o_pacijentu.UrediMedicinskePodatke" />
-        <activity android:name=".doktorovo.pacijenti_od_doktora.detalji_o_pacijentu.DodajLijekPacijentu" />
-        <activity android:name=".doktorovo.pregledi.PreglediOdDoktora" />
-        <activity android:name=".doktorovo.pregledi.CardViewPregleda" />
-        <activity android:name=".doktorovo.pregledi.DodajNoviPregled" />
-        <activity android:name=".doktorovo.postavke_profila.PostavkeProfilaDoktora" />
-        <activity android:name=".doktorovo.pomoc.PomocDoktor" />
-        <activity android:name=".pacijentovo.postavke_profila.PostavkeProfilaPacijenta" />
-        <activity android:name=".pacijentovo.raspored_uzimanja_lijekova.RasporedUzimanjaLijekova" />
-
+            android:label="Registracija"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".doktorovo.ToolbarActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".pocetni_zaslon.ToolbarActivityAll"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".pacijentovo.ToolbarActivityPacijent"
+            android:screenOrientation="portrait"/>
+        />
+        <activity android:name=".doktorovo.pacijenti_od_doktora.CardViewPacijenta"
+            android:screenOrientation="portrait"/>
+        />
+        <activity android:name=".doktorovo.pacijenti_od_doktora.RecycleViewPacijenta"
+            android:screenOrientation="portrait"/>
+        />
+        <activity android:name=".doktorovo.pacijenti_od_doktora.detalji_o_pacijentu.FragmentPacijentDetalji"
+            android:screenOrientation="portrait"/>
+        />
+        <activity android:name=".doktorovo.pacijenti_u_bazi.RecycleViewPacijenata"
+            android:screenOrientation="portrait"/>
+        />
+        <activity android:name=".doktorovo.pacijenti_od_doktora.detalji_o_pacijentu.UrediMedicinskePodatke"
+            android:screenOrientation="portrait"/>
+        />
+        <activity android:name=".doktorovo.pacijenti_od_doktora.detalji_o_pacijentu.DodajLijekPacijentu"
+            android:screenOrientation="portrait"/>
+        />
+        <activity android:name=".doktorovo.pregledi.PreglediOdDoktora"
+            android:screenOrientation="portrait"/>
+        />
+        <activity android:name=".doktorovo.pregledi.CardViewPregleda"
+            android:screenOrientation="portrait"/>
+        />
+        <activity android:name=".doktorovo.pregledi.DodajNoviPregled"
+            android:screenOrientation="portrait"/>
+        />
+        <activity android:name=".doktorovo.postavke_profila.PostavkeProfilaDoktora"
+            android:screenOrientation="portrait"/>
+        />
+        <activity android:name=".doktorovo.pomoc.PomocDoktor"
+            android:screenOrientation="portrait"/>
+        />
+        <activity android:name=".pacijentovo.postavke_profila.PostavkeProfilaPacijenta"
+            android:screenOrientation="portrait"/>
+        />
+        <activity android:name=".pacijentovo.raspored_uzimanja_lijekova.RasporedUzimanjaLijekova"
+            android:screenOrientation="portrait"/>
+        />
         <receiver android:name=".pacijentovo.raspored_uzimanja_lijekova.NotificationReceiver"></receiver>
 
-        <activity android:name=".pacijentovo.raspored_uzimanja_lijekova.DodajNoviLijekZaUzimanje"></activity>
+        <activity android:name=".pacijentovo.raspored_uzimanja_lijekova.DodajNoviLijekZaUzimanje">
+            android:screenOrientation="portrait"/>
+        </activity>
     </application>
 
 </manifest>
