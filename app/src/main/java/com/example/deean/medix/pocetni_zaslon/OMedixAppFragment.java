@@ -19,6 +19,7 @@ public class OMedixAppFragment extends Fragment {
 
     JustifyTextView oapp;
 
+
     public OMedixAppFragment() {
         // Required empty public constructor
     }
@@ -28,6 +29,7 @@ public class OMedixAppFragment extends Fragment {
         LayoutInflater lf = getActivity().getLayoutInflater();
         View view = lf.inflate(R.layout.fragment_omedix_app, container, false);
         // Inflate the layout for this fragment
+        Login.bPrijava.setVisibility(View.INVISIBLE);
         oapp = (JustifyTextView) view.findViewById(R.id.tvOapp);
         oapp.setText("   Medix je aplikacija koja je kreirana kao tema završnog rada.\n" +
                 "   Glavna ideja aplikacije je da sam doktor ima evidenciju i plan rada na svoje mobitelu.\n" +

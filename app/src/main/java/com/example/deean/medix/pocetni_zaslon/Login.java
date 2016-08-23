@@ -26,7 +26,7 @@ import com.github.ybq.android.spinkit.SpinKitView;
 
 
 public class Login extends ToolbarActivityAll implements View.OnClickListener{
-    Button bPrijava;
+    public static Button bPrijava;
     EditText etEmail, etLozinka;
     TextView tvRegistracijaLink, tvLozinkaLink;
     SpinKitView loadingView;
