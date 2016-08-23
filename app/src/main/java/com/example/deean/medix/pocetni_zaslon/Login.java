@@ -61,12 +61,12 @@ public class Login extends ToolbarActivityAll implements View.OnClickListener{
         postaviDrawer(postaviToolbar("Početna")).build();
 
 
-        if(DoktorLokalno.provjeriPrijavljenogDoktora()){
-            startActivity(new Intent(this,Prijava.class));
-        }
-        if(PacijentLokalno.provjeriPrijavljenogPacijenta()){
-            startActivity(new Intent(this,Prijava_Pacijent.class));
-        }
+//        if(DoktorLokalno.provjeriPrijavljenogDoktora()){
+//            startActivity(new Intent(this,Prijava.class));
+//        }
+//        if(PacijentLokalno.provjeriPrijavljenogPacijenta()){
+//            startActivity(new Intent(this,Prijava_Pacijent.class));
+//        }
     }
 
     @Override

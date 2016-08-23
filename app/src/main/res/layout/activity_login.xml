@@ -39,6 +39,7 @@
         android:text="Email"
         android:layout_height="wrap_content" />
     <EditText
+        android:singleLine="true"
         android:layout_below="@id/tvemtext"
         android:theme="@style/Boja_EditText"
         android:textColor="#434343"
@@ -54,6 +55,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/etEmail"/>
     <EditText
+        android:singleLine="true"
         android:layout_below="@+id/tvloztext"
         android:theme="@style/Boja_EditText"
         android:textColor="#434343"

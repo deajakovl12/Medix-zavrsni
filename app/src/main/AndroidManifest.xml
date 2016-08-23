@@ -6,15 +6,16 @@
     <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="com.android.alarm.permission.SET_ALARM" />
 
-
     <application
         android:allowBackup="true"
         android:icon="@drawable/logo1_samo_logo"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".pocetni_zaslon.Login"
-            android:screenOrientation="portrait">
+        <activity
+            android:name=".SplashActivity"
+            android:noHistory="true"
+            android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -24,11 +25,11 @@
         <activity
             android:name=".doktorovo.Prijava"
             android:label="Doktor"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".pocetni_zaslon.ZaboravljenaLozinka"
             android:label="Zaboravili ste lozinku?"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <!--
              ATTENTION: This was auto-generated to add Google Play services to your project for
              App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -40,72 +41,93 @@
         <activity
             android:name=".pacijentovo.Prijava_Pacijent"
             android:label="Pacijent"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".lijekovi.CardViewLijek"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".lijekovi.CardViewLijek"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".lijekovi.RecycleView"
             android:label="Lijekovi"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".lijekovi.detalji_o_lijeku.FragmentLijekDetalji"
             android:label="Lijek detalji"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".registracija.FragmentRegistracija"
             android:label="Registracija"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".doktorovo.ToolbarActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".pocetni_zaslon.ToolbarActivityAll"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".pacijentovo.ToolbarActivityPacijent"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".doktorovo.ToolbarActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".pocetni_zaslon.ToolbarActivityAll"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".pacijentovo.ToolbarActivityPacijent"
+            android:screenOrientation="portrait" />
         />
-        <activity android:name=".doktorovo.pacijenti_od_doktora.CardViewPacijenta"
-            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".doktorovo.pacijenti_od_doktora.CardViewPacijenta"
+            android:screenOrientation="portrait" />
         />
-        <activity android:name=".doktorovo.pacijenti_od_doktora.RecycleViewPacijenta"
-            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".doktorovo.pacijenti_od_doktora.RecycleViewPacijenta"
+            android:screenOrientation="portrait" />
         />
-        <activity android:name=".doktorovo.pacijenti_od_doktora.detalji_o_pacijentu.FragmentPacijentDetalji"
-            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".doktorovo.pacijenti_od_doktora.detalji_o_pacijentu.FragmentPacijentDetalji"
+            android:screenOrientation="portrait" />
         />
-        <activity android:name=".doktorovo.pacijenti_u_bazi.RecycleViewPacijenata"
-            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".doktorovo.pacijenti_u_bazi.RecycleViewPacijenata"
+            android:screenOrientation="portrait" />
         />
-        <activity android:name=".doktorovo.pacijenti_od_doktora.detalji_o_pacijentu.UrediMedicinskePodatke"
-            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".doktorovo.pacijenti_od_doktora.detalji_o_pacijentu.UrediMedicinskePodatke"
+            android:screenOrientation="portrait" />
         />
-        <activity android:name=".doktorovo.pacijenti_od_doktora.detalji_o_pacijentu.DodajLijekPacijentu"
-            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".doktorovo.pacijenti_od_doktora.detalji_o_pacijentu.DodajLijekPacijentu"
+            android:screenOrientation="portrait" />
         />
-        <activity android:name=".doktorovo.pregledi.PreglediOdDoktora"
-            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".doktorovo.pregledi.PreglediOdDoktora"
+            android:screenOrientation="portrait" />
         />
-        <activity android:name=".doktorovo.pregledi.CardViewPregleda"
-            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".doktorovo.pregledi.CardViewPregleda"
+            android:screenOrientation="portrait" />
         />
-        <activity android:name=".doktorovo.pregledi.DodajNoviPregled"
-            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".doktorovo.pregledi.DodajNoviPregled"
+            android:screenOrientation="portrait" />
         />
-        <activity android:name=".doktorovo.postavke_profila.PostavkeProfilaDoktora"
-            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".doktorovo.postavke_profila.PostavkeProfilaDoktora"
+            android:screenOrientation="portrait" />
         />
-        <activity android:name=".doktorovo.pomoc.PomocDoktor"
-            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".doktorovo.pomoc.PomocDoktor"
+            android:screenOrientation="portrait" />
         />
-        <activity android:name=".pacijentovo.postavke_profila.PostavkeProfilaPacijenta"
-            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".pacijentovo.postavke_profila.PostavkeProfilaPacijenta"
+            android:screenOrientation="portrait" />
         />
-        <activity android:name=".pacijentovo.raspored_uzimanja_lijekova.RasporedUzimanjaLijekova"
-            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".pacijentovo.raspored_uzimanja_lijekova.RasporedUzimanjaLijekova"
+            android:screenOrientation="portrait" />
         />
-        <receiver android:name=".pacijentovo.raspored_uzimanja_lijekova.NotificationReceiver"></receiver>
+        <receiver android:name=".pacijentovo.raspored_uzimanja_lijekova.NotificationReceiver" />
 
-        <activity android:name=".pacijentovo.raspored_uzimanja_lijekova.DodajNoviLijekZaUzimanje">
-            android:screenOrientation="portrait"/>
+        <activity android:name=".pacijentovo.raspored_uzimanja_lijekova.DodajNoviLijekZaUzimanje"
+            android:screenOrientation="portrait">
+            />
         </activity>
+        <activity android:name=".pocetni_zaslon.Login"
+            android:screenOrientation="portrait"
+            ></activity>
     </application>
 
 </manifest>

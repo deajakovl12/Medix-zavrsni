@@ -8,6 +8,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.support.v4.app.ActivityCompat;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -30,8 +31,8 @@ import retrofit2.Response;
 
 
 public class Prijava extends ToolbarActivity implements View.OnClickListener {
-    TextView etRadnoVrijeme, etSavjet, etTelefon, etAdresa, etPrezime, etIme, etMobitel, etTitula;
-    ImageView ivDoktor, ivTelZvanje, ivMobZvanje;
+    TextView etRadnoVrijeme, etSavjet, etTelefon, etAdresa, etPrezime, etIme, etMobitel, etTitula, tvNoDoctor;
+    ImageView ivDoktor, ivTelZvanje, ivMobZvanje, noDoctor;
     com.example.deean.medix.doktorovo.konsturktor_i_baza.DoktorLokalno DoktorLokalno;
 
     private Doktor doktor;
@@ -56,6 +57,8 @@ public class Prijava extends ToolbarActivity implements View.OnClickListener {
         ivDoktor = (ImageView) findViewById(R.id.ivDoktor);
         ivTelZvanje = (ImageView) findViewById(R.id.ivTelZvanje);
         ivMobZvanje = (ImageView) findViewById(R.id.ivMobZvanje);
+        noDoctor = (ImageView) findViewById(R.id.noDoctor);
+        tvNoDoctor = (TextView) findViewById(R.id.tvNemateDoktora);
 
         ivMobZvanje.setOnClickListener(this);
         ivTelZvanje.setOnClickListener(this);
@@ -71,11 +74,15 @@ public class Prijava extends ToolbarActivity implements View.OnClickListener {
         if (provjera() == true) {
             prikaziDoktorovePodatke();
         } else {
-            //startActivity(new Intent(Prijava.this,Login.class));
-            //TODO tu staviti uvjet ako se dolazi sa pacijentovog screena
             pacijent = pacijentLokalno.getPrijavljenogPacijenta();
             postaviDrawer(postaviToolbar("Doktor"), pacijent.getIme(), pacijent.getPrezime(), pacijent.getEmail()).build();
-            dohvatiDoktorovePodatke();
+            if(pacijent.getId_doktor().equals("null")){
+                noDoctor.setVisibility(View.VISIBLE);
+                tvNoDoctor.setVisibility(View.VISIBLE);
+            }
+            else{
+                dohvatiDoktorovePodatke();
+            }
         }
     }
 

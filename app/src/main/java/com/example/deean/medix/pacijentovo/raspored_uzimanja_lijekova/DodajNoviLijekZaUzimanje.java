@@ -46,7 +46,7 @@ public class DodajNoviLijekZaUzimanje extends ToolbarActivity implements View.On
     //ActivityDodajNoviLijekZaUzimanjeBinding bind;
 
     EditText etDatum, etVrijeme, etVrijemeUzimanja;
-    Spinner spinner;
+    Spinner spinner, spinnerKoliko;
     SpinKitView loadingView;
 
 
@@ -74,6 +74,7 @@ public class DodajNoviLijekZaUzimanje extends ToolbarActivity implements View.On
         postaviDrawer(postaviToolbar("Dodaj novi lijek za korištenje"), pacijent.getIme(), pacijent.getPrezime(), pacijent.getEmail()).build();
 
         spinner = (Spinner) findViewById(R.id.spinner);
+        spinnerKoliko = (Spinner) findViewById(R.id.spinner_koliko_prije);
         etDatum = (EditText) findViewById(R.id.etDatum);
         etVrijeme = (EditText) findViewById(R.id.etVrijeme);
         etVrijemeUzimanja = (EditText) findViewById(R.id.etVrijemeUzimanja);
@@ -98,7 +99,7 @@ public class DodajNoviLijekZaUzimanje extends ToolbarActivity implements View.On
                 for (int i = 0; i < response.body().size(); i++) {
                     spremi.add(new Lijek(response.body().get(i).getNaziv(),response.body().get(i).getSlika_lijeka()));
                 }
-                popuniSpinner(spinner);
+                popuniSpinner(spinner, spinnerKoliko);
 
             }
             @Override
@@ -108,14 +109,24 @@ public class DodajNoviLijekZaUzimanje extends ToolbarActivity implements View.On
         });
     }
 
-    private void popuniSpinner(Spinner spinner) {
+    private void popuniSpinner(Spinner spinner, Spinner spinnerKoliko) {
         List<String> lables = new ArrayList<String>();
         for (int i = 0; i < spremi.size(); i++) {
             lables.add(spremi.get(i).getNaziv().toUpperCase());
         }
+        List<String> lablesKoliko = new ArrayList<String>();
+        lablesKoliko.add("5 minuta");
+        lablesKoliko.add("10 minuta");
+        lablesKoliko.add("30 minuta");
+        lablesKoliko.add("1 sat");
+
         ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, lables);
         spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(spinnerAdapter);
+
+        ArrayAdapter<String> spinnerAdapterKoliko = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, lablesKoliko);
+        spinnerAdapterKoliko.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerKoliko.setAdapter(spinnerAdapterKoliko);
     }
 
     @Override
@@ -219,7 +230,7 @@ public class DodajNoviLijekZaUzimanje extends ToolbarActivity implements View.On
             PendingIntent pendingIntent = PendingIntent.getBroadcast(getApplicationContext(),randomNum,intent,0); //PendingIntent.FLAG_UPDATE_CURRENT)
 
             AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
-            alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,calendar2.getTimeInMillis(),1000*60*Integer.parseInt(invervalUzimanjaLijeka),pendingIntent);
+            alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,calendar2.getTimeInMillis(),1000*60*Integer.parseInt(invervalUzimanjaLijeka),pendingIntent); // ovo je u minutama
 
 
             SpremiPodatkeOAlarmuAPI.Factory.getIstance().response(String.valueOf(randomNum),pacijent.getId_pacijent(),nazivLijeka,datumPocetkaIVrijeme,invervalUzimanjaLijeka).enqueue(new Callback<ArrayList<Integer>>() {

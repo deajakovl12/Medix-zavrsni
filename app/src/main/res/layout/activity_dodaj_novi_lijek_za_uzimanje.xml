@@ -137,6 +137,32 @@
                 android:layout_below="@id/tvKolikoSati"
                 android:layout_toEndOf="@+id/ivRadno_vrijeme"
                 />
+
+            <TextView
+
+                android:layout_marginLeft="5dp"
+                android:layout_marginBottom="10dp"
+                android:id="@+id/tvKolikoPrije"
+                android:textColor="#A22022"
+                android:layout_width="wrap_content"
+                android:text="Koliko vremenski prije želite da vam se javi da morate uzeti lijek"
+                android:textSize="18dp"
+                android:textStyle="bold"
+                android:layout_toEndOf="@+id/ivRadno_vrijeme"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/etVrijemeUzimanja"/>
+
+            <Spinner
+                android:textColor="#434343"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/spinner_koliko_prije"
+                android:layout_toEndOf="@+id/ivRadno_vrijeme"
+                android:layout_marginBottom="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_below="@id/tvKolikoPrije"
+                />
+
             <com.github.ybq.android.spinkit.SpinKitView
                 android:id="@+id/loading_view"
                 android:layout_width="match_parent"
