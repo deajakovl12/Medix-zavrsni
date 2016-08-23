@@ -45,6 +45,18 @@
                 android:layout_toRightOf="@+id/lijek_slika"
                 android:textSize="15sp"
                 />
+
+            <TextView
+                android:visibility="gone"
+                android:layout_below="@id/lijek_ime"
+                android:text="vrijeme pocetka"
+                android:textColor="@android:color/white"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/req_code"
+                android:layout_alignParentRight="true"
+                android:textSize="15sp"
+                />
             <TextView
                 android:layout_below="@id/vrijeme_pocetka"
                 android:text="uzeti svakih"

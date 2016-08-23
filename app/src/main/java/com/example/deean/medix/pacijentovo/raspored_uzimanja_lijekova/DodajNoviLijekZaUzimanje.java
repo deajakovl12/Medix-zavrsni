@@ -115,6 +115,7 @@ public class DodajNoviLijekZaUzimanje extends ToolbarActivity implements View.On
             lables.add(spremi.get(i).getNaziv().toUpperCase());
         }
         List<String> lablesKoliko = new ArrayList<String>();
+        lablesKoliko.add("Bez razmaka uzimanja");
         lablesKoliko.add("5 minuta");
         lablesKoliko.add("10 minuta");
         lablesKoliko.add("30 minuta");
@@ -189,6 +190,26 @@ public class DodajNoviLijekZaUzimanje extends ToolbarActivity implements View.On
         String nazivLijeka = spinner.getSelectedItem().toString();
         String datumPocetkaIVrijeme = etDatum.getText().toString() + " " +  etVrijeme.getText().toString();
         String invervalUzimanjaLijeka = etVrijemeUzimanja.getText().toString();
+        String kolikoPrijeUzimati = spinnerKoliko.getSelectedItem().toString();
+
+        String [] kolikoPrijeRazdvojeno = kolikoPrijeUzimati.split(" ");
+//        Log.e("SELECTED", String.valueOf(spinnerKoliko.getSelectedItemPosition()));
+//        Log.e("SELECTED", kolikoPrijeRazdvojeno[0]);
+
+        int kolikoPrijeMillis;
+
+        if(spinnerKoliko.getSelectedItemPosition() == 0){
+            kolikoPrijeMillis = 0;
+        }
+        else if (spinnerKoliko.getSelectedItemPosition() == 4){
+            kolikoPrijeMillis =  60 * 60 * 1000;
+        }
+        else{
+            kolikoPrijeMillis =  Integer.parseInt(kolikoPrijeRazdvojeno[0]) * 60 * 1000;
+        }
+
+//        Log.e("KOLIKO PRIJE MILLIS", String.valueOf(kolikoPrijeMillis));
+
 
         if(nazivLijeka.equals("") || etVrijeme.getText().toString().equals("") || etDatum.getText().toString().equals("") || invervalUzimanjaLijeka.equals("")){
             Toast.makeText(DodajNoviLijekZaUzimanje.this, "Popunite sve podatke!", Toast.LENGTH_SHORT).show();
@@ -205,7 +226,6 @@ public class DodajNoviLijekZaUzimanje extends ToolbarActivity implements View.On
             String[] satMinuta = etVrijeme.getText().toString().split(":");
 
 
-            //TODO NAPRAVITI KOLIKO VREMENSKI PRIJE SE TREBA JAVITI ALARM NPR 10 MIN PRIJE UZIMANJA LIJEKA I SLICNO
             calendar.set(Calendar.YEAR,mYear);
             calendar.set(Calendar.MONTH,mMonth);
             calendar.set(Calendar.DAY_OF_MONTH,mDay);
@@ -217,10 +237,10 @@ public class DodajNoviLijekZaUzimanje extends ToolbarActivity implements View.On
 
             int randomNum = rand.nextInt((9999999 - 1) + 1) + 1;
 
-            Log.e("RANDOM NUM", String.valueOf(randomNum)+ " da");
-            Log.e("Kalendar njihov", String.valueOf(calendar) + " da");
-            Log.e("Kalendar njihov2", String.valueOf(calendar2) + " da");
-            Log.e("Kalendar moj", datumPocetkaIVrijeme +  " da");
+//            Log.e("RANDOM NUM", String.valueOf(randomNum)+ " da");
+//            Log.e("Kalendar njihov", String.valueOf(calendar) + " da");
+//            Log.e("Kalendar njihov2", String.valueOf(calendar2) + " da");
+//            Log.e("Kalendar moj", datumPocetkaIVrijeme +  " da");
 
             Intent intent = new Intent(getApplicationContext(),NotificationReceiver.class);
 
@@ -230,7 +250,7 @@ public class DodajNoviLijekZaUzimanje extends ToolbarActivity implements View.On
             PendingIntent pendingIntent = PendingIntent.getBroadcast(getApplicationContext(),randomNum,intent,0); //PendingIntent.FLAG_UPDATE_CURRENT)
 
             AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
-            alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,calendar2.getTimeInMillis(),1000*60*Integer.parseInt(invervalUzimanjaLijeka),pendingIntent); // ovo je u minutama
+            alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,calendar2.getTimeInMillis() - kolikoPrijeMillis,1000*60*Integer.parseInt(invervalUzimanjaLijeka),pendingIntent); // ovo je u minutama
 
 
             SpremiPodatkeOAlarmuAPI.Factory.getIstance().response(String.valueOf(randomNum),pacijent.getId_pacijent(),nazivLijeka,datumPocetkaIVrijeme,invervalUzimanjaLijeka).enqueue(new Callback<ArrayList<Integer>>() {
@@ -238,7 +258,6 @@ public class DodajNoviLijekZaUzimanje extends ToolbarActivity implements View.On
                 public void onResponse(Call<ArrayList<Integer>> call, Response<ArrayList<Integer>> response) {
 
                 }
-
                 @Override
                 public void onFailure(Call<ArrayList<Integer>> call, Throwable t) {
                     bSpremiLijek.setVisibility(View.VISIBLE);
