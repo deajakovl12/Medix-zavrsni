@@ -108,12 +108,17 @@ public class RVAadapterAlarma extends RecyclerView.Adapter<RVAadapterAlarma.Alar
                     PonistiAlarmAPI.Factory.getIstance().response(reqCode.getText().toString()).enqueue(new Callback<ArrayList<Integer>>() {
                         @Override
                         public void onResponse(Call<ArrayList<Integer>> call, Response<ArrayList<Integer>> response) {
+//                            context.startActivity(new Intent(context, RasporedUzimanjaLijekova.class));
+                            alarms.remove(getAdapterPosition());
+                            RVAadapterAlarma.this.refresh();
                         }
                         @Override
                         public void onFailure(Call<ArrayList<Integer>> call, Throwable t) {
+//                            context.startActivity(new Intent(context, RasporedUzimanjaLijekova.class));
+                            alarms.remove(getAdapterPosition());
+                            RVAadapterAlarma.this.refresh();
                         }
                     });
-                    context.startActivity(new Intent(context, RasporedUzimanjaLijekova.class));
                 }
             });
             dialogBuilder1.setNegativeButton("Ne", new DialogInterface.OnClickListener() {
@@ -123,12 +128,6 @@ public class RVAadapterAlarma extends RecyclerView.Adapter<RVAadapterAlarma.Alar
                 }
             });
             dialogBuilder1.show();
-
-
-
         }
-
-
-
     }
 }
