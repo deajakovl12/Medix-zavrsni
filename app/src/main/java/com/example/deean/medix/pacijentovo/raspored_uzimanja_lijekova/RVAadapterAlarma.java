@@ -22,8 +22,13 @@ import com.example.deean.medix.pocetni_zaslon.Login;
 import com.squareup.picasso.Picasso;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * Created by Deean on 27.6.2016..
@@ -100,8 +105,15 @@ public class RVAadapterAlarma extends RecyclerView.Adapter<RVAadapterAlarma.Alar
                     PendingIntent pendingIntent = PendingIntent.getBroadcast(context,Integer.parseInt(reqCode.getText().toString()),intent,0);
                     AlarmManager alarmManager = (AlarmManager) context.getSystemService(context.ALARM_SERVICE);
                     alarmManager.cancel(pendingIntent);
-                    RVAadapterAlarma.this.refresh();
-//                    context.startActivity(new Intent(context, RasporedUzimanjaLijekova.class));
+                    PonistiAlarmAPI.Factory.getIstance().response(reqCode.getText().toString()).enqueue(new Callback<ArrayList<Integer>>() {
+                        @Override
+                        public void onResponse(Call<ArrayList<Integer>> call, Response<ArrayList<Integer>> response) {
+                        }
+                        @Override
+                        public void onFailure(Call<ArrayList<Integer>> call, Throwable t) {
+                        }
+                    });
+                    context.startActivity(new Intent(context, RasporedUzimanjaLijekova.class));
                 }
             });
             dialogBuilder1.setNegativeButton("Ne", new DialogInterface.OnClickListener() {
