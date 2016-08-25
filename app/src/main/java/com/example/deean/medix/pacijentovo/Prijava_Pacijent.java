@@ -48,6 +48,8 @@ public class Prijava_Pacijent extends ToolbarActivity {
 
     @Override
     public void onBackPressed() {
+        finishAffinity();
+
     }
 
     private boolean provjera(){

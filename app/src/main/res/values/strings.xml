@@ -7,4 +7,18 @@
     <string name="pregledi">Preglede doktor može filtrirati na način da u pretraživanje upiše npr. određeni datum, te će mu onda biti prikazani svi pregledi koje ima zakazane za taj dan koji je upisan.</string>
     <string name="lozinka">Ako je lozinka kojim slučajem zaboravljena, doktor ju može resetirati tako da ode na zaboravljenu lozinku, te upiše e-mail adresu.</string>
     <string name="uzimanje_lijekova">Pacijent si sam može dodati lijek, klikom na + znak kada se nalazi na rasporedu uzimanja lijekova, tamo si popuni koji lijek kada koliko često i slično želi uzimati, te kada želi da mu se javlja alarm.</string>
+
+    <string name="first">Korištenje izbornika</string>
+    <string name="second">Dodavanje pacijenata</string>
+    <string name="third">Pregled podataka pacijenta</string>
+    <string name="last">Dodavanje termina s pacijentom</string>
+
+    <string name="done">Done</string>
+
+
+    <string name="first_text">Korištenje izbornika omogućuje brzo pretraživanje potrebnih informacija, u izborniku su prikazane osnovne sekcije aplikacije.</string>
+    <string name="second_text">Pronađite svoje  pacijente, dodajte ih u svoju listu pacijenata te pratite i komunicirajte s pacijentom.</string>
+    <string name="third_text">Pregledajte podatke od pacijenta, zovite ih preko aplikacije, uredite medicinske podatke, pregledajte lijekove koje pacijent koristi, dodajte nove lijekove pacijentu.</string>
+    <string name="last_text">Ugovorite pregled s pacijentom, odaberite pacijenta, odaberite vrijeme te dodajte komentar kako bi i vi znali zbog čega pacijent dolazi na pregled.</string>
+
 </resources>

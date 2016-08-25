@@ -5,6 +5,7 @@ import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import com.example.deean.medix.doktorovo.IntroActivityDoctor;
 import com.example.deean.medix.doktorovo.Prijava;
 import com.example.deean.medix.doktorovo.konsturktor_i_baza.DoktorLokalno;
 import com.example.deean.medix.pacijentovo.Prijava_Pacijent;
@@ -30,8 +31,14 @@ public class SplashActivity extends AppCompatActivity {
             @Override
             public void run() {
                 if(DoktorLokalno.provjeriPrijavljenogDoktora()){
-                    startActivity(new Intent(SplashActivity.this,Prijava.class));
+                    if(SharedPreferencesHelper.getShowIntroScreen()) {
+                        startActivity(new Intent(SplashActivity.this, Prijava.class));
+                    }
+                    else{
+                        startActivity(new Intent(SplashActivity.this,IntroActivityDoctor.class));
+                    }
                 }
+
                 else if(PacijentLokalno.provjeriPrijavljenogPacijenta()){
                     startActivity(new Intent(SplashActivity.this,Prijava_Pacijent.class));
                 }

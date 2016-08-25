@@ -30,6 +30,10 @@ public class PomocFragment extends Fragment {
         View view = lf.inflate(R.layout.fragment_pomoc, container, false);
 
         Login.bPrijava.setVisibility(View.INVISIBLE);
+        Login.etEmail.setVisibility(View.INVISIBLE);
+        Login.etLozinka.setVisibility(View.INVISIBLE);
+        Login.tvLozinkaLink.setVisibility(View.INVISIBLE);
+        Login.tvRegistracijaLink.setVisibility(View.INVISIBLE);
 
         zapoceti = (TextView) view.findViewById(R.id.tvzapocetirad);
         registrirati = (TextView) view.findViewById(R.id.tvregistriratise);

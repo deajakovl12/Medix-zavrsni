@@ -88,6 +88,8 @@ public class Prijava extends ToolbarActivity implements View.OnClickListener {
 
     @Override
     public void onBackPressed() {
+        finishAffinity();
+
     }
 
     private boolean provjera() {

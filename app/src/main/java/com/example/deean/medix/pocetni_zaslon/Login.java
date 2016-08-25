@@ -2,6 +2,7 @@ package com.example.deean.medix.pocetni_zaslon;
 
 import android.app.AlertDialog;
 
+import android.app.Application;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -11,6 +12,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.deean.medix.SharedPreferencesHelper;
+import com.example.deean.medix.doktorovo.IntroActivityDoctor;
 import com.example.deean.medix.doktorovo.konsturktor_i_baza.Doktor;
 import com.example.deean.medix.doktorovo.konsturktor_i_baza.DoktorLokalno;
 import com.example.deean.medix.registracija.FragmentRegistracija;
@@ -27,8 +30,8 @@ import com.github.ybq.android.spinkit.SpinKitView;
 
 public class Login extends ToolbarActivityAll implements View.OnClickListener{
     public static Button bPrijava;
-    EditText etEmail, etLozinka;
-    TextView tvRegistracijaLink, tvLozinkaLink;
+    public static EditText etEmail, etLozinka;
+    public static TextView tvRegistracijaLink, tvLozinkaLink;
     SpinKitView loadingView;
 
     Pacijent pacijent;
@@ -94,9 +97,11 @@ public class Login extends ToolbarActivityAll implements View.OnClickListener{
                 break;
 
         }
+    }
 
-
-
+    @Override
+    public void onBackPressed() {
+        finishAffinity();
     }
 
     private void autentifikacija_doktora(Doktor doktor){
@@ -142,7 +147,12 @@ public class Login extends ToolbarActivityAll implements View.OnClickListener{
         DoktorLokalno.spremiDoktorPodatke(returnedDoktor);
         DoktorLokalno.postaviPrijavljenogDoktora(true);
 
-        startActivity(new Intent(this,Prijava.class));
+        if(SharedPreferencesHelper.getShowIntroScreen()) {
+            startActivity(new Intent(this, Prijava.class));
+        }
+        else{
+            startActivity(new Intent(this, IntroActivityDoctor.class));
+        }
     }
     private void logPacijentIn(Pacijent returnedPacijent){
         PacijentLokalno.spremiPacijentPodatke(returnedPacijent);

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <android.support.v4.view.ViewPager
+            android:id="@+id/viewpager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"  />
+        <me.relex.circleindicator.CircleIndicator
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="10dp"
+            android:id="@+id/indicator"
+            app:ci_width="7dp"
+            app:ci_height="7dp"
+            app:ci_drawable="@drawable/blac_radius"
+            app:ci_drawable_unselected="@drawable/grey_radius"
+            android:layout_height="40dp"
+            android:layout_width="match_parent"
+            />
+    </RelativeLayout>
+</android.support.design.widget.CoordinatorLayout>
+

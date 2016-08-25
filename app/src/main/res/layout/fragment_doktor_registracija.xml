@@ -9,6 +9,7 @@
     android:background="#efefef">
 
     <EditText
+        android:singleLine="true"
         android:layout_marginTop="10dp"
         android:theme="@style/Boja_EditText"
         android:hint="Ime"
@@ -18,6 +19,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"/>
     <EditText
+        android:singleLine="true"
         android:theme="@style/Boja_EditText"
         android:layout_below="@id/etIme"
         android:hint="Prezime"
@@ -27,6 +29,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"/>
     <EditText
+        android:singleLine="true"
         android:theme="@style/Boja_EditText"
         android:layout_below="@id/etPrezime"
         android:hint="E-mail"
@@ -36,6 +39,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"/>
     <EditText
+        android:singleLine="true"
         android:theme="@style/Boja_EditText"
         android:layout_below="@id/etEmail"
         android:hint="Lozinka"
@@ -69,6 +73,7 @@
     <EditText
         android:theme="@style/Boja_EditText"
         android:layout_below="@id/etTelefon"
+        android:singleLine="true"
         android:hint="Adresa ordinacije"
         android:textColor="#434343"
         android:id="@+id/etAdresa"
