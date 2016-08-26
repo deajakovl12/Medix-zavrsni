@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import com.example.deean.medix.databinding.IntroFragmentBinding;
 import com.example.deean.medix.doktorovo.IntroActivityDoctor;
 import com.example.deean.medix.doktorovo.Prijava;
+import com.example.deean.medix.pacijentovo.Prijava_Pacijent;
 import com.squareup.picasso.Picasso;
 
 /**
@@ -67,6 +68,28 @@ public class IntroFragment extends android.support.v4.app.Fragment {
                             startActivity(i);
 //                            Intent i = new Intent(getContext(), OnBoardActivity.class);
 //                            startActivity(i);
+                    }
+                });
+                break;
+
+            case IntroActivityDoctor.FIRST_P:
+                setIntroScreen(R.color.background_color,R.drawable.first_p,R.string.first,R.string.first_text); // background prvo. sve to namjestit
+                break;
+            case IntroActivityDoctor.SECOND_P:
+                setIntroScreen(R.color.background_color,R.drawable.second_p,R.string.second_p,R.string.second_text_p);
+                break;
+            case IntroActivityDoctor.THIRD_P:
+                setIntroScreen(R.color.background_color,R.drawable.third_p,R.string.third_p,R.string.third_text_p);
+                break;
+            case IntroActivityDoctor.LAST_P:
+                setIntroScreen(R.color.background_color,R.drawable.last_p,R.string.last_p,R.string.last_text_p);
+                bind.next.setVisibility(View.VISIBLE);
+                bind.next.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        SharedPreferencesHelper.setShowIntroScreenP(true);
+                        Intent i = new Intent(getContext(), Prijava_Pacijent.class);
+                        startActivity(i);
                     }
                 });
                 break;

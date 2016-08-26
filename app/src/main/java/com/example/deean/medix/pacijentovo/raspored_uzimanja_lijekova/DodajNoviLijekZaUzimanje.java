@@ -115,7 +115,7 @@ public class DodajNoviLijekZaUzimanje extends ToolbarActivity implements View.On
             lables.add(spremi.get(i).getNaziv().toUpperCase());
         }
         List<String> lablesKoliko = new ArrayList<String>();
-        lablesKoliko.add("Bez razmaka uzimanja");
+        lablesKoliko.add("Javiti točno kada treba uzeti");
         lablesKoliko.add("5 minuta");
         lablesKoliko.add("10 minuta");
         lablesKoliko.add("30 minuta");

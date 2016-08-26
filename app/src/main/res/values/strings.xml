@@ -21,4 +21,13 @@
     <string name="third_text">Pregledajte podatke od pacijenta, zovite ih preko aplikacije, uredite medicinske podatke, pregledajte lijekove koje pacijent koristi, dodajte nove lijekove pacijentu.</string>
     <string name="last_text">Ugovorite pregled s pacijentom, odaberite pacijenta, odaberite vrijeme te dodajte komentar kako bi i vi znali zbog čega pacijent dolazi na pregled.</string>
 
+    <string name="second_p">Pregled dobivenih lijekova</string>
+    <string name="third_p">Dodavanje lijeka za upotrebu</string>
+    <string name="last_p">Pregled vašeg doktora</string>
+
+
+    <string name="second_text_p">Imate mogućnost provjeriti sve lijekove koje vam je doktor preporučio za korištenje, odabirom pojedinog lijeka vidite sve potrebne informacije o lijeku.</string>
+    <string name="third_text_p">Možete sami sebi zadati lijek za upotrebu. Odaberite lijek, vrijeme početka konzumiranja, koliko često uzimate lijek i ako želite koliko prije uzimanja lijeka vam treba doći obavijest.</string>
+    <string name="last_text_p">Pogledajte sve informacije od vašeg doktora, radno vrijeme, broj telefona, adresu ordinacije i slično.</string>
+
 </resources>

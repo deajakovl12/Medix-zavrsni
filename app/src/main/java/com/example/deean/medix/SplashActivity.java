@@ -40,7 +40,12 @@ public class SplashActivity extends AppCompatActivity {
                 }
 
                 else if(PacijentLokalno.provjeriPrijavljenogPacijenta()){
-                    startActivity(new Intent(SplashActivity.this,Prijava_Pacijent.class));
+                    if(SharedPreferencesHelper.getShowIntroScreenP()) {
+                        startActivity(new Intent(SplashActivity.this, Prijava_Pacijent.class));
+                    }
+                    else{
+                        startActivity(new Intent(SplashActivity.this,IntroActivityDoctor.class));
+                    }
                 }
                 else{
                     startActivity(new Intent(SplashActivity.this,Login.class));

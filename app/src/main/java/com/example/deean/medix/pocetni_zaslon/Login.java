@@ -158,6 +158,11 @@ public class Login extends ToolbarActivityAll implements View.OnClickListener{
         PacijentLokalno.spremiPacijentPodatke(returnedPacijent);
         PacijentLokalno.postaviPrijavljenogPacijenta(true);
 
-        startActivity(new Intent(this,Prijava_Pacijent.class));
+        if(SharedPreferencesHelper.getShowIntroScreenP()) {
+            startActivity(new Intent(this,Prijava_Pacijent.class));
+        }
+        else{
+            startActivity(new Intent(this,IntroActivityDoctor.class));
+        }
     }
 }
